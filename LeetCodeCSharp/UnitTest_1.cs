@@ -47,4 +47,16 @@ public partial class UnitTest
             return root;
         }
     }
+
+    [Test]
+    public void TestMethod_BuildTree()
+    {
+        var inorder   = new[] { 9, 3, 15, 20, 7 };
+        var postorder = new[] { 9, 15, 7, 20, 3 };
+
+        var tree    = BuildTree(inorder, postorder);
+        var treeStr = CreateArrayString(tree);
+
+        Assert.That(treeStr, Is.EqualTo("[3,9,20,null,null,15,7]"));
+    }
 }
