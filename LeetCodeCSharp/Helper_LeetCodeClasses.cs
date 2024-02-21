@@ -18,21 +18,9 @@ public class TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
 
 
 /// Definition for a Node.
-public class Node
+public class Node(int _val = default, IList<Node> _children = default)
 {
-    public int         val;
-    public IList<Node> children;
-
-    public Node() { }
-
-    public Node(int _val)
-    {
-        val = _val;
-    }
-
-    public Node(int _val, IList<Node> _children)
-    {
-        val      = _val;
-        children = _children;
-    }
+    public int         val      = _val;
+    public IList<Node> children = _children;
 }
+
