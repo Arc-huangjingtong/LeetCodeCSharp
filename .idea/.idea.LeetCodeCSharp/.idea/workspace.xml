@@ -5,31 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_3.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_4.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_5.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_Golbal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/GlobalUsings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Helper_GlobalUsings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCodeCSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCodeCSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCodeClass.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Helper_LeetCodeClasses.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_3.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_3.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_4.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_4.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_5.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +32,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/053cba69424c47858472194d509c3cdc12bb0/43/e8ff7f40/DynamicDataAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/053cba69424c47858472194d509c3cdc12bb0/43/e8ff7f40/DynamicDataAttribute.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -57,10 +49,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "99a6ad9d-6c8f-4eac-aef6-cd8895c9b2f1.executor": "Debug",
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "a93ac737-846b-4ef1-94a1-954eca8cc2ac.executor": "Debug",
+    "a93ac737-846b-4ef1-94a1-954eca8cc2ac.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "F:/LeetCodeCSharp",
@@ -91,6 +84,7 @@
       <workItem from="1708359337072" duration="754000" />
       <workItem from="1708420437893" duration="5788000" />
       <workItem from="1708426258231" duration="6927000" />
+      <workItem from="1708487284257" duration="4127000" />
     </task>
     <servers />
   </component>
@@ -116,13 +110,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs</url>
-          <line>87</line>
+          <line>7</line>
           <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" initialLine="87" containingFunctionPresentation="方法 'TestMethod1'">
             <startOffsets>
-              <option value="2442" />
+              <option value="114" />
             </startOffsets>
             <endOffsets>
-              <option value="2475" />
+              <option value="161" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
