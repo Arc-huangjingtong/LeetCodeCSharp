@@ -301,5 +301,63 @@ public partial class UnitTest
         // 1 <= s.length <= 100
         // s 仅由 '0' 和 '1' 组成
         //     s 中至少包含一个 '1'
+
+        /// <summary>更具树生成数组</summary>
+        /// <param name="root">树的根节点</param>
+        /// <returns>层序遍历的数组</returns>
+        public static int?[] CreateArray(TreeNode root)
+        {
+            if (root == null)
+            {
+                return Array.Empty<int?>();
+            }
+
+            var list  = new List<int?>();
+            var queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+            while (queue.Count > 0)
+            {
+                var node = queue.Dequeue();
+                if (node == null)
+                {
+                    list.Add(null);
+                }
+                else
+                {
+                    list.Add(node.val);
+                    queue.Enqueue(node.left);
+                    queue.Enqueue(node.right);
+                }
+            }
+
+            return list.ToArray();
+        }
+
+
+        /// <summary>更具树生成数组字符串</summary>
+        /// <param name="root">树的根节点</param>
+        /// <returns>层序遍历的数组字符串</returns>
+        public static string CreateArrayString(TreeNode root)
+        {
+            var array = CreateArray(root);
+            // 移除末尾的null
+
+            var count = array.Length;
+            for (var i = array.Length - 1 ; i >= 0 ; i--)
+            {
+                if (array[i] == null)
+                {
+                    count--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            Array.Resize(ref array, count);
+
+            return $"[{string.Join(',', array.Select(x => x == null ? "null" : x.ToString()))}]";
+        }
     }
 }
