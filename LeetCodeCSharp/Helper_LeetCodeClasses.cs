@@ -1,5 +1,8 @@
 ﻿namespace LeetCodeCSharp;
 
+/// 该类记录LeetCode中常用的, 用于测试的数据结构
+
+
 /// Definition for singly-linked list.
 public class ListNode(int val = 0, ListNode next = null)
 {
