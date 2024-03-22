@@ -96,11 +96,7 @@ public partial class UnitTest
     }
 
 
-    [Test]
-    public void Test()
-    {
-        CountPaths(4, [[1, 2], [1, 3], [2, 4], [2, 5]]);
-    }
+  
 
     public static readonly HashSet<int> PrimeSet = [];
 

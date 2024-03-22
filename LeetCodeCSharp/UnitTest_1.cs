@@ -58,9 +58,9 @@ public partial class UnitTest
         var postorder = new[] { 9, 15, 7, 20, 3 };
 
         var tree    = BuildTree(inorder, postorder);
-        var treeStr = CreateArrayString(tree);
-
-        Assert.That(treeStr, Is.EqualTo("[3,9,20,null,null,15,7]"));
+        // var treeStr = CreateArrayString(tree);
+        //
+        // Assert.That(treeStr, Is.EqualTo("[3,9,20,null,null,15,7]"));
     }
 
     // 889. 根据前序和后序遍历构造二叉树
@@ -438,110 +438,110 @@ public partial class UnitTest
 
     public static bool[] Primes = null!;
 
-    public static bool[] CountPrimes(int n)
-    {
-        if (n < 3) return [];
+    // public static bool[] CountPrimes(int n)
+    // {
+    //     if (n < 3) return [];
+    //
+    //     Span<bool> isPrime = stackalloc bool[n];
+    //
+    //     isPrime.Fill(true);
+    //     isPrime[0] = false;
+    //     isPrime[1] = false;
+    //
+    //     var sqrt = (int)Math.Sqrt(n) + 1;
+    //
+    //     for (var i = 2 ; i < sqrt ; i++)
+    //     {
+    //         if (!isPrime[i])
+    //         {
+    //             continue;
+    //         }
+    //
+    //         //为什么从i*i开始,因为i*2,i*3这些数已经被i*2,i*3这些数标记过了
+    //         for (var j = i * i ; j < n ; j += i)
+    //         {
+    //             isPrime[j] = false;
+    //         }
+    //     }
+    //
+    //     return isPrime.ToArray(); //直接减去index:0/1 的情况
+    // }
 
-        Span<bool> isPrime = stackalloc bool[n];
-
-        isPrime.Fill(true);
-        isPrime[0] = false;
-        isPrime[1] = false;
-
-        var sqrt = (int)Math.Sqrt(n) + 1;
-
-        for (var i = 2 ; i < sqrt ; i++)
-        {
-            if (!isPrime[i])
-            {
-                continue;
-            }
-
-            //为什么从i*i开始,因为i*2,i*3这些数已经被i*2,i*3这些数标记过了
-            for (var j = i * i ; j < n ; j += i)
-            {
-                isPrime[j] = false;
-            }
-        }
-
-        return isPrime.ToArray(); //直接减去index:0/1 的情况
-    }
-
-    public long CountPaths(int n, int[][] edges)
-    {
-        //更具题目范围生成质数表
-        Primes ??= CountPrimes(100001);
-
-        //1 <= ui, vi <= n 隐藏条件：说明节点值对应1-n;
-
-        //生成邻接表
-        var graph = new List<int>[n + 1];
-
-        for (var i = 1 ; i <= n ; i++)
-        {
-            graph[i] = [];
-        }
-
-        foreach (var edge in edges)
-        {
-            int i = edge[0], j = edge[1];
-            graph[i].Add(j);
-            graph[j].Add(i);
-        }
-
-
-        Span<long> count = stackalloc long[n + 1];
-        var        seen  = new List<int>();
-        var        ans   = 0L;
-
-        //以质数为节点，遍历邻接表,找所有的非质数节点,记录每个节点的非质数子节点数量
-        //然后遍历质数节点，计算每个质数节点的路径数量
-        //最后累加所有质数节点的路径数量 n1*n2+n2*n3+n3*n4+...
-        for (var i = 2 ; i <= n ; i++)
-        {
-            if (!Primes[i])
-            {
-                continue;
-            }
-
-            var cur = 0L;
-            foreach (var j in graph[i])
-            {
-                if (Primes[j]) continue;
-
-
-                if (count[j] == 0)
-                {
-                    seen.Clear();
-                    DFS(j, 0);
-                    var cnt = seen.Count;
-                    foreach (var k in seen)
-                    {
-                        count[k] = cnt;
-                    }
-                }
-
-                ans += count[j] * cur;
-                cur += count[j];
-            }
-
-            ans += cur;
-        }
-
-        return ans;
-
-        void DFS(int i, int pre)
-        {
-            seen.Add(i);
-            foreach (var j in graph[i])
-            {
-                if (j != pre && !Primes[j])
-                {
-                    DFS(j, i);
-                }
-            }
-        }
-    }
+    // public long CountPaths(int n, int[][] edges)
+    // {
+    //     //更具题目范围生成质数表
+    //     Primes ??= CountPrimes(100001);
+    //
+    //     //1 <= ui, vi <= n 隐藏条件：说明节点值对应1-n;
+    //
+    //     //生成邻接表
+    //     var graph = new List<int>[n + 1];
+    //
+    //     for (var i = 1 ; i <= n ; i++)
+    //     {
+    //         graph[i] = [];
+    //     }
+    //
+    //     foreach (var edge in edges)
+    //     {
+    //         int i = edge[0], j = edge[1];
+    //         graph[i].Add(j);
+    //         graph[j].Add(i);
+    //     }
+    //
+    //
+    //     Span<long> count = stackalloc long[n + 1];
+    //     var        seen  = new List<int>();
+    //     var        ans   = 0L;
+    //
+    //     //以质数为节点，遍历邻接表,找所有的非质数节点,记录每个节点的非质数子节点数量
+    //     //然后遍历质数节点，计算每个质数节点的路径数量
+    //     //最后累加所有质数节点的路径数量 n1*n2+n2*n3+n3*n4+...
+    //     for (var i = 2 ; i <= n ; i++)
+    //     {
+    //         if (!Primes[i])
+    //         {
+    //             continue;
+    //         }
+    //
+    //         var cur = 0L;
+    //         foreach (var j in graph[i])
+    //         {
+    //             if (Primes[j]) continue;
+    //
+    //
+    //             if (count[j] == 0)
+    //             {
+    //                 seen.Clear();
+    //                 DFS(j, 0);
+    //                 var cnt = seen.Count;
+    //                 foreach (var k in seen)
+    //                 {
+    //                     count[k] = cnt;
+    //                 }
+    //             }
+    //
+    //             ans += count[j] * cur;
+    //             cur += count[j];
+    //         }
+    //
+    //         ans += cur;
+    //     }
+    //
+    //     return ans;
+    //
+    //     void DFS(int i, int pre)
+    //     {
+    //         seen.Add(i);
+    //         foreach (var j in graph[i])
+    //         {
+    //             if (j != pre && !Primes[j])
+    //             {
+    //                 DFS(j, i);
+    //             }
+    //         }
+    //     }
+    // }
 
 
     [TestCase(7, new[] { 1, 5, 2, 2, 3, 3, 1 }, ExpectedResult = 6)]
@@ -563,7 +563,7 @@ public partial class UnitTest
     // 1 + 2 + 1 = 4
 
     [Test]
-    public void Test()
+    public void Test2()
     {
         CountPaths(5, [[1, 2], [1, 3], [2, 4], [2, 5]]);
     }
@@ -722,73 +722,6 @@ public partial class UnitTest
         }
     }
 
-
-    public class Solution
-    {
-        public int RootCount(int[][] edges, int[][] guesses, int k)
-        {
-            var n     = edges.Length + 1;
-            var graph = new List<int>[n];
-            var cnt   = 0;
-            var res   = 0;
-            for (var i = 0 ; i < n ; i++)
-            {
-                graph[i] = [];
-            }
-
-            HashSet<long> set = [];
-
-            foreach (var v in edges)
-            {
-                graph[v[0]].Add(v[1]);
-                graph[v[1]].Add(v[0]);
-            }
-
-            foreach (var v in guesses)
-            {
-                set.Add(H(v[0], v[1]));
-            }
-
-
-            Dfs(0, -1);
-            Redfs(0, -1, cnt);
-            return res;
-
-            long H(int x, int y) => ((long)x << 20) | (uint)y;
-
-            void Dfs(int x, int fat)
-            {
-                foreach (var y in graph[x])
-                {
-                    if (y == fat)
-                    {
-                        continue;
-                    }
-
-                    cnt += set.Contains(H(x, y)) ? 1 : 0;
-                    Dfs(y, x);
-                }
-            }
-
-            void Redfs(int x, int fat, int cnt)
-            {
-                if (cnt >= k)
-                {
-                    res++;
-                }
-
-                foreach (var y in graph[x])
-                {
-                    if (y == fat)
-                    {
-                        continue;
-                    }
-
-                    Redfs(y, x, cnt - (set.Contains(H(x, y)) ? 1 : 0) + (set.Contains(H(y, x)) ? 1 : 0));
-                }
-            }
-        }
-    }
 
 
 

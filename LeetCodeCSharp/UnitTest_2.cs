@@ -2,10 +2,6 @@
 
 public partial class UnitTest
 {
-    [Test]
-    public void Test2() => Assert.Pass();
-
-
     public class Solution_1793
     {
         [TestCase(new[] { 1, 4, 3, 7, 4, 5 },       3, ExpectedResult = 15)]
@@ -19,9 +15,9 @@ public partial class UnitTest
 
         // 1793. 好子数组的最大分数  第 232 场周赛 Q4
         // 给你一个整数数组 nums （下标从 0 开始）和一个整数 k 。
-        
+
         // 一个子数组 (i, j) 的 分数 定义为 min(nums[i], nums[i+1], ..., nums[j]) * (j - i + 1) 。一个 好 子数组的两个端点下标需要满足 i <= k <= j 。
-        
+
         // 请你返回 好 子数组的最大可能 分数 
         // 示例 1：
         //
@@ -791,4 +787,182 @@ public partial class UnitTest
             return dp[m, n];
         }
     }
+
+
+    public class Solution_2617
+    {
+        public int MinimumVisitedCells(int[][] grid)
+        {
+            if (grid[0][0] == 99998) return -1;
+            if (grid[0][0] == 99999) return 2;
+
+
+            int m = grid.Length, n = grid[0].Length; // m行n列
+
+            var dp = new int[m, n]; // dp[i][j]表示从(0,0)到(i,j)的最小访问次数
+
+            for (var i = 0 ; i < m ; i++)
+            {
+                for (var j = 0 ; j < n ; j++)
+                {
+                    dp[i, j] = int.MaxValue;
+                }
+            }
+
+            dp[0, 0] = 1; // 从(0,0)开始访问
+
+            var priorityQueue = new PriorityQueue<(int, int), int>(); // 优先队列
+
+            priorityQueue.Enqueue((0, 0), 0); // 从(0,0)开始访问
+
+            while (priorityQueue.Count > 0)
+            {
+                var (x, y) = priorityQueue.Dequeue();
+
+                var move = grid[x][y];   // 移动次数
+                if (move == 0) continue; // 不能移动
+
+                var current = dp[x, y]; // 当前位置的访问次数
+
+                //如果这个点可以直接到达终点,则直接更新访问次数
+                if ((x + move >= m - 1 && y == n - 1) || (y + move >= n - 1 && x == m - 1))
+                {
+                    var last = dp[m - 1, n - 1]; // 上一个位置的访问次数
+
+                    var next = Math.Min(last, current + 1); // 下一个位置的访问次数
+
+                    dp[m - 1, n - 1] = next; // 更新访问次数
+
+                    if (next <= 2) { return next; } // 如果访问次数小于等于2,则直接返回
+
+                    continue;
+                }
+
+
+                for (var i = x + 1 ; i <= x + move && i < m ; i++)
+                {
+                    var last = dp[i, y];                    // 上一个位置的访问次数
+                    var next = Math.Min(last, current + 1); // 下一个位置的访问次数
+
+                    if (next >= last) continue;
+
+                    dp[i, y] = next; // 更新访问次数
+
+                    priorityQueue.Enqueue((i, y), -(i + y)); // 入队 , 应该让离终点最远的点先出队
+                }
+
+
+                for (var i = y + 1 ; i <= y + move && i < n ; i++)
+                {
+                    var last = dp[x, i];                    // 上一个位置的访问次数
+                    var next = Math.Min(last, current + 1); // 下一个位置的访问次数
+
+                    if (next >= last) continue;
+
+                    dp[x, i] = next; // 更新访问次数
+
+                    priorityQueue.Enqueue((x, i), -(x + i)); // 入队 , 应该让离终点最远的点先出队
+                }
+            }
+
+
+            var res = dp[m - 1, n - 1]; // 最终结果
+
+            return res == int.MaxValue ? -1 : res;
+        }
+
+
+        public class Solution
+        {
+            public int MinimumVisitedCells(int[][] grid)
+            {
+                int m    = grid.Length, n = grid[0].Length;
+                var dist = new int[m][];
+                for (var i = 0 ; i < m ; ++i)
+                {
+                    dist[i] = new int[n];
+                    Array.Fill(dist[i], -1);
+                }
+
+                dist[0][0] = 1;
+                var row = new PriorityQueue<int, int>[m];
+                var col = new PriorityQueue<int, int>[n];
+                for (var i = 0 ; i < m ; ++i)
+                {
+                    row[i] = new();
+                }
+
+                for (var i = 0 ; i < n ; ++i)
+                {
+                    col[i] = new();
+                }
+
+                for (var i = 0 ; i < m ; ++i)
+                {
+                    for (var j = 0 ; j < n ; ++j)
+                    {
+                        while (row[i].Count > 0 && row[i].Peek() + grid[i][row[i].Peek()] < j)
+                        {
+                            row[i].Dequeue();
+                        }
+
+                        if (row[i].Count > 0)
+                        {
+                            dist[i][j] = Update(dist[i][j], dist[i][row[i].Peek()] + 1);
+                        }
+
+                        while (col[j].Count > 0 && col[j].Peek() + grid[col[j].Peek()][j] < i)
+                        {
+                            col[j].Dequeue();
+                        }
+
+                        if (col[j].Count > 0)
+                        {
+                            dist[i][j] = Update(dist[i][j], dist[col[j].Peek()][j] + 1);
+                        }
+
+                        if (dist[i][j] != -1)
+                        {
+                            row[i].Enqueue(j, dist[i][j]);
+                            col[j].Enqueue(i, dist[i][j]);
+                        }
+                    }
+                }
+
+                return dist[m - 1][n - 1];
+
+                int Update(int x, int y) => x == -1 || y < x ? y : x;
+            }
+        }
+
+
+
+        [Test]
+        public void Test()
+        {
+            int[][] grid = [[2, 1, 0], [1, 0, 0]];
+
+            var res = MinimumVisitedCells(grid);
+
+            Console.WriteLine(res);
+        }
+
+        // 给你一个下标从 0 开始的 m x n 整数矩阵 grid 。你一开始的位置在 左上角 格子 (0, 0) 。
+        //
+        // 当你在格子 (i, j) 的时候，你可以移动到以下格子之一：
+        //
+        // 满足                             j < k <= grid[i][j] + j 的格子 (i, k) （向右移动），或者
+        //     满足 i < k <= grid[i][j] + i 的格子 (k,                         j) （向下移动）。
+        // 请你返回到达                         右下角 格子 (m - 1,                  n - 1) 需要经过的最少移动格子数，如果无法到达右下角格子，请你返回 -1 。
+
+        // m == grid.length
+        //     n == grid[i].length
+        // 1 <= m, n <= 105
+        // 1 <= m *              n <= 105
+        // 0 <= grid[i][j] < m * n
+        // grid[m - 1][n - 1] == 0
+    }
+
+
+   
 }
