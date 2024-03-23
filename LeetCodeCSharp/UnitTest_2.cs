@@ -109,6 +109,172 @@ public partial class UnitTest
     }
 
 
+    public class Solution_322
+    {
+        [TestCase(new[] { 1, 2, 5 }, 11, ExpectedResult = 3)]
+        [TestCase(new[] { 2 },       3,  ExpectedResult = -1)]
+        public int CoinChange(int[] coins, int amount)
+        {
+            Span<int> dp = stackalloc int[amount + 1]; 
+            dp.Fill(amount + 1);
+
+            dp[0] = 0;
+
+            for (var i = 1 ; i <= amount ; i++)
+            {
+                foreach (var t in coins)
+                {
+                    if (t <= i)
+                    {
+                        dp[i] = Math.Min(dp[i], dp[i - t] + 1);
+                    }
+                }
+            }
+
+            if (dp[amount] > amount)
+            {
+                return -1;
+            }
+
+            return dp[amount];
+        }
+
+        // 322. 零钱兑换 中等
+        // 给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
+        //
+        // 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。
+        //
+        // 你可以认为每种硬币的数量是无限的。
+        //
+        //
+        //
+        // 示例 1：
+        //
+        // 输入：coins = [1, 2, 5], amount = 11
+        // 输出：3 
+        // 解释：11 = 5 + 5 + 1
+        // 示例 2：
+        //
+        // 输入：coins = [2], amount = 3
+        // 输出：-1
+        // 示例 3：
+        //
+        // 输入：coins = [1], amount = 0
+        // 输出：0
+        //
+        //
+        // 提示：
+        //
+        // 1 <= coins.length <= 12
+        // 1 <= coins[i] <= 2^31 - 1
+        // 0 <= amount <= 10^4
+    }
+
+
+    public class Solution_76
+    {
+        [TestCase("ADOBECODEBANC", "ABC", ExpectedResult = "BANC")]
+        [TestCase("a",             "a",   ExpectedResult = "a")]
+        [TestCase("a",             "aa",  ExpectedResult = "")]
+        public string MinWindow(string s, string t)
+        {
+            var r_list    = new List<char>();
+            var t_dict    = new Dictionary<char, int>();
+            var min       = int.MaxValue;
+            var minString = string.Empty;
+
+            foreach (var c in t)
+            {
+                if (t_dict.TryAdd(c, 1))
+                {
+                    continue;
+                }
+
+                t_dict[c]++;
+            }
+
+            for (var i = 0 ; i < s.Length ; i++)
+            {
+                r_list.Add(s[i]);
+
+                if (t_dict.TryGetValue(s[i], out var value))
+                {
+                    t_dict[s[i]] = --value;
+
+                    var isNotMatch = t_dict.Values.Any(v => v > 0); //如果t_dict中的所有值都大于0,则表示不匹配
+
+                    if (isNotMatch) continue; //如果不匹配,则开始缩小窗口
+
+
+                    while (!isNotMatch) //循环规则：只要一直处于匹配状态,则一直缩小窗口
+                    {
+                        if (t_dict.TryGetValue(r_list[0], out var v)) //队列头部元素
+                        {
+                            if (v == 0)
+                            {
+                                break;
+                            }
+
+                            t_dict[r_list[0]] = ++v;
+                        }
+
+                        r_list.RemoveAt(0);
+
+                        isNotMatch = t_dict.Values.Any(_v => _v > 0);
+                    }
+
+                    if (r_list.Count < min)
+                    {
+                        min       = r_list.Count;
+                        minString = string.Join("", r_list);
+                    }
+                }
+            }
+
+
+            return minString;
+        }
+
+        [Test]
+        public void Test() { }
+
+        // 76. 最小覆盖子串 困难
+        // 提示
+        //     给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+        //
+        // 注意：
+        // 
+        // 对于 t 中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。
+        // 如果 s 中存在这样的子串，我们保证它是唯一的答案。
+        //
+        //
+        // 示例 1：
+        //
+        // 输入：s = "ADOBECODEBANC", t = "ABC"
+        // 输出："BANC"
+        // 解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
+        // 示例 2：
+        //
+        // 输入：s = "a", t = "a"
+        // 输出："a"
+        // 解释：整个字符串 s 是最小覆盖子串。
+        // 示例 3:
+        //
+        // 输入: s = "a", t = "aa"
+        // 输出: ""
+        // 解释: t 中两个字符 'a' 均应包含在 s 的子串中，
+        // 因此没有符合条件的子字符串，返回空字符串。
+        //
+        //
+        // 提示：
+        //
+        // m == s.length
+        //     n == t.length
+        // 1 <= m, n <= 10^5
+        // s 和 t 由英文字母组成
+    }
+
+
     public class Solution_77
     {
         //[TestCase(4, 2, ExpectedResult = default)]
@@ -962,7 +1128,4 @@ public partial class UnitTest
         // 0 <= grid[i][j] < m * n
         // grid[m - 1][n - 1] == 0
     }
-
-
-   
 }

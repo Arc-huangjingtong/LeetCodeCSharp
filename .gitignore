@@ -4,3 +4,6 @@
 *.dll
 *.dll
 *.dll
+*.dll
+*.dll
+/LeetCodeCSharp/obj/Debug/net8.0/refint
