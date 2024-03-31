@@ -52,3 +52,8 @@ public class Note_Optimize
         }
     }
 }
+
+
+
+//Node：
+//1.当参数范围很小的时候,可以考虑使用暴力枚举
