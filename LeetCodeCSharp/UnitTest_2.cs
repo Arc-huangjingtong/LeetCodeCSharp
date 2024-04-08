@@ -115,7 +115,7 @@ public partial class UnitTest
         [TestCase(new[] { 2 },       3,  ExpectedResult = -1)]
         public int CoinChange(int[] coins, int amount)
         {
-            Span<int> dp = stackalloc int[amount + 1]; 
+            Span<int> dp = stackalloc int[amount + 1];
             dp.Fill(amount + 1);
 
             dp[0] = 0;
@@ -168,6 +168,78 @@ public partial class UnitTest
         // 1 <= coins.length <= 12
         // 1 <= coins[i] <= 2^31 - 1
         // 0 <= amount <= 10^4
+    }
+
+
+    public class Solution_518
+    {
+        // 0, 1, 2, 3, 4, 5 
+        // 1, 1, 2, 2, 0, 0
+
+
+
+        // [TestCase(5,  new[] { 1, 2, 5 }, ExpectedResult = 4)]
+        [TestCase(3,  new[] { 2 },  ExpectedResult = 0)]
+        [TestCase(10, new[] { 10 }, ExpectedResult = 1)]
+        public int Change(int amount, int[] coins)
+        {
+            Span<int> dp = stackalloc int[amount + 1]; //表示凑成总金额为i的硬币组合数
+
+            dp[0] = 1;
+
+
+            foreach (var coin in coins)
+            {
+                for (var i = coin ; i <= amount ; i++)
+                {
+                    dp[i] += dp[i - coin];
+                }
+            }
+
+
+            return dp[amount];
+        }
+        //
+        // 518. 零钱兑换 II
+        // 中等
+        //     相关标签
+        // 相关企业
+        //     给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
+        //
+        // 请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。
+        //
+        // 假设每一种面额的硬币有无限个。 
+        //
+        // 题目数据保证结果符合 32 位带符号整数。
+        //
+        //
+        //
+        // 示例 1：
+        //
+        // 输入：amount = 5, coins = [1, 2, 5]
+        // 输出：4
+        // 解释：有四种方式可以凑成总金额：
+        // 5=5
+        // 5=2+2+1
+        // 5=2+1+1+1
+        // 5=1+1+1+1+1
+        // 示例 2：
+        //
+        // 输入：amount = 3, coins = [2]
+        // 输出：0
+        // 解释：只用面额 2 的硬币不能凑成总金额 3 。
+        // 示例 3：
+        //
+        // 输入：amount = 10, coins = [10] 
+        // 输出：1
+        //
+        //
+        // 提示：
+        //
+        // 1 <= coins.length <= 300
+        // 1 <= coins[i] <= 5000
+        // coins 中的所有值 互不相同
+        // 0 <= amount <= 5000
     }
 
 
@@ -1127,5 +1199,580 @@ public partial class UnitTest
         // 1 <= m *              n <= 105
         // 0 <= grid[i][j] < m * n
         // grid[m - 1][n - 1] == 0
+    }
+
+
+    public class Solution_2642
+    {
+        public class Graph
+        {
+            private readonly IList<(int, int)>[] graph;
+
+            private readonly PriorityQueue<(int, int), int> pQueue = new();
+
+            public Graph(int n, int[][] edges)
+            {
+                graph = new IList<(int, int)>[n]; // 初始化邻接表
+
+                for (var i = 0 ; i < n ; i++)
+                {
+                    graph[i] = new List<(int, int)>();
+                }
+
+                foreach (var edge in edges)
+                {
+                    graph[edge[0]].Add((edge[1], edge[2]));
+                }
+            }
+
+            /// <summary>添加边的时候，只维护邻接表即可</summary>
+            public void AddEdge(int[] edge) => graph[edge[0]].Add((edge[1], edge[2]));
+
+            public int ShortestPath(int node1, int node2)
+            {
+                pQueue.Clear(); // 清空优先队列
+
+                Span<int> dist = stackalloc int[graph.Length]; //记录到每个点的最短距离的字典数组
+                dist.Fill(int.MaxValue);
+
+                dist[node1] = 0; //起点到自己的距离为0
+                pQueue.Enqueue((0, node1), 0);
+                while (pQueue.Count > 0)
+                {
+                    var (cost, cur) = pQueue.Dequeue();
+
+                    if (cur == node2) //找到终点
+                    {
+                        return cost;
+                    }
+
+                    foreach (var (next, _cost) in graph[cur]) //遍历邻接表
+                    {
+                        if (dist[next] > cost + _cost)
+                        {
+                            dist[next] = cost + _cost;
+                            pQueue.Enqueue((cost + _cost, next), cost + _cost);
+                        }
+                    }
+                }
+
+                return -1;
+            }
+        }
+
+
+        // 2642. 设计可以求最短路径的图类 第 102 场双周赛 Q4
+        // 相关标签
+        //     相关企业
+        // 提示
+        //     给你一个有 n 个节点的 有向带权 图，节点编号为 0 到 n - 1 。图中的初始边用数组 edges 表示，其中 edges[i] = [fromi, toi, edgeCosti] 表示从 fromi 到 toi 有一条代价为 edgeCosti 的边。
+        //
+        // 请你实现一个 Graph 类：
+        //
+        // Graph(int     n, int[][] edges) 初始化图有 n 个节点，并输入初始边。
+        // addEdge(int[] edge) 向边集中添加一条边，其中 edge = [from, to, edgeCost] 。数据保证添加这条边之前对应的两个节点之间没有有向边。
+
+        // int shortestPath(int node1, int node2) 返回从节点 node1 到 node2 的路径 最小 代价。如果路径不存在，返回 -1 。一条路径的代价是路径中所有边代价之和。
+        //
+        //
+        // 示例 1：
+        //
+        //
+        //
+        // 输入：
+        // ["Graph", "shortestPath", "shortestPath", "addEdge", "shortestPath"]
+        // [[4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]], [3, 2], [0, 3], [[1, 3, 4]], [0, 3]]
+        // 输出：
+        // [null, 6, -1, null, 6]
+        //
+        // 解释：
+        // Graph g = new Graph(4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]);
+        // g.shortestPath(3, 2); // 返回 6 。从 3 到 2 的最短路径如第一幅图所示：3 -> 0 -> 1 -> 2 ，总代价为 3 + 2 + 1 = 6 。
+        // g.shortestPath(0, 3); // 返回 -1 。没有从 0 到 3 的路径。
+        // g.addEdge([1, 3, 4]); // 添加一条节点 1 到节点 3 的边，得到第二幅图。
+        // g.shortestPath(0, 3); // 返回 6 。从 0 到 3 的最短路径为 0 -> 1 -> 3 ，总代价为 2 + 4 = 6 。
+        //
+        //
+        // 提示：
+        //
+        // 1 <= n <= 100
+        // 0 <= edges.length <= n * (n - 1)
+        //     edges[i].length == edge.length == 3
+        // 0 <= from_i, toi, from, to, node1, node2 <= n - 1
+        // 1 <= edgeCost_i, edgeCost <= 106
+        // 图中任何时候都不会有重边和自环。
+        // 调用 addEdge 至多 100 次。
+        // 调用 shortestPath 至多 100 次。
+    }
+
+
+    public class Solution_2908
+    {
+        [TestCase(new[] { 8, 6, 1, 5, 3 },     ExpectedResult = 9)]
+        [TestCase(new[] { 5, 4, 8, 7, 10, 2 }, ExpectedResult = 13)]
+        public int MinimumSum(int[] nums)
+        {
+            var n   = nums.Length;
+            var ans = int.MaxValue;
+            //暴力枚举
+            for (var i = 0 ; i < n ; i++)
+            {
+                for (var j = i + 1 ; j < n ; j++)
+                {
+                    for (var k = j + 1 ; k < n ; k++)
+                    {
+                        if (nums[i] < nums[j] && nums[k] < nums[j])
+                        {
+                            ans = Math.Min(ans, nums[k] + nums[i] + nums[j]);
+                        }
+                    }
+                }
+            }
+
+            if (ans == int.MaxValue)
+            {
+                return -1;
+            }
+
+            return ans;
+        }
+
+        // 2908. 元素和最小的山形三元组 I
+        // 第 368 场周赛
+        //     Q1
+        // 1254
+        // 相关标签
+        //     相关企业
+        // 提示
+        //     给你一个下标从 0 开始的整数数组 nums 。
+        //
+        // 如果下标三元组 (i, j, k) 满足下述全部条件，则认为它是一个 山形三元组 ：
+        //
+        // i < j < k
+        //     nums[i] < nums[j] 且 nums[k] < nums[j]
+        // 请你找出 nums 中             元素和最小 的山形三元组，并返回其 元素和 。如果不存在满足条件的三元组，返回 -1 。
+        //
+        //
+        //
+        // 示例 1：
+        //
+        // 输入：nums = [8,6,1,5,3]
+        // 输出：9
+        // 解释：三元组 (2, 3, 4) 是一个元素和等于 9 的山形三元组，因为： 
+        // - 2 < 3 < 4
+        // - nums[2] < nums[3] 且 nums[4] < nums[3]
+        // 这个三元组的元素和等于           nums[2] + nums[3] + nums[4] = 9 。可以证明不存在元素和小于 9 的山形三元组。
+        // 示例 2：
+        //
+        // 输入：nums = [5,4,8,7,10,2]
+        // 输出：13
+        // 解释：三元组 (1, 3, 5) 是一个元素和等于 13 的山形三元组，因为： 
+        // - 1 < 3 < 5 
+        // - nums[1] < nums[3] 且 nums[5] < nums[3]
+        // 这个三元组的元素和等于           nums[1] + nums[3] + nums[5] = 13 。可以证明不存在元素和小于 13 的山形三元组。
+        // 示例 3：
+        //
+        // 输入：nums = [6,5,4,3,4,5]
+        // 输出：-1
+        // 解释：可以证明 nums 中不存在山形三元组。
+        //
+        //
+        // 提示：
+        //
+        // 3 <= nums.length <= 50
+        // 1 <= nums[i] <= 50
+    }
+
+
+    public class Solution_2952
+    {
+        [TestCase(new[] { 1, 4, 10 },           19, ExpectedResult = 2)]
+        [TestCase(new[] { 1, 4, 10, 5, 7, 19 }, 19, ExpectedResult = 1)]
+        public int MinimumAddedCoins(int[] coins, int target)
+        {
+            Array.Sort(coins);
+            var ans     = 0;
+            var current = 1;
+            int length  = coins.Length, index = 0;
+            while (current <= target)
+            {
+                if (index < length && coins[index] <= current)
+                {
+                    current += coins[index];
+                    index++;
+                }
+                else
+                {
+                    current *= 2;
+                    ans++;
+                }
+            }
+
+            return ans;
+        }
+
+        // 2952. 需要添加的硬币的最小数量
+        //     第 374 场周赛
+        //     Q2
+        // 1784
+        // 相关标签
+        //     相关企业
+        // 提示
+        //     给你一个下标从 0 开始的整数数组 coins，表示可用的硬币的面值，以及一个整数 target 。
+        //
+        // 如果存在某个 coins 的子序列总和为 x，那么整数 x 就是一个 可取得的金额 。
+        //
+        // 返回需要添加到数组中的 任意面值 硬币的 最小数量 ，使范围 [1, target] 内的每个整数都属于 可取得的金额 。
+        //
+        // 数组的 子序列 是通过删除原始数组的一些（可能不删除）元素而形成的新的 非空 数组，删除过程不会改变剩余元素的相对位置。
+        //
+        //
+        //
+        // 示例 1：
+        //
+        // 输入：coins = [1,4,10], target = 19
+        // 输出：2
+        // 解释：需要添加面值为 2 和 8 的硬币各一枚，得到硬币数组 [1,2,4,8,10] 。
+        // 可以证明从 1 到 19 的所有整数都可由数组中的硬币组合得到，且需要添加到数组中的硬币数目最小为 2 。
+        // 示例 2：
+        //
+        // 输入：coins = [1,4,10,5,7,19], target = 19
+        // 输出：1
+        // 解释：只需要添加一枚面值为 2 的硬币，得到硬币数组 [1,2,4,5,7,10,19] 。
+        // 可以证明从 1 到 19 的所有整数都可由数组中的硬币组合得到，且需要添加到数组中的硬币数目最小为 1 。
+        // 示例 3：
+        //
+        // 输入：coins = [1,1,1], target = 20
+        // 输出：3
+        // 解释：
+        // 需要添加面值为 4 、8 和 16 的硬币各一枚，得到硬币数组 [1,1,1,4,8,16] 。 
+        // 可以证明从 1 到 20 的所有整数都可由数组中的硬币组合得到，且需要添加到数组中的硬币数目最小为 3 。
+        //
+        //
+        // 提示：
+        //
+        // 1 <= target <= 105
+        // 1 <= coins.length <= 105
+        // 1 <= coins[i] <= target
+    }
+
+
+    public class Solution_331
+    {
+        [TestCase("9,3,4,#,#,1,#,#,2,#,6,#,#", ExpectedResult = true)]
+        public bool IsValidSerialization(string preorder)
+        {
+            var strs  = preorder.Split(','); //分割字符串,获得字符串数组
+            var lens  = strs.Length;         //字符串数组的长度
+            var stack = new Stack<int>();    //维护一个栈
+            stack.Push(1);
+
+            for (var i = 0 ; i < lens ; i++)
+            {
+                if (stack.Count == 0)
+                {
+                    return false;
+                }
+
+                var isSharp = strs[i] == "#"; //判断是否是#.如果是,则弹出一个元素,并将其减1
+
+                stack.Push(stack.Pop() - 1);
+
+                if (stack.Peek() == 0)
+                {
+                    stack.Pop();
+                }
+
+                if (!isSharp)
+                {
+                    stack.Push(2);
+                }
+            }
+
+
+            return stack.Count == 0; //如果栈为空,则返回true,否则返回false
+        }
+    }
+
+
+    public class Solution_547
+    {
+        public int FindCircleNum(int[][] isConnected)
+        {
+            var num  = isConnected.Length;       //城市数量
+            var list = new List<HashSet<int>>(); //记录已经访问过的城市
+            var sum  = num;                      //记录省份数量
+
+            for (var i = 0 ; i < num ; i++)
+            {
+                for (var j = 0 ; j < i ; j++)
+                {
+                    if (isConnected[i][j] != 1) continue;
+
+
+                    var iIndex = -1;
+                    var jIndex = -1;
+
+                    foreach (var hashSet in list)
+                    {
+                        if (hashSet.Contains(i))
+                        {
+                            iIndex = list.IndexOf(hashSet);
+                        }
+
+                        if (hashSet.Contains(j))
+                        {
+                            jIndex = list.IndexOf(hashSet);
+                        }
+                    }
+
+                    if (iIndex != -1 && jIndex != -1)
+                    {
+                        if (iIndex != jIndex) //如果i和j都在已经访问过的城市中,且不在同一个省份中,则合并两个省份
+                        {
+                            list[iIndex].UnionWith(list[jIndex]);
+                            list.RemoveAt(jIndex);
+                        }
+                    }
+                    else if (iIndex != -1) //说明i在已经访问过的城市中,则把j加入到i所在的省份中
+                    {
+                        sum--;
+                        list[iIndex].Add(j);
+                    }
+                    else if (jIndex != -1) //说明j在已经访问过的城市中,则把i加入到j所在的省份中
+                    {
+                        sum--;
+                        list[jIndex].Add(i);
+                    }
+                    else //如果i和j都不在已经访问过的城市中,则新建一个省份
+                    {
+                        sum--;
+                        sum--;
+                        var hashSet = new HashSet<int> { i, j };
+                        list.Add(hashSet);
+                    }
+                }
+            }
+
+
+            return list.Count + sum;
+        }
+
+
+        //DFS
+        public int FindCircleNum2(int[][] isConnected)
+        {
+            var        province = 0;
+            var        len      = isConnected.Length;
+            Span<bool> visited  = stackalloc bool[len]; //维护一个数组,记录城市是否被访问过
+            for (var i = 0 ; i < len ; i++)
+            {
+                if (visited[i]) continue;
+
+                DFS(i, visited); //开始遍历这个城市所在的省份所有的城市
+                province++;
+            }
+
+            return province;
+
+            void DFS(int city, Span<bool> visited)
+            {
+                visited[city] = true;
+
+                for (var j = 0 ; j < len ; j++)
+                {
+                    if (isConnected[city][j] == 1 && !visited[j])
+                    {
+                        DFS(j, visited);
+                    }
+                }
+            }
+        }
+
+        //BFS
+        public int FindCircleNum3(int[][] isConnected)
+        {
+            var        cities    = isConnected.Length;
+            Span<bool> visited   = stackalloc bool[cities];
+            var        provinces = 0;
+            var        queue     = new Queue<int>();
+
+            for (var i = 0 ; i < cities ; i++)
+            {
+                if (visited[i]) continue;
+
+                queue.Enqueue(i);
+
+                while (queue.Count != 0)
+                {
+                    var j = queue.Dequeue();
+                    visited[j] = true;
+                    for (var k = 0 ; k < cities ; k++)
+                    {
+                        if (isConnected[j][k] == 1 && !visited[k])
+                        {
+                            queue.Enqueue(k);
+                        }
+                    }
+                }
+
+                provinces++;
+            }
+
+            return provinces;
+        }
+
+        //  [[1,0,0,1],
+        //   [0,1,1,0],
+        //   [0,1,1,1],
+        //   [1,0,1,1]]
+
+        //     0 : 1: 2: 3: 4: 5: 6: 7: 8: 9:10:11:12:13:14
+        //0 :[[1 , 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+        //1 :,[1 , 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        //2 :,[0 , 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        //3 :,[0 , 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+        //4 :,[0 , 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
+        //5 :,[0 , 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+        //6 :,[0 , 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0]
+        //7 :,[1 , 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]
+        //8 :,[0 , 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0]
+        //9 :,[0 , 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1]
+        //10:,[0 , 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0]
+        //11:,[0 , 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0]
+        //12:,[0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+        //13:,[0 , 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0]
+        //14:,[0 , 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]]
+
+        [Test]
+        public void Test()
+        {
+            int[][] isConnected = [[1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0], [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1], [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]];
+
+            var res = FindCircleNum(isConnected);
+
+            Console.WriteLine(res);
+        }
+
+
+        // 547. 省份数量
+        //     中等
+        // 相关标签
+        //     相关企业
+        // 有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b 直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。
+        //
+        // 省份 是一组直接或间接相连的城市，组内不含其他没有相连的城市。
+        //
+        // 给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i 个城市和第 j 个城市直接相连，而 isConnected[i][j] = 0 表示二者不直接相连。
+        //
+        // 返回矩阵中 省份 的数量。
+        //
+        //
+        //
+        // 示例 1：
+        //
+        //
+        // 输入：isConnected =
+        // [[1,1,0],
+        //  [1,1,0],
+        //  [0,0,1]]
+        // 输出：2
+        // 示例 2：
+        //
+        //
+        // 输入：isConnected =
+        // [[1,0,0],
+        //  [0,1,0],
+        //  [0,0,1]]
+        // 输出：3
+        // 
+        // [[1,1,1],
+        //  [1,1,1],
+        //  [1,1,1]]
+        //
+        //  [[1,0,0,1],
+        //   [0,1,1,0],
+        //   [0,1,1,1],
+        //   [1,0,1,1]]
+        //
+        // 提示：
+        //
+        // 1 <= n <= 200
+        // n == isConnected.length
+        //     n == isConnected[i].length
+        //     isConnected[i][j] 为 1 或 0
+        // isConnected[i][i] == 1
+        // isConnected[i][j] == isConnected[j][i]
+    }
+
+
+    public class Solution_2810 //双向链表
+    {
+        [TestCase("string", ExpectedResult = "rtsng")]
+        public string FinalString(string s)
+        {
+            var forward = true;
+            var list    = new LinkedList<char>();
+            foreach (var c in s)
+            {
+                if (c == 'i')
+                    forward = !forward;
+                else if (forward)
+                    list.AddLast(c);
+                else
+                    list.AddFirst(c);
+            }
+
+            return string.Join(string.Empty, forward ? list : list.Reverse());
+        }
+
+        // 2810. 故障键盘
+        //     第 357 场周赛
+        //     Q1
+        // 1193
+        // 相关标签
+        //     相关企业
+        // 提示
+        //     你的笔记本键盘存在故障，每当你在上面输入字符 'i' 时，它会反转你所写的字符串。而输入其他字符则可以正常工作。
+        //
+        // 给你一个下标从 0 开始的字符串 s ，请你用故障键盘依次输入每个字符。
+        //
+        // 返回最终笔记本屏幕上输出的字符串。
+        //
+        //
+        //
+        // 示例 1：
+        //
+        // 输入：s = "string"
+        // 输出："rtsng"
+        // 解释：
+        // 输入第 1 个字符后，屏幕上的文本是："s" 。
+        // 输入第 2 个字符后，屏幕上的文本是："st" 。
+        // 输入第 3 个字符后，屏幕上的文本是："str" 。
+        // 因为第 4 个字符是 'i' ，屏幕上的文本被反转，变成 "rts" 。
+        // 输入第 5 个字符后，屏幕上的文本是："rtsn" 。
+        // 输入第 6 个字符后，屏幕上的文本是： "rtsng" 。
+        // 因此，返回 "rtsng" 。
+        // 示例 2：
+        //
+        // 输入：s = "poiinter"
+        // 输出："ponter"
+        // 解释：
+        // 输入第 1 个字符后，屏幕上的文本是："p" 。
+        // 输入第 2 个字符后，屏幕上的文本是："po" 。
+        // 因为第 3 个字符是 'i' ，屏幕上的文本被反转，变成 "op" 。
+        // 因为第 4 个字符是 'i' ，屏幕上的文本被反转，变成 "po" 。
+        // 输入第 5 个字符后，屏幕上的文本是："pon" 。
+        // 输入第 6 个字符后，屏幕上的文本是："pont" 。
+        // 输入第 7 个字符后，屏幕上的文本是："ponte" 。
+        // 输入第 8 个字符后，屏幕上的文本是："ponter" 。
+        // 因此，返回 "ponter" 。
+        //
+        //
+        // 提示：
+        //
+        // 1 <= s.length <= 100
+        // s 由小写英文字母组成
+        // s[0] != 'i'
     }
 }
