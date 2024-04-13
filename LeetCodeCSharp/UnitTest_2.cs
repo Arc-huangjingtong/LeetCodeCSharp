@@ -1775,4 +1775,529 @@ public partial class UnitTest
         // s 由小写英文字母组成
         // s[0] != 'i'
     }
+
+
+    public class Solution_894 //没看懂
+    {
+        public IList<TreeNode> AllPossibleFBT(int n)
+        {
+            if (n % 2 == 0) return new List<TreeNode>();
+            if (n     == 1) return new List<TreeNode> { new() };
+
+            var res = new List<TreeNode>();
+            for (var i = 1 ; i < n ; i += 2)
+            {
+                var left  = AllPossibleFBT(i);
+                var right = AllPossibleFBT(n - i - 1);
+                foreach (var l in left)
+                {
+                    foreach (var r in right)
+                    {
+                        res.Add(new(0, l, r));
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        public IList<TreeNode> AllPossibleFBT2(int n)
+        {
+            if (n % 2 == 0) return new List<TreeNode>();
+
+            var dp = new IList<TreeNode>[n + 1];
+
+            for (var i = 0 ; i <= n ; i++)
+            {
+                dp[i] = new List<TreeNode>();
+            }
+
+            dp[1].Add(new(0));
+            for (var i = 3 ; i <= n ; i += 2)
+            {
+                for (var j = 1 ; j < i ; j += 2)
+                {
+                    foreach (var leftSubtree in dp[j])
+                    {
+                        foreach (var rightSubtrees in dp[i - 1 - j])
+                        {
+                            var root = new TreeNode(0, leftSubtree, rightSubtrees);
+                            dp[i].Add(root);
+                        }
+                    }
+                }
+            }
+
+            return dp[n];
+        }
+
+
+
+        [Test]
+        public void Test()
+        {
+            AllPossibleFBT(7);
+        }
+    }
+
+
+    public class Solution_1379
+    {
+        public TreeNode GetTargetCopy(TreeNode original, TreeNode cloned, TreeNode target)
+        {
+            if (original == null)
+            {
+                return null;
+            }
+
+            if (original == target)
+            {
+                return cloned;
+            }
+
+            var left = GetTargetCopy(original.left, cloned.left, target);
+
+            if (left != null)
+            {
+                return left;
+            }
+
+            return GetTargetCopy(original.right, cloned.right, target);
+        }
+    }
+
+
+    public class Solution_2192
+    {
+        public IList<IList<int>> GetAncestors(int n, int[][] edges)
+        {
+            var result = new List<IList<int>>(n);
+            var graph  = new Dictionary<int, List<int>>(n);
+
+            for (var i = 0 ; i < n ; i++)
+            {
+                result.Add([]);
+                graph.Add(i, []);
+            }
+
+            foreach (var edge in edges)
+            {
+                graph[edge[0]].Add(edge[1]);
+            }
+
+
+            for (var i = 0 ; i < n ; i++)
+            {
+                Span<bool> visited = stackalloc bool[n];
+                DFS(i, i, visited);
+            }
+
+            return result;
+
+            void DFS(int target, int index, Span<bool> visited)
+            {
+                var set = graph[index];
+
+                visited[index] = true;
+
+                foreach (var i in set)
+                {
+                    if (!visited[i])
+                    {
+                        result[i].Add(target);   //目标节点增加祖先
+                        DFS(target, i, visited); //遍历这个节点的next,然后再增加
+                    }
+                }
+            }
+        }
+
+
+        [Test]
+        public void Test()
+        {
+            GetAncestors(9, [[3, 6], [2, 4], [8, 6], [7, 4], [1, 4], [2, 1], [7, 2], [0, 4], [5, 0], [4, 6], [3, 2], [5, 6], [1, 6]]);
+        }
+    }
+
+
+    public class Solution_1026
+    {
+        public int maxAncestorDiff(TreeNode root)
+        {
+            return Math.Max(DFS(root.left, root.val, root.val), DFS(root.right, root.val, root.val));
+
+            int DFS(TreeNode _root, int maxValue, int minValue)
+            {
+                if (_root == null) return -1;
+
+                var leftRes  = DFS(_root.left,  Math.Max(maxValue, _root.val), Math.Min(minValue, _root.val));
+                var rightRes = DFS(_root.right, Math.Max(maxValue, _root.val), Math.Min(minValue, _root.val));
+                return Math.Max(Math.Max(leftRes, rightRes), Math.Max(Math.Abs(maxValue - _root.val), Math.Abs(minValue - _root.val)));
+            }
+        }
+    }
+
+
+    public class Solution_1483
+    {
+        public class TreeAncestor
+        {
+            private const int     LOG = 16;
+            readonly      int[][] ancestors;
+
+            public TreeAncestor(int n, int[] parent)
+            {
+                //生成nx16的矩阵，初始值为-1
+                ancestors = new int[n][];
+                for (var i = 0 ; i < n ; i++)
+                {
+                    ancestors[i] = new int[LOG];
+                    Array.Fill(ancestors[i], -1);
+                }
+
+                //初始化第一列
+                for (var i = 0 ; i < n ; i++)
+                {
+                    ancestors[i][0] = parent[i];
+                }
+
+                for (var j = 1 ; j < LOG ; j++)
+                {
+                    for (var i = 0 ; i < n ; i++)
+                    {
+                        if (ancestors[i][j - 1] != -1)
+                        {
+                            ancestors[i][j] = ancestors[ancestors[i][j - 1]][j - 1];
+                        }
+                    }
+                }
+            }
+
+            public int GetKthAncestor(int node, int k)
+            {
+                for (var j = 0 ; j < LOG ; j++)
+                {
+                    if (((k >> j) & 1) != 0)
+                    {
+                        node = ancestors[node][j];
+                        if (node == -1)
+                        {
+                            return -1;
+                        }
+                    }
+                }
+
+                return node;
+            }
+        }
+    }
+
+
+    public class Solution_1600
+    {
+        public class ThroneInheritance(string kingName)
+        {
+            public readonly Dictionary<string, IList<string>> dict = new() { { kingName, [] } };
+
+            public readonly HashSet<string> deadSet = [];
+
+            public readonly string root = kingName;
+
+
+
+            public void Birth(string parentName, string childName)
+            {
+                var parent = dict[parentName];
+                parent.Add(childName);
+                dict.Add(childName, []);
+            }
+
+            public void Death(string name)
+            {
+                deadSet.Add(name);
+            }
+
+            public IList<string> GetInheritanceOrder()
+            {
+                var res = new List<string>();
+
+                DFS(root);
+
+                return res;
+
+                void DFS(string name)
+                {
+                    if (!deadSet.Contains(name))
+                    {
+                        res.Add(name);
+                    }
+
+                    foreach (var child in dict[name])
+                    {
+                        DFS(child);
+                    }
+                }
+            }
+        }
+    }
+
+
+    public class Solution_2009
+    {
+        public int MinOperations(int[] nums)
+        {
+            var n   = nums.Length;
+            var set = new HashSet<int>(nums);
+
+            var sortedUniqueNums = new List<int>(set);
+            sortedUniqueNums.Sort();
+            var res = n;
+            var j   = 0;
+            for (var i = 0 ; i < sortedUniqueNums.Count ; i++)
+            {
+                var left  = sortedUniqueNums[i];
+                var right = left + n - 1;
+
+                while (j < sortedUniqueNums.Count && sortedUniqueNums[j] <= right)
+                {
+                    res = Math.Min(res, n - (j - i + 1));
+                    j++;
+                }
+            }
+
+            return res;
+        }
+    }
+
+
+    public class Solution_2529
+    {
+        public int MaximumCount2(int[] nums)
+        {
+            return Math.Max(nums.Count(x => x > 0), nums.Count(x => x < 1));
+        }
+
+        public int MaximumCount(int[] nums)
+        {
+            var len = nums.Length;
+
+            return Math.Max(Find(0), nums.Length - Find(1));
+
+            int Find(int target)
+            {
+                int l = 0, r = len;
+                while (l < r)
+                {
+                    var mid = (l + r) >> 1;
+                    if (nums[mid] >= target)
+                        r = mid;
+                    else
+                        l = mid + 1;
+                }
+
+                return l;
+            }
+        }
+    }
+
+
+    public class Solution_56
+    {
+        public int[][] Merge(int[][] intervals)
+        {
+            Array.Sort(intervals, (a, b) => a[0] - b[0]);
+
+            var res = new List<int[]>();
+
+            var current = intervals[0];
+
+            for (var i = 1 ; i < intervals.Length ; i++)
+            {
+                var interval = intervals[i];
+
+                if (interval[0] <= current[1] && interval[1] <= current[1]) { }
+                else if (interval[0] <= current[1])
+                {
+                    current[1] = interval[1];
+                }
+                else
+                {
+                    res.Add(current);
+
+                    current = interval;
+                }
+            }
+
+            res.Add(current);
+
+            return res.ToArray();
+        }
+
+        public int[][] Merge2(int[][] intervals)
+        {
+            var res = new List<int[]>(intervals.Length);
+
+            Array.Sort(intervals, (a, b) => a[0] - b[0]);
+
+            foreach (var inter in intervals)
+            {
+                if (res.Count == 0 || res[^1][1] < inter[0])
+                {
+                    res.Add(inter);
+                }
+                else
+                {
+                    res[^1][1] = Math.Max(inter[1], res[^1][1]);
+                }
+            }
+
+            return res.ToArray();
+        }
+    }
+
+
+    public class Solution_1702
+    {
+        [TestCase("000110", ExpectedResult = "111011")]
+        public string MaximumBinaryString(string binary)
+        {
+            Span<char> result = binary.ToCharArray();
+
+            for (var i = 1 ; i < result.Length ; i++)
+            {
+                if (result[i] == '0' && result[i - 1] == '0')
+                {
+                    result[i - 1] = '1';
+                }
+                else if (result[i] == '1' && result[i - 1] == '0')
+                {
+                    var start = i;
+                    while (i < result.Length && result[start] == '1')
+                    {
+                        start++;
+                    }
+                }
+            }
+
+
+            return new string(result);
+        }
+
+        [TestCase("000110", ExpectedResult = "111011")]
+        [TestCase("01110",  ExpectedResult = "10111")]
+        [TestCase("0111",   ExpectedResult = "0111")]
+        [TestCase("1100",   ExpectedResult = "1110")]
+        [TestCase("111",    ExpectedResult = "111")]
+        public string MaximumBinaryString2(string binary)
+        {
+            var len      = binary.Length;
+            var oneCount = binary.Count(x => x == '1');
+
+            if (oneCount == len) return binary;
+
+
+            //开头的1的个数
+            var startOne = 0;
+            while (startOne < len && binary[startOne] == '1')
+            {
+                startOne++;
+            }
+
+
+            oneCount -= startOne;
+
+            Span<char> result = stackalloc char[len];
+
+            result.Fill('1');
+            result[^(oneCount + 1)] = '0';
+
+
+            return new(result);
+        }
+    }
+
+
+    public class Solution_189
+    {
+        public void Rotate(int[] nums, int k)
+        {
+            var len      = nums.Length;
+            var numsSpan = new Span<int>(nums.ToArray());
+
+
+            for (int i = 0 ; i < nums.Length ; i++)
+            {
+                nums[(i + k) % len] = numsSpan[i];
+            }
+        }
+
+        [Test]
+        public void Test()
+        {
+            Rotate([1, 2, 3, 4, 5, 6, 7], 3);
+        }
+    }
+
+
+    public class Solution_2924
+    {
+        //如果两只队伍没有比赛过,则返回-1;
+
+        //优化前版本
+        public int FindChampion(int n, int[][] edges)
+        {
+            var graph = new Dictionary<int, HashSet<int>>();
+
+            for (int i = 0 ; i < n ; i++)
+            {
+                graph.Add(i, []);
+            }
+
+
+            foreach (var edge in edges)
+            {
+                graph.TryAdd(edge[1], []);
+                graph[edge[1]].Add(edge[0]);
+            }
+
+            int signal = 0;
+            int result = -1;
+            foreach (var node in graph)
+            {
+                if (node.Value.Count == 0)
+                {
+                    signal++;
+                    result = node.Key;
+                }
+            }
+
+            return signal == 1 ? result : -1;
+        }
+
+        //由于节点的具体值是多少没有涉及,直接优化成计数器
+        public int FindChampion2(int n, int[][] edges)
+        {
+            Span<int> graph = stackalloc int[n];
+
+            //有比edge[1]的强的,则计数器+1 
+            foreach (var edge in edges)
+            {
+                graph[edge[1]]++;
+            }
+
+            int signal = 0;
+            int result = -1;
+            for (var i = 0 ; i < graph.Length ; i++)
+            {
+                var node = graph[i];
+                if (node == 0)
+                {
+                    signal++;
+                    result = i;
+                }
+            }
+
+            return signal == 1 ? result : -1;
+        }
+    }
 }
