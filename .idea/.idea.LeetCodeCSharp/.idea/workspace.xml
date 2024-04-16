@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Design.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/Note_Optimize.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Note_Optimize.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +17,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Arc-huangjingtong&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Arc-huangjingtong/LeetCodeCSharp.git&quot;,
+    &quot;accountId&quot;: &quot;c0745512-cbcc-4f59-97dd-2191d8fc44cd&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/MethodImplAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5abecb93434c4299acd01d522fdf8da2c9a910/17/19ccfef3/Span`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ac02bd793e9c4e83bfe86202a976291919910/a0/18dcf2b9/SortedList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -66,8 +70,8 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Windows11\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Windows11\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Windows11\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Windows11\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
       &quot;C:\\Users\\Windows11\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
@@ -101,12 +105,26 @@
       <workItem from="1711810952785" duration="3066000" />
       <workItem from="1711869801573" duration="12293000" />
       <workItem from="1711903181454" duration="576000" />
+      <workItem from="1712064539051" duration="4834000" />
+      <workItem from="1712166774549" duration="5984000" />
+      <workItem from="1712256637262" duration="923000" />
+      <workItem from="1712401849851" duration="2521000" />
+      <workItem from="1712500660039" duration="1949000" />
+      <workItem from="1712588085457" duration="165000" />
+      <workItem from="1712596736149" duration="558000" />
+      <workItem from="1712671810195" duration="1835000" />
+      <workItem from="1712753521783" duration="7011000" />
+      <workItem from="1712936764493" duration="1539000" />
+      <workItem from="1712976125231" duration="3401000" />
+      <workItem from="1713028030685" duration="1589000" />
+      <workItem from="1713118133376" duration="445000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -127,43 +145,43 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs</url>
           <line>7</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" initialLine="87" containingFunctionPresentation="方法 'TestMethod1'" />
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" containingFunctionPresentation="方法 'TestMethod1'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/Helper_Utils.cs</url>
           <line>170</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\Helper_Utils.cs" initialLine="172" containingFunctionPresentation="方法 'CountPrimes'" />
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\Helper_Utils.cs" containingFunctionPresentation="方法 'CountPrimes'" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs</url>
           <line>84</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" initialLine="84" containingFunctionPresentation="方法 'CountPaths'" />
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" containingFunctionPresentation="方法 'CountPaths'" />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs</url>
           <line>180</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" initialLine="179" containingFunctionPresentation="方法 'Test'" />
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" containingFunctionPresentation="方法 'Test'" />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs</url>
           <line>142</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" initialLine="142" containingFunctionPresentation="方法 'CountPaths2'" />
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" containingFunctionPresentation="方法 'CountPaths2'" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_1.cs</url>
           <line>397</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" initialLine="398" containingFunctionPresentation="方法 'Test'" />
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\UnitTest_1.cs" containingFunctionPresentation="方法 'Test'" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs</url>
           <line>1503</line>
-          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\UnitTest_2.cs" initialLine="1503" containingFunctionPresentation="方法 'FindCircleNum'">
+          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\UnitTest_2.cs" containingFunctionPresentation="方法 'FindCircleNum'">
             <startOffsets>
               <option value="40855" />
             </startOffsets>
@@ -172,6 +190,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs</url>
+          <line>1888</line>
+          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\UnitTest_2.cs" containingFunctionPresentation="方法 'GetAncestors'">
+            <startOffsets>
+              <option value="52166" />
+            </startOffsets>
+            <endOffsets>
+              <option value="52195" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs</url>
+          <line>2223</line>
+          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\UnitTest_2.cs" containingFunctionPresentation="方法 'Rotate'">
+            <startOffsets>
+              <option value="61023" />
+            </startOffsets>
+            <endOffsets>
+              <option value="61050" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
