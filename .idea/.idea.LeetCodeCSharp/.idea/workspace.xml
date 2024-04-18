@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Graph.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Design.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Design.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.genruntimeconfig.cache" afterDir="false" />
@@ -20,11 +22,21 @@
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,9 +54,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Collections/src/System/Collections/Generic/SortedSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/MethodImplAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5abecb93434c4299acd01d522fdf8da2c9a910/17/19ccfef3/Span`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ac02bd793e9c4e83bfe86202a976291919910/a0/18dcf2b9/SortedList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -67,7 +78,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "XThreadsFramesViewSplitterKey": "0.36744186",
+    "XThreadsFramesViewSplitterKey": "0.50574714",
     "a93ac737-846b-4ef1-94a1-954eca8cc2ac.executor": "Run",
     "cf197e88-d421-4315-9276-6844ed836af1.executor": "Debug",
     "git-widget-placeholder": "main",
@@ -201,45 +212,33 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Graph.cs</url>
           <line>47</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Graph.cs" initialLine="48" containingFunctionPresentation="方法 'MinMalwareSpread'">
-            <startOffsets>
-              <option value="1234" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1266" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Graph.cs" containingFunctionPresentation="方法 'MinMalwareSpread'" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Graph.cs</url>
           <line>70</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Graph.cs" initialLine="56" containingFunctionPresentation="方法 'MinMalwareSpread'">
-            <startOffsets>
-              <option value="1790" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1849" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Graph.cs" containingFunctionPresentation="方法 'MinMalwareSpread'" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Graph.cs</url>
           <line>56</line>
-          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Graph.cs" initialLine="54" containingFunctionPresentation="方法 'MinMalwareSpread'">
+          <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Graph.cs" containingFunctionPresentation="方法 'MinMalwareSpread'" />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs</url>
+          <line>35</line>
+          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Array.cs" containingFunctionPresentation="方法 'FindOriginalArray'">
             <startOffsets>
-              <option value="1407" />
-              <option value="1426" />
-              <option value="1454" />
+              <option value="850" />
             </startOffsets>
             <endOffsets>
-              <option value="1488" />
-              <option value="1432" />
-              <option value="1470" />
+              <option value="901" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="30" />
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
