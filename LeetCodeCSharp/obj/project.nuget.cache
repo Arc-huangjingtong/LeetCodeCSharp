@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "ef0UQIsqkgAC1/zCDu0FXcdtXy+TUnJFnPd6qCofLkoen1GrwdbBqsUlcSNu4jz0xchvRmSyVksW+8X7hlwfnQ==",
-=======
   "dgSpecHash": "+G3pLFT6mMSlb3GHk2oURstxybFI/EwXzNgy+OJ3EASevM9hcCZCAdO8BRhduQZZjb3D/AvHJPjipV0gDPaBzQ==",
->>>>>>> 1ff30d99ce523bb6d141f87d94a4dabe40d77e03
   "success": true,
   "projectFilePath": "D:\\Project\\LeetCodeCSharp\\LeetCodeCSharp\\LeetCodeCSharp.csproj",
   "expectedPackageFiles": [
@@ -17,5 +13,12 @@
     "C:\\Users\\Windows11\\.nuget\\packages\\nunit\\4.0.1\\nunit.4.0.1.nupkg.sha512",
     "C:\\Users\\Windows11\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Project\\LeetCodeCSharp\\LeetCodeCSharp\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
