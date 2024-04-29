@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "ef0UQIsqkgAC1/zCDu0FXcdtXy+TUnJFnPd6qCofLkoen1GrwdbBqsUlcSNu4jz0xchvRmSyVksW+8X7hlwfnQ==",
+=======
   "dgSpecHash": "+G3pLFT6mMSlb3GHk2oURstxybFI/EwXzNgy+OJ3EASevM9hcCZCAdO8BRhduQZZjb3D/AvHJPjipV0gDPaBzQ==",
+>>>>>>> 1ff30d99ce523bb6d141f87d94a4dabe40d77e03
   "success": true,
   "projectFilePath": "D:\\Project\\LeetCodeCSharp\\LeetCodeCSharp\\LeetCodeCSharp.csproj",
   "expectedPackageFiles": [

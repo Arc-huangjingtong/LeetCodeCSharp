@@ -183,3 +183,39 @@ public class Solution_924
         Console.WriteLine(MinMalwareSpread(graph, initial));
     }
 }
+
+
+public class Solution_928
+{
+    //我们可以从 initial 中删除一个节点，并完全移除该节点以及从该节点到任何其他节点的任何连接
+    //请返回移除后能够使 M(initial) 最小化的节点。如果有多个节点满足条件，返回索引 最小的节点
+
+    public int MinMalwareSpread(int[][] graph, int[] initial)
+    {
+        var length   = graph.Length;
+        var graphSet = new HashSet<int>[length];
+
+        for (var i = 0 ; i < length ; i++)
+        {
+            graphSet[i] = [];
+            for (var j = 0 ; j < length ; j++)
+            {
+                if (graph[i][j] == 1)
+                {
+                    graphSet[i].Add(j);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    [Test]
+    public void Test()
+    {
+        int[][] graph   = [[1, 1, 0], [1, 1, 0], [0, 0, 1]];
+        int[]   initial = [0, 1];
+
+        Console.WriteLine(MinMalwareSpread(graph, initial));
+    }
+}

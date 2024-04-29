@@ -2301,6 +2301,74 @@ public partial class UnitTest
         }
     }
 
+    
+    public class Solution_A001
+    {
+        public static Random rnc = new Random();
 
-  
+        [TestCase(0, 1, 0, 3)] //边界情况:当玩家兵力不缺少时,任意兵种数量为3
+        public void RandomCreateAnySoldiers(int lessArcher, int lessShielder, int lessRider, int anyNum)
+        {
+            //转化AnyNum
+
+            var randomIndex = rnc.Next(1000, 2000);
+
+            int ArcherNum = 0, ShielderNum = 0, riderNum = 0;
+
+            int times = 0;
+
+            while (anyNum > 0 && times < 1000)
+            {
+                var addFlag = false;
+                var index   = randomIndex % 3;
+
+                switch (index)
+                {
+                    case 0 :
+                        if (lessShielder > 0)
+                        {
+                            ShielderNum++;
+                            lessShielder--;
+                            addFlag = true;
+                        }
+
+                        break;
+                    case 1 :
+                        if (lessArcher > 0)
+                        {
+                            ArcherNum++;
+                            lessArcher--;
+                            addFlag = true;
+                        }
+
+                        break;
+                    case 2 :
+                        if (lessRider > 0)
+                        {
+                            riderNum++;
+                            lessRider--;
+                            addFlag = true;
+                        }
+
+                        break;
+                }
+
+                if (addFlag)
+                {
+                    anyNum--;
+                    randomIndex = rnc.Next(1000, 2000);
+                }
+                else
+                {
+                    randomIndex--;
+                }
+
+                times++;
+            }
+
+            Console.WriteLine(times);
+            Console.WriteLine($"ArcherNum:{ArcherNum} ShielderNum:{ShielderNum} riderNum:{riderNum}");
+            Console.WriteLine($"lessArcher:{lessArcher} lessShielder:{lessShielder} lessRider:{lessRider} anyNum:{anyNum}");
+        }
+    }
 }
