@@ -154,3 +154,71 @@ public class Solution_706
         }
     }
 }
+
+
+/// <summary> 快照数组 </summary>
+public class Solution_1146
+{
+    public class SnapshotArray
+    {
+        private          int                snap_cnt = 0;
+        private readonly List<(int, int)>[] data     = []; //每一位都是一个链表
+
+        public SnapshotArray(int length)
+        {
+            for (var i = 0 ; i < length ; i++)
+            {
+                data[i] = [];
+            }
+        }
+
+        ///<summary> 将指定索引index处的元素设置为val </summary>
+        public void Set(int index, int val) => data[index].Add((snap_cnt, val));
+
+        public int Snap() => snap_cnt++;
+
+        public int Get(int index, int snap_id)
+        {
+            var x = BinarySearch(index, snap_id);
+            return x == 0 ? 0 : data[index][x - 1].Item2;
+        }
+
+        //二分法查找 snap_id
+        private int BinarySearch(int index, int snap_id)
+        {
+            int low = 0, high = data[index].Count;
+            while (low < high)
+            {
+                var mid  = low + (high - low) / 2;
+                var pair = data[index][mid];
+                if (pair.Item1 > snap_id + 1 || (pair.Item1 == snap_id + 1 && pair.Item2 >= 0))
+                {
+                    high = mid;
+                }
+                else
+                {
+                    low = mid + 1;
+                }
+            }
+
+            return low;
+        }
+    }
+
+
+    [Test]
+    public void Test()
+    {
+        //["SnapshotArray","set","snap","snap","snap","get","snap","snap","get"]
+        //[[1],[0,15],[],[],[],[0,2],[],[],[0,0]]
+        var obj = new SnapshotArray(1);
+        obj.Set(0, 15);
+        obj.Snap();
+        obj.Snap();
+        obj.Snap();
+        obj.Get(0, 2); //15
+        obj.Snap();
+        obj.Snap();
+        obj.Get(0, 0);
+    }
+}

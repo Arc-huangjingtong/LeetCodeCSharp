@@ -135,3 +135,91 @@ public class Solution_2007
     /// 0 <= changed[i] <= 10^5
 }
 
+
+/// <summary> 39. 组合总和 </summary>
+public class Solution_39
+{
+    public IList<IList<int>> CombinationSum(int[] candidates, int target)
+    {
+        var result = new List<IList<int>>();
+
+
+        return result;
+    }
+
+    //[TestCase(new[] {2, 3, 6, 7}, 7, ExpectedResult = new[] {new[] {2, 2, 3}, new[] {7}})]
+
+    //7, 6+1
+}
+
+
+public class Solution_377
+{
+    // 377. 组合总和 Ⅳ
+    public int CombinationSum4(int[] nums, int target)
+    {
+        Span<int> f = stackalloc int[target + 1];
+        f[0] = 1;
+        for (var i = 1 ; i <= target ; ++i)
+        {
+            foreach (var x in nums)
+            {
+                if (i >= x)
+                {
+                    f[i] += f[i - x];
+                }
+            }
+        }
+
+        return f[target];
+    }
+}
+
+
+/// <summary> 2639.查询网格图中每一列的宽度 </summary>
+public class Solution_2639
+{
+    public int[] FindColumnWidth(int[][] grid)
+    {
+        var n      = grid.Length;
+        var m      = grid[0].Length;
+        var result = new int[m];
+        for (var i = 0 ; i < m ; i++)
+        {
+            for (var j = 0 ; j < n ; j++)
+            {
+                var num   = grid[j][i];
+                var width = 0;
+                if (num < 0)
+                {
+                    width++;
+                }
+
+                if (num == 0)
+                {
+                    width = 1;
+                }
+                else
+                {
+                    while (num != 0)
+                    {
+                        num /= 10;
+                        width++;
+                    }
+                }
+
+               
+
+
+                result[i] = Math.Max(result[i], width);
+            }
+        }
+
+        return result;
+    }
+
+    // [[-15,1,  3],
+    //  [15 ,7, 12],
+    //  [5  ,6, -2]]
+    // 输出：[3,1,2]
+}
