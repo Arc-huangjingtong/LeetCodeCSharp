@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< Updated upstream
   "dgSpecHash": "ef0UQIsqkgAC1/zCDu0FXcdtXy+TUnJFnPd6qCofLkoen1GrwdbBqsUlcSNu4jz0xchvRmSyVksW+8X7hlwfnQ==",
+=======
+  "dgSpecHash": "SNOC9EO8zQwCqZ5DG7uTnhH/INU2TZ4EzjDSIgcv1JF8r5jreknAuQBpHF/Hq0eBv9UcwRuO+2gOZR88u4DX0g==",
+>>>>>>> Stashed changes
   "success": true,
   "projectFilePath": "F:\\LeetCodeCSharp\\LeetCodeCSharp\\LeetCodeCSharp.csproj",
   "expectedPackageFiles": [

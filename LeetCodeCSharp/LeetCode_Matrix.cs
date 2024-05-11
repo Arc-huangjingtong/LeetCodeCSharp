@@ -1,4 +1,7 @@
 ﻿namespace LeetCodeCSharp;
+
+using System.Linq.Expressions;
+
 ///////////////////////////////////////////////////////矩阵相关题型///////////////////////////////////////////////////////
 
 
@@ -12,7 +15,7 @@ public class Solution_1329
         var m = mat[0].Length;
 
         var diag = new List<List<int>>(m + n);
-        
+
         for (var i = 0 ; i < m + n ; i++)
         {
             diag.Add([]);
@@ -22,7 +25,7 @@ public class Solution_1329
         {
             for (var j = 0 ; j < m ; j++)
             {
-                diag[i - j + m].Add(mat[i][j]);//i-j+m是为了保证对角线的元素在同一个list中
+                diag[i - j + m].Add(mat[i][j]); //i-j+m是为了保证对角线的元素在同一个list中
             }
         }
 
@@ -67,5 +70,30 @@ public class Solution_1329
         {
             Console.WriteLine(string.Join(",", row));
         }
+    }
+}
+
+
+public class Solution_Arc
+{
+    [Test]
+    public void Test()
+    {
+        // 使用表达式API来创建表达式树
+        var paramA        = Expression.Parameter(typeof(int), "a");
+        var paramB        = Expression.Parameter(typeof(int), "b");
+        var sumExpression = Expression.Add(paramA, paramB);
+        
+        
+        // 创建lambda表达式代表这个表达式树
+        var lambda = Expression.Lambda<Func<int, int, int>>(sumExpression, paramA, paramB);
+
+        // 编译lambda表达式，生成可执行的委托
+        var compiled = lambda.Compile();
+        
+        // 使用具体的参数值调用委托
+        var result = compiled(5, 3);  // result将会是8
+        
+        Console.WriteLine(result);
     }
 }
