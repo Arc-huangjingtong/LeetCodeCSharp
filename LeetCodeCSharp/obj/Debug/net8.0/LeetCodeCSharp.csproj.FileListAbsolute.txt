@@ -179,10 +179,10 @@ D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.Assembl
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.AssemblyInfo.cs
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.csproj.CoreCompileInputs.cache
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.sourcelink.json
-D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.csproj.CopyComplete
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.dll
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\refint\LeetCodeCSharp.dll
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.pdb
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCodeCSharp.genruntimeconfig.cache
 D:\Project\LeetCodeCsharp\LeetCodeCSharp\obj\Debug\net8.0\ref\LeetCodeCSharp.dll
 F:\LeetCodeCSharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCode.F9E4A365.Up2Date
+D:\Project\LeetCodeCSharp\LeetCodeCSharp\obj\Debug\net8.0\LeetCode.F9E4A365.Up2Date
