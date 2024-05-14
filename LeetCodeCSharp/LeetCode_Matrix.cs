@@ -12,7 +12,7 @@ public class Solution_1329
         var m = mat[0].Length;
 
         var diag = new List<List<int>>(m + n);
-        
+
         for (var i = 0 ; i < m + n ; i++)
         {
             diag.Add([]);
@@ -22,7 +22,7 @@ public class Solution_1329
         {
             for (var j = 0 ; j < m ; j++)
             {
-                diag[i - j + m].Add(mat[i][j]);//i-j+m是为了保证对角线的元素在同一个list中
+                diag[i - j + m].Add(mat[i][j]); //i-j+m是为了保证对角线的元素在同一个list中
             }
         }
 
@@ -68,4 +68,66 @@ public class Solution_1329
             Console.WriteLine(string.Join(",", row));
         }
     }
+}
+
+
+///<summary> 994. 腐烂的橘子 </summary>
+public class Solution_994
+{
+    public static readonly (int, int)[] Directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
+
+    public static int OrangesRotting2(int[][] grid)
+    {
+        var n     = grid.Length;
+        var m     = grid[0].Length;
+        var queue = new Queue<(int, int)>();
+        var fresh = 0;
+
+        for (var i = 0 ; i < n ; i++)
+        {
+            for (var j = 0 ; j < m ; j++)
+            {
+                switch (grid[i][j])
+                {
+                    case 2 :
+                        queue.Enqueue((i, j));
+                        break;
+                    case 1 :
+                        fresh++;
+                        break;
+                }
+            }
+        }
+
+        if (fresh == 0) return 0;
+
+        var minutes = 0;
+
+        while (queue.Count > 0)
+        {
+            minutes++;
+            var size = queue.Count;
+            for (var i = 0 ; i < size ; i++)
+            {
+                var (x, y) = queue.Dequeue();
+                foreach (var (dx, dy) in Directions)
+                {
+                    var (nx, ny) = (x + dx, y + dy);
+
+                    if (nx < 0 || nx >= n || ny < 0 || ny >= m || grid[nx][ny] != 1)
+                    {
+                        continue;
+                    }
+
+                    grid[nx][ny] = 2;
+                    fresh--;
+                    queue.Enqueue((nx, ny));
+                }
+            }
+        }
+
+        return fresh == 0 ? minutes - 1 : -1;
+    }
+
+    public int OrangesRotting(int[][] grid) => OrangesRotting2(grid);
 }

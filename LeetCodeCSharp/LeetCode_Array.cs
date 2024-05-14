@@ -135,3 +135,79 @@ public class Solution_2007
     /// 0 <= changed[i] <= 10^5
 }
 
+
+/// <summary> 2244. 完成所有任务需要的最少轮数 </summary>
+public class Solution_2244
+{
+    [TestCase(new int[] { 2, 2, 3, 3, 2, 4, 4, 4, 4, 4 }, ExpectedResult = 4)]
+    public int MinimumRounds(int[] tasks)
+    {
+        Array.Sort(tasks);
+
+        var temp   = tasks[0];
+        var index  = 0;
+        var result = 0;
+
+        for (int i = 1 ; i < tasks.Length ; i++)
+        {
+            if (tasks[i] == temp) continue;
+
+            var length = i - index;
+
+            if (length == 1)
+            {
+                return -1;
+            }
+
+            if (length % 3 == 2 || length % 3 == 1)
+            {
+                result += length / 3 + 1;
+            }
+            else
+            {
+                result += length / 3;
+            }
+
+            index = i;
+            temp  = tasks[i];
+        }
+
+        var lastLength = tasks.Length - index;
+
+        if (lastLength == 1)
+        {
+            return -1;
+        }
+
+        if (lastLength % 3 == 2 || lastLength % 3 == 1)
+        {
+            result += lastLength / 3 + 1;
+        }
+        else
+        {
+            result += lastLength / 3;
+        }
+
+        return result;
+    }
+
+    //字典存数量
+    public int MinimumRounds2(int[] tasks)
+    {
+        var ans  = 0;
+        var cnts = new Dictionary<int, int>();
+        foreach (int task in tasks)
+        {
+            cnts.TryAdd(task, 0);
+            ++cnts[task];
+        }
+
+        foreach (int cnt in cnts.Values)
+        {
+            if (cnt == 1) return -1;
+            ans += (cnt + 2) / 3;
+        }
+
+        return ans;
+    }
+}
