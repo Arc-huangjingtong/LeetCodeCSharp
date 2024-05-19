@@ -6,7 +6,7 @@ public partial class UnitTest
     public void Test5()
     {
         // Example usage:
-        var n    = 9; // Binary: 10011100
+        var n    = 1; // Binary: 10011100
         var next = Gosper_Hack(n);
 
         while (n != 0)
