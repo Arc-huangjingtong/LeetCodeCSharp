@@ -392,7 +392,10 @@ public class Solution_Test
 /// <summary> 2981. 找出出现至少三次的最长特殊子字符串 I </summary>
 public class Solution_2981
 {
-    [TestCase("abcdef", ExpectedResult = -1)]
+    public static List<int> List => new List<int>();
+
+    //[TestCase("abcdef", ExpectedResult = -1)]
+    [TestCase("aada", ExpectedResult = 1)]
     public int MaximumLength(string s)
     {
         var ans = -1;
@@ -457,6 +460,60 @@ public class Solution_2981
     }
 
 
+    [TestCase("ereerrrererrrererre",                                ExpectedResult = 2)]
+    [TestCase("dceeddedcedcdcdedcdddeeedddsssdcdcdeeeccdccedeeedd", ExpectedResult = 3)]
+    public int MaximumLength2(string s)
+    {
+        var chs = Enumerable.Range(0, 26).Select(_ => new PriorityQueue<int, int>()).ToArray();
+
+        var cnt = 0;
+
+        foreach (var c in chs)
+        {
+            cnt++;
+        }
+
+        for (var i = 0 ; i < s.Length ; i++)
+        {
+            cnt++;
+            if (i + 1 == s.Length || s[i] != s[i + 1])
+            {
+                chs[s[i] - 'a'].Enqueue(cnt, -cnt);
+                cnt = 0;
+            }
+        }
+
+        var ans = -1;
+
+        for (var i = 0 ; i < 26 ; i++)
+        {
+            if (chs[i].Count > 0 && chs[i].Peek() > 2)
+            {
+                ans = Math.Max(ans, chs[i].Peek() - 2);
+            }
+
+            if (chs[i].Count > 1 && chs[i].Peek() > 1)
+            {
+                var num1 = chs[i].Dequeue();
+                var num2 = chs[i].Dequeue();
+                ans = Math.Max(ans, Math.Min(num1 - 1, num2));
+
+                chs[i].Enqueue(num2, -num2);
+                chs[i].Enqueue(num1, -num1);
+            }
+
+            if (chs[i].Count > 2)
+            {
+                chs[i].Dequeue();
+                chs[i].Dequeue();
+                ans = Math.Max(ans, chs[i].Dequeue());
+            }
+        }
+
+        return ans;
+    }
+
+
 
     // 2981. 找出出现至少三次的最长特殊子字符串 I 中等
     //
@@ -478,19 +535,20 @@ public class Solution_2981
     // 输入：s = "abcaba" 输出： 1
     // 解释：出现三次的最长特殊子字符串是 "a" ：子字符串 "[a]bcaba"、"abc[a]ba" 和 "abcab[a]"。
     // 可以证明最大长度是 1 。
+
+
+
+    // 因字符串仅含有小写字母，所以可以对每种字母单独处理。
+    // 1.对于每一种字母，统计出每部分连续子串的长度，并储存在数组 chs 中。因题目要求出现至少三次，因此只要维护前三大的长度即可。每次往 chs 中添加元素时，可采用冒泡的方法使其有序。如果长度超过 3，则将末尾元素 pop 掉
+    //
+    // 更新答案时，主要有三种：
+    //
+    // 最长的 chs[0] 可贡献出 3 个长为 chs[0]−2 的子串，并且需要满足 chs[0]>2。
+    // a:aaaa,aaaa,aaaa chs[0]>2
+    //
+    // 当 chs[0] 与 chs[1] 相等时，可贡献出 4 个长为 chs[0]−1 的子串。不等时可由 chs[0] 贡献出 2 个长为 chs[1] 的子串，加上 chs[1] 本身一共 3 个，并且需要满足 chs[0]>1
+    //
+    // 可由 chs[0] 与 chs[1] 加上 chs[2] 本身贡献 3 个长为 chs[2] 的子串。
+    //
+    // 没有更新答案时，则输出 −1
 }
-
-
-// 因字符串仅含有小写字母，所以可以对每种字母单独处理。
-// 1.对于每一种字母，统计出每部分连续子串的长度，并储存在数组 chs 中。因题目要求出现至少三次，因此只要维护前三大的长度即可。每次往 chs 中添加元素时，可采用冒泡的方法使其有序。如果长度超过 3，则将末尾元素 pop 掉
-//
-// 更新答案时，主要有三种：
-//
-// 最长的 chs[0] 可贡献出 3 个长为 chs[0]−2 的子串，并且需要满足 chs[0]>2。
-// a:aaaa,aaaa,aaaa chs[0]>2
-//
-// 当 chs[0] 与 chs[1] 相等时，可贡献出 4 个长为 chs[0]−1 的子串。不等时可由 chs[0] 贡献出 2 个长为 chs[1] 的子串，加上 chs[1] 本身一共 3 个，并且需要满足 chs[0]>1
-//
-// 可由 chs[0] 与 chs[1] 加上 chs[2] 本身贡献 3 个长为 chs[2] 的子串。
-//
-// 没有更新答案时，则输出 −1
