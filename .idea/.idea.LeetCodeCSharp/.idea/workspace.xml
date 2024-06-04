@@ -8,25 +8,20 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Graph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Graph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Math.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Math.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/rider.project.restore.info" afterDir="false" />
     </list>
@@ -54,10 +49,12 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/MethodImplAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/MethodImplAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/12e92f53b2f148a3aabdec53d64f032c381908/1f/3850ddd5/Expression`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -73,6 +70,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;0bdb584f-c20a-4827-a5b8-664f92322f0f.executor&quot;: &quot;Debug&quot;,
+    &quot;5db135a2-305f-4c9d-89b8-30d0ba5578ec.executor&quot;: &quot;Debug&quot;,
     &quot;7943af6d-79fd-4bd1-826d-a04ef224ce34.executor&quot;: &quot;Debug&quot;,
     &quot;97f9c284-aa57-401d-8ab7-4dfeea07c07e.executor&quot;: &quot;Debug&quot;,
     &quot;99a6ad9d-6c8f-4eac-aef6-cd8895c9b2f1.executor&quot;: &quot;Debug&quot;,
@@ -155,8 +154,32 @@
       <workItem from="1715445047197" duration="51000" />
       <workItem from="1715530224436" duration="597000" />
       <workItem from="1716014709528" duration="2026000" />
-      <workItem from="1716109781064" duration="2060000" />
+      <workItem from="1716109781064" duration="2131000" />
+      <workItem from="1716230284711" duration="466000" />
+      <workItem from="1716384311120" duration="4724000" />
+      <workItem from="1716701182985" duration="3126000" />
+      <workItem from="1716908893695" duration="1773000" />
+      <workItem from="1717158987149" duration="733000" />
+      <workItem from="1717201591906" duration="6562000" />
+      <workItem from="1717507742697" duration="8908000" />
     </task>
+    <task id="LOCAL-00001" summary="Update">
+      <option name="closed" value="true" />
+      <created>1716112527238</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716112527238</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/.idea.LeetCodeCSharp/.idea/workspace.xml&#10;#&#9;LeetCodeCSharp.sln.DotSettings.user&#10;#&#9;LeetCodeCSharp/LeetCode_Array.cs&#10;#&#9;LeetCodeCSharp/LeetCode_Matrix.cs&#10;#&#9;LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json&#10;#&#9;LeetCodeCSharp/obj/project.assets.json&#10;#&#9;LeetCodeCSharp/obj/project.nuget.cache&#10;#&#9;LeetCodeCSharp/obj/project.packagespec.json&#10;#&#9;LeetCodeCSharp/obj/rider.project.model.nuget.info&#10;#&#9;LeetCodeCSharp/obj/rider.project.restore.info">
+      <option name="closed" value="true" />
+      <created>1716112569370</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716112569370</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +235,7 @@
       <select />
     </coverage-tree-state>
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -226,6 +250,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Update" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/.idea.LeetCodeCSharp/.idea/workspace.xml&#10;#&#9;LeetCodeCSharp.sln.DotSettings.user&#10;#&#9;LeetCodeCSharp/LeetCode_Array.cs&#10;#&#9;LeetCodeCSharp/LeetCode_Matrix.cs&#10;#&#9;LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json&#10;#&#9;LeetCodeCSharp/obj/project.assets.json&#10;#&#9;LeetCodeCSharp/obj/project.nuget.cache&#10;#&#9;LeetCodeCSharp/obj/project.packagespec.json&#10;#&#9;LeetCodeCSharp/obj/rider.project.model.nuget.info&#10;#&#9;LeetCodeCSharp/obj/rider.project.restore.info" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/.idea.LeetCodeCSharp/.idea/workspace.xml&#10;#&#9;LeetCodeCSharp.sln.DotSettings.user&#10;#&#9;LeetCodeCSharp/LeetCode_Array.cs&#10;#&#9;LeetCodeCSharp/LeetCode_Matrix.cs&#10;#&#9;LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.csproj.CoreCompileInputs.cache&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll&#10;#&#9;LeetCodeCSharp/obj/LeetCodeCSharp.csproj.nuget.dgspec.json&#10;#&#9;LeetCodeCSharp/obj/project.assets.json&#10;#&#9;LeetCodeCSharp/obj/project.nuget.cache&#10;#&#9;LeetCodeCSharp/obj/project.packagespec.json&#10;#&#9;LeetCodeCSharp/obj/rider.project.model.nuget.info&#10;#&#9;LeetCodeCSharp/obj/rider.project.restore.info" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -292,16 +320,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs</url>
-          <line>244</line>
-          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Array.cs" containingFunctionPresentation="方法 'TotalCost'">
+          <line>383</line>
+          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Array.cs" containingFunctionPresentation="方法 'Test'">
             <startOffsets>
-              <option value="5700" />
+              <option value="9216" />
             </startOffsets>
             <endOffsets>
-              <option value="5715" />
+              <option value="9241" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="32" />
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -373,3 +373,121 @@ public class Solution_1535
     }
 }
 
+
+/// <summary> 22. 括号生成 </summary>
+public class Solution_22
+{
+    [Test]
+    public void Test()
+    {
+        var result = GenerateParenthesis(3);
+        foreach (var s in result)
+        {
+            Console.WriteLine(s);
+        }
+
+        var a = -2147483648;
+    }
+
+    public void Backtrack(List<string> ans, StringBuilder cur, int balance, int max)
+    {
+        if (cur.Length == max * 2)
+        {
+            if (balance == 0)
+            {
+                ans.Add(cur.ToString());
+            }
+
+            return;
+        }
+
+        if (balance < max)
+        {
+            cur.Append('(');
+            Backtrack(ans, cur, balance + 1, max);
+
+            cur.Remove(cur.Length - 1, 1);
+        }
+
+        if (balance > 0)
+        {
+            cur.Append(')');
+            Backtrack(ans, cur, balance - 1, max);
+
+            cur.Remove(cur.Length - 1, 1);
+        }
+    }
+
+
+    public List<string> GenerateParenthesis(int n)
+    {
+        List<string> ans = [];
+        Backtrack(ans, new(), 0, n);
+        return ans;
+    }
+
+    public void Backtrack(List<string> ans, StringBuilder cur, int open, int close, int max)
+    {
+        if (cur.Length == max * 2)
+        {
+            ans.Add(cur.ToString());
+            return;
+        }
+
+        if (open < max)
+        {
+            cur.Append('(');
+            Backtrack(ans, cur, open + 1, close, max);
+
+            cur.Remove(cur.Length - 1, 1);
+        }
+
+        if (close < open)
+        {
+            cur.Append(')');
+            Backtrack(ans, cur, open, close + 1, max);
+
+            cur.Remove(cur.Length - 1, 1);
+        }
+    }
+}
+
+
+public class Solution_29
+{
+    public int Divide(int dividend, int divisor)
+    {
+        var ans = (long)dividend / (long)divisor;
+
+        return (int)Math.Clamp(ans, int.MinValue, int.MaxValue);
+    }
+}
+
+
+public class Solution_2965
+{
+    public int[] FindMissingAndRepeatedValues(int[][] grid)
+    {
+        var sum    = 0;
+        var set    = new HashSet<int>();
+        var repeat = 0;
+
+        foreach (var row in grid)
+        {
+            foreach (var num in row)
+            {
+                sum += num;
+                if (!set.Add(num))
+                {
+                    repeat = num;
+                }
+            }
+        }
+
+        var lose = (1 + grid.Length * grid.Length) * (grid.Length * grid.Length) / 2 - (sum - repeat);
+
+        return [repeat, lose];
+    }
+}
+
+

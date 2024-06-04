@@ -1,8 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\Administrator\AppData\Local\JetBrains\Rider2024.1\resharper-host\temp\Rider\vAny\CoverageData\_LeetCodeCSharp.1324791150\Snapshot\snapshot.utdcvr</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=97f9c284_002Daa57_002D401d_002D8ab7_002D4dfeea07c07e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="maxDivScore" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5db135a2_002D305f_002D4c9d_002D89b8_002D30d0ba5578ec/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1535.GetWinner&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_3067.Test&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
 </wpf:ResourceDictionary>

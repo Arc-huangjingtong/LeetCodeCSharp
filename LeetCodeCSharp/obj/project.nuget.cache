@@ -13,12 +13,5 @@
     "C:\\Users\\Windows11\\.nuget\\packages\\nunit\\4.0.1\\nunit.4.0.1.nupkg.sha512",
     "C:\\Users\\Windows11\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\Project\\LeetCodeCSharp\\LeetCodeCSharp\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
