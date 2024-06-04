@@ -326,3 +326,30 @@ public partial class UnitTest
         // 第 6 天是你访问完所有房间的第一天。
     }
 }
+
+public class Solution_2028 
+{
+    public int[] MissingRolls(int[] rolls, int mean, int n) 
+    {
+        var rollsResSum = mean * (rolls.Length + n) - rolls.Sum();
+        
+        var res = new int[n];
+        
+        if (rollsResSum < n || rollsResSum > 6 * n)
+        {
+            return [];
+        }
+        
+        var avg = rollsResSum / n;
+        var mod = rollsResSum % n;
+        
+        Array.Fill(res, avg); 
+        
+        for (var i = 0; i < mod; i++)
+        {
+            res[i]++;
+        }
+        
+        return res;
+    }
+}
