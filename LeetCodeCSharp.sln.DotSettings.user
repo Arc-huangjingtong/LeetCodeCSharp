@@ -1,12 +1,12 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\Administrator\AppData\Local\JetBrains\Rider2024.1\resharper-host\temp\Rider\vAny\CoverageData\_LeetCodeCSharp.1324791150\Snapshot\snapshot.utdcvr</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6ef26612_002De545_002D4dca_002D8d7b_002D7fdb8506c71f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="canMatch" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e4be9f24_002De682_002D4260_002Dbebc_002D88c856f5ca17/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="MinimumSteps" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_Test.canMatch&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2981.MaximumLength&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2981.MaximumLength2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Temp_1024.Test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2938.MinimumSteps&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2938.MinimumSteps2&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
 	
 </wpf:ResourceDictionary>

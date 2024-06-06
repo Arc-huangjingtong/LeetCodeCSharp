@@ -491,3 +491,78 @@ public class Solution_2965
 }
 
 
+/// <summary> 2938.区分黑球和白球 </summary>
+public class Solution_2938
+{
+    [Repeat(10000)]
+    [TestCase("0111",               ExpectedResult = 0L)]
+    [TestCase("010",                ExpectedResult = 1L)]
+    [TestCase("100",                ExpectedResult = 2L)]
+    [TestCase("010000110010101010", ExpectedResult = 32L)]
+    public long MinimumSteps(string s)
+    {
+        Span<bool> bits = stackalloc bool[s.Length];
+
+        for (var i = 0 ; i < s.Length ; i++)
+        {
+            bits[i] = s[i] == '1';
+        }
+
+
+        var rightIndex    = s.Length - 1;
+        var operatorCount = 0L;
+        var currentIndex  = 0;
+        var leftCount     = 0;
+
+        while (rightIndex >= 0)
+        {
+            if (!bits[rightIndex])
+            {
+                rightIndex--;
+                currentIndex++;
+                continue;
+            }
+
+            bits[rightIndex] =  false;
+            operatorCount    += currentIndex - leftCount;
+            leftCount++;
+        }
+
+
+        return operatorCount;
+    }
+
+    [Repeat(10000)]
+    [TestCase("0111",               ExpectedResult = 0L)]
+    [TestCase("010",                ExpectedResult = 1L)]
+    [TestCase("100",                ExpectedResult = 2L)]
+    [TestCase("010000110010101010", ExpectedResult = 32L)]
+    public long MinimumSteps2(string str)
+    {
+        var ans = 0L;
+        var sum = 0;
+        foreach (var t in str)
+        {
+            if (t == '1')
+            {
+                sum++;
+            }
+            else
+            {
+                ans += sum;
+            }
+        }
+
+        return ans;
+    }
+
+    // 1→     0←
+    //010000110010101010
+    //010000110010101001 =>  1  => 2 - 1 = 1
+    //010000110010100011 =>  2  => 4 - 2 = 2
+    //010000110010000111 =>  3  => 6 - 3 = 3 
+    //010000110000001111 =>  4
+    //010000100000011111 =>  6
+    //010000000000111111 =>  6
+    //000000000001111111 => 10
+}

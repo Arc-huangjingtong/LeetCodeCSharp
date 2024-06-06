@@ -7,3 +7,6 @@
 *.dll
 *.dll
 /LeetCodeCSharp/obj/Debug/net8.0/refint
+*.dll
+*.pdb
+*.cache
