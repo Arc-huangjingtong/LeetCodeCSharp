@@ -221,4 +221,82 @@ public class Solution_928
 }
 
 
+/// 难点：计算组合数： ans = 0 x c1 + c1 x c2 + (c1+c2) x c3 + (c1+c2+c3) x c4 
+public class Solution_3067
+{
+    public int[] CountPairsOfConnectableServers(int[][] edges, int signalSpeed)
+    {
+        var nodeCount = edges.Length + 1;                              // 节点数量
+        var graph     = new List<(int node, int distance)>[nodeCount]; // 声明邻接表
+        var ans       = new int[nodeCount];                            // 存储结果
 
+        InitGraph(nodeCount, graph, edges); //初始化邻接表
+
+        for (var i = 0 ; i < nodeCount ; i++)
+        {
+            if (graph[i].Count == 1) continue; //如果只有一个节点与之相连,则不可能有通过该节点的两个节点
+
+            var sum = 0;
+
+            foreach (var edge in graph[i]) //遍历所有的节点 : 思维点:第一层子节点，当成子树，计算每一个子树的能整除的节点数
+            {
+                var cnt = DFS(edge.node, i, edge.distance);
+                ans[i] += cnt * sum;
+                sum    += cnt;
+            }
+        }
+
+        return ans;
+
+        int DFS(int x, int fa, int sum)
+        {
+            var cnt = sum % signalSpeed == 0 ? 1 : 0;
+
+            foreach (var (_node, _distance) in graph[x])
+            {
+                if (_node != fa)
+                {
+                    cnt += DFS(_node, x, sum + _distance);
+                }
+            }
+
+            return cnt;
+        }
+
+
+        static void InitGraph(int nodeCount, List<(int node, int distance)>[] graph, int[][] edges)
+        {
+            for (var i = 0 ; i < nodeCount ; i++)
+            {
+                graph[i] = [];
+            }
+
+            foreach (var edge in edges)
+            {
+                var node1    = edge[0];
+                var node2    = edge[1];
+                var distance = edge[2];
+                graph[node1].Add((node2, distance));
+                graph[node2].Add((node1, distance));
+            }
+        }
+    }
+
+
+
+    [Test]
+    public void Test()
+    {
+        // int[][] edges       = [[0, 1, 1], [1, 2, 5], [2, 3, 13], [3, 4, 9], [4, 5, 2]];
+        // var     signalSpeed = 1;
+        int[][] edges       = [[0, 6, 3], [6, 5, 3], [0, 3, 1], [3, 2, 7], [3, 1, 6], [3, 4, 2]];
+        var     signalSpeed = 3;
+
+        var result = CountPairsOfConnectableServers(edges, signalSpeed);
+
+        foreach (var i in result)
+        {
+            Console.WriteLine(i);
+        }
+    }
+}

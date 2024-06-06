@@ -23,3 +23,17 @@ public class Solution_1518
     //所以只需要看倒数第二次换水的时候,剩下的空瓶子数量是否大于等于n,如果大于等于n,那么就可以继续换水,否则就直接返回
     //公式: b−n(e−1)≥e
 }
+
+
+public class Solution_2929
+{
+    public long DistributeCandies(int n, int limit)
+    {
+        return Cal(n + 2) - 3 * Cal(n - limit + 1) + 3 * Cal(n - (limit + 1) * 2 + 2) - Cal(n - 3 * (limit + 1) + 2);
+
+        long Cal(int x) => x < 0 ? 0 : (long)x * (x - 1) / 2;
+        //核心思路: 1. 从n个糖果中选出limit个糖果,可以有C(n, limit)种选法
+    }
+}
+
+
