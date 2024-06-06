@@ -131,3 +131,23 @@ public class Solution_994
 
     public int OrangesRotting(int[][] grid) => OrangesRotting2(grid);
 }
+
+
+public class Temp_1024
+{
+    [Test]
+    public void Test()
+    {
+        // We use 5 here because we want layers: 2^2, 2^3, 2^4, ... 2^6 (32 directions)
+        var DetectionAngle = Enumerable.Range(0, 5)
+                                       .SelectMany(i => Enumerable.Range(0, (int)Math.Pow(2, i + 2))
+                                       .Select(j => j * (360f / (int)Math.Pow(2, i + 2))))
+                                       .OrderBy(angle => angle)
+                                       .ToArray();
+
+        foreach (var i in DetectionAngle)
+        {
+            Console.WriteLine(i);
+        }
+    }
+}

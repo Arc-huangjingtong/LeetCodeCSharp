@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Array.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/bin/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Matrix.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Matrix.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/LeetCodeCSharp.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/ref/LeetCodeCSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/obj/Debug/net8.0/refint/LeetCodeCSharp.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +141,7 @@
       <workItem from="1716953930995" duration="8173000" />
       <workItem from="1716969014759" duration="674000" />
       <workItem from="1717049522169" duration="3545000" />
+      <workItem from="1717491652248" duration="82000" />
     </task>
     <servers />
   </component>
