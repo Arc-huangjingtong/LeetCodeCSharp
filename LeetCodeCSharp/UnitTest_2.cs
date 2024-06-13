@@ -2225,7 +2225,7 @@ public partial class UnitTest
             var numsSpan = new Span<int>(nums.ToArray());
 
 
-            for (int i = 0 ; i < nums.Length ; i++)
+            for (var i = 0 ; i < nums.Length ; i++)
             {
                 nums[(i + k) % len] = numsSpan[i];
             }
@@ -2248,7 +2248,7 @@ public partial class UnitTest
         {
             var graph = new Dictionary<int, HashSet<int>>();
 
-            for (int i = 0 ; i < n ; i++)
+            for (var i = 0 ; i < n ; i++)
             {
                 graph.Add(i, []);
             }
@@ -2260,8 +2260,8 @@ public partial class UnitTest
                 graph[edge[1]].Add(edge[0]);
             }
 
-            int signal = 0;
-            int result = -1;
+            var signal = 0;
+            var result = -1;
             foreach (var node in graph)
             {
                 if (node.Value.Count == 0)
@@ -2285,8 +2285,8 @@ public partial class UnitTest
                 graph[edge[1]]++;
             }
 
-            int signal = 0;
-            int result = -1;
+            var signal = 0;
+            var result = -1;
             for (var i = 0 ; i < graph.Length ; i++)
             {
                 var node = graph[i];
@@ -2315,7 +2315,7 @@ public partial class UnitTest
 
             int ArcherNum = 0, ShielderNum = 0, riderNum = 0;
 
-            int times = 0;
+            var times = 0;
 
             while (anyNum > 0 && times < 1000)
             {

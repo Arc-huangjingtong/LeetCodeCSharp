@@ -28,7 +28,7 @@ public class Note_Optimize
         {
             var solution = new Solution_2549();
 
-            for (int i = 0 ; i < 10000 ; i++)
+            for (var i = 0 ; i < 10000 ; i++)
             {
                 var n      = 10;
                 var result = solution.DistinctIntegers1(n);

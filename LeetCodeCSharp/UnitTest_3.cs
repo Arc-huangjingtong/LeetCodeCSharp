@@ -325,37 +325,37 @@ public partial class UnitTest
         // 你每天访问房间的次序是 [0,0,1,1,2,2,3,...] 。
         // 第 6 天是你访问完所有房间的第一天。
     }
-<<<<<<< Updated upstream
 }
 
-public class Solution_2028 
+
+public class Solution_2028
 {
-    public int[] MissingRolls(int[] rolls, int mean, int n) 
+    public int[] MissingRolls(int[] rolls, int mean, int n)
     {
         var rollsResSum = mean * (rolls.Length + n) - rolls.Sum();
-        
+
         var res = new int[n];
-        
+
         if (rollsResSum < n || rollsResSum > 6 * n)
         {
             return [];
         }
-        
+
         var avg = rollsResSum / n;
         var mod = rollsResSum % n;
-        
-        Array.Fill(res, avg); 
-        
-        for (var i = 0; i < mod; i++)
+
+        Array.Fill(res, avg);
+
+        for (var i = 0 ; i < mod ; i++)
         {
             res[i]++;
         }
-        
-        return res;
-=======
 
-    
-    
+        return res;
+    }
+
+
+
     public class Solution_2009
     {
         [TestCase(new[] { 4, 2, 5, 3 },    ExpectedResult = 0)]
@@ -368,7 +368,7 @@ public class Solution_2028
             var operatorNum = 0;
             var left        = 0;
             var right       = len - 1;
-            
+
             while (nums[right] - nums[left] > len - 1) // need : MAX - MIN = len - 1
             {
                 operatorNum++;
@@ -424,6 +424,5 @@ public class Solution_2028
         //
         // 1 <= nums.length <= 105
         // 1 <= nums[i] <= 109
->>>>>>> Stashed changes
     }
 }

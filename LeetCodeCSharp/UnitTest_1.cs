@@ -547,8 +547,8 @@ public partial class UnitTest
     [TestCase(7, new[] { 1, 5, 2, 2, 3, 3, 1 }, ExpectedResult = 6)]
     public int MinIncrements(int n, int[] cost)
     {
-        int result = 0;
-        for (int i = n - 1 ; i > 0 ; i -= 2)
+        var result = 0;
+        for (var i = n - 1 ; i > 0 ; i -= 2)
         {
             var (max, min)    =  cost[i] > cost[i - 1] ? (cost[i], cost[i - 1]) : (cost[i - 1], cost[i]);
             result            += (max - min);
@@ -835,10 +835,10 @@ public partial class UnitTest
                 graph[edge[1]].Add((edge[0], edge[2]));
             }
 
-            int   n     = graph.Count;
-            int[] count = new int[n];
+            var   n     = graph.Count;
+            var count = new int[n];
 
-            for (int i = 0 ; i < n ; i++)
+            for (var i = 0 ; i < n ; i++)
             {
                 var distances = BFS(i, signalSpeed);
                 count[i] = CalculatePairs(distances, signalSpeed);
@@ -853,12 +853,12 @@ public partial class UnitTest
             var connectableDistances = distances.Where(kvp => kvp.Value % signalSpeed == 0).Select(kvp => kvp.Key).ToList();
             connectableDistances.Sort();
 
-            for (int i = 0 ; i < connectableDistances.Count ; i++)
+            for (var i = 0 ; i < connectableDistances.Count ; i++)
             {
-                for (int j = i + 1 ; j < connectableDistances.Count ; j++)
+                for (var j = i + 1 ; j < connectableDistances.Count ; j++)
                 {
-                    int a = connectableDistances[i];
-                    int b = connectableDistances[j];
+                    var a = connectableDistances[i];
+                    var b = connectableDistances[j];
                     if (a < b)
                     {
                         pairsCount++;
@@ -882,7 +882,7 @@ public partial class UnitTest
                 var (current, weight) = queue.Dequeue();
                 foreach (var (neighbor, edgeWeight) in graph[current])
                 {
-                    int nextWeight = weight + edgeWeight;
+                    var nextWeight = weight + edgeWeight;
                     if (!distances.ContainsKey(neighbor))
                     {
                         distances[neighbor] = nextWeight;
@@ -1042,8 +1042,8 @@ public partial class UnitTest
 
     public static BitArray Decrement(BitArray bits)
     {
-        bool carry   = true; // 我们要减一，所以从最低位开始借位
-        int  i       = 0;
+        var carry   = true; // 我们要减一，所以从最低位开始借位
+        var  i       = 0;
         var  newBits = new BitArray(bits);
 
         while (carry && i < newBits.Length)

@@ -24,10 +24,10 @@ public partial class UnitTest
     {
         if (decimalNumber == 0) return "0";
 
-        string binaryNumber = "";
+        var binaryNumber = "";
         while (decimalNumber > 0)
         {
-            int remainder = decimalNumber % 2;
+            var remainder = decimalNumber % 2;
             binaryNumber  =  remainder + binaryNumber;
             decimalNumber /= 2;
         }

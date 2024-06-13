@@ -213,7 +213,7 @@ public partial class UnitTest
 
             span[^1] = '1';
 
-            for (int i = 0 ; i < popCount ; i++)
+            for (var i = 0 ; i < popCount ; i++)
             {
                 span[i] = '1';
             }
