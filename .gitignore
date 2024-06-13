@@ -10,3 +10,6 @@
 *.dll
 *.pdb
 *.cache
+*.dll
+*.dll
+*.cache
