@@ -199,3 +199,46 @@ public class Solution_2813
     //
     // 注意：数组的子序列是经由原数组删除一些元素（可能不删除）而产生的新数组，且删除不改变其余元素相对顺序
 }
+
+
+public class Solution_2713
+{
+    public int MaxIncreasingCells(int[][] mat)
+    {
+        int m   = mat.Length, n = mat[0].Length;
+        var dic = new Dictionary<int, IList<int[]>>();
+        var row = new int[m];
+        var col = new int[n];
+
+        for (var i = 0 ; i < m ; i++)
+        {
+            for (var j = 0 ; j < n ; j++)
+            {
+                dic.TryAdd(mat[i][j], new List<int[]>());
+                dic[mat[i][j]].Add([i, j]);
+            }
+        }
+
+        var keys = new List<int>(dic.Keys);
+        keys.Sort();
+        foreach (var key in keys)
+        {
+            var pos = dic[key];
+            var res = new List<int>(); // 存放相同数值的答案，便于后续更新 row 和 col
+            foreach (var arr in pos)
+            {
+                res.Add(Math.Max(row[arr[0]], col[arr[1]]) + 1);
+            }
+
+            for (var i = 0 ; i < pos.Count ; i++)
+            {
+                var arr = pos[i];
+                var d   = res[i];
+                row[arr[0]] = Math.Max(row[arr[0]], d);
+                col[arr[1]] = Math.Max(col[arr[1]], d);
+            }
+        }
+
+        return row.Max();
+    }
+}

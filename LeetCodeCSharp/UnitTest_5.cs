@@ -136,12 +136,12 @@ public partial class UnitTest
     public ref struct RefMyStruct(int value)
     {
         public int Value = value;
-        
+
         public void SetValue(int value)
         {
             Value = value;
         }
-        
+
         public static ref RefMyStruct GetRef(ref RefMyStruct myStruct)
         {
             return ref myStruct;
@@ -152,25 +152,27 @@ public partial class UnitTest
     public struct MyStruct(int value)
     {
         public int Value = value;
-        
+
         public void SetValue(int value)
         {
             Value = value;
         }
-        
+
         public static ref MyStruct GetRef(ref MyStruct myStruct)
         {
             return ref myStruct;
         }
     }
-    
+
+
     [Test]
     public void Test()
     {
-        var myStruct = new MyStruct(1);
+        var     myStruct    = new MyStruct(1);
         ref var refMyStruct = ref MyStruct.GetRef(ref myStruct);
         refMyStruct.SetValue(2);
         Console.WriteLine(myStruct.Value);
     }
-    
 }
+
+

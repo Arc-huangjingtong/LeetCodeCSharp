@@ -161,7 +161,37 @@
                 k++;
             }
         }
-        
+    }
+
+
+    public class Permute
+    {
+        /// <summary> All Permute </summary>
+        public IList<IList<int>> AllPermute(int[] nums)
+        {
+            var result = new List<IList<int>>();
+            DFS(0);
+
+
+            return result;
+
+            void DFS(int depth) // 经典回溯排列
+                // https://leetcode.cn/problems/permutations/solutions/218275/quan-pai-lie-by-leetcode-solution-2/
+            {
+                if (depth == nums.Length)
+                {
+                    result.Add(nums.ToList());
+                    return;
+                }
+
+                for (var i = depth ; i < nums.Length ; i++)
+                {
+                    (nums[depth], nums[i]) = (nums[i], nums[depth]);
+                    DFS(depth + 1);
+                    (nums[depth], nums[i]) = (nums[i], nums[depth]);
+                }
+            }
+        }
     }
 
 }

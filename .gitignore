@@ -14,3 +14,4 @@
 *.dll
 *.cache
 /LeetCodeCSharp/bin
+*.dll
