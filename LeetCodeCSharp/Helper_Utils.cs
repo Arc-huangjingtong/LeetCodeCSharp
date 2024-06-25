@@ -11,7 +11,9 @@ public partial class UnitTest
         {
             return null!;
         }
-
+        
+        ArgumentException.ThrowIfNullOrEmpty("array");
+        
         var root  = new TreeNode(array[0]!.Value);
         var queue = new Queue<TreeNode>();
         queue.Enqueue(root);

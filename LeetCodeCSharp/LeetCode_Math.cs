@@ -34,6 +34,16 @@ public class Solution_2929
         long Cal(int x) => x < 0 ? 0 : (long)x * (x - 1) / 2;
         //核心思路: 1. 从n个糖果中选出limit个糖果,可以有C(n, limit)种选法
     }
+    
+    [Test]
+    public void Test()
+    {
+        var dict = new Dictionary<int, int>();
+        
+        dict.Add(1, 2);
+        dict[1] = 2;
+        dict[2] = 3;
+    }
 }
 
 
