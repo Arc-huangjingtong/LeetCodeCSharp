@@ -655,3 +655,39 @@ public class Solution_2786
 //
 // 2 <= nums.length <= 105
 // 1 <= nums[i], x  <= 106
+
+
+public class Solution
+{
+    //[TestCase(new[] { 2, 5, 1, 4 }, ExpectedResult = 5)]
+    //
+    [TestCase(new[] { 756, 1324, 2419, 495, 106, 111, 1649, 1474, 2001, 1633, 273, 1804, 2102, 1782, 705, 1529, 1761, 1613, 111, 186, 412 }, ExpectedResult = 183)]
+    public int CountBeautifulPairs(int[] nums)
+    {
+        var result = 0;
+
+        for (var i = 0 ; i < nums.Length ; i++)
+        {
+            var num1 = nums[i];
+
+            while (num1 > 10)
+            {
+                num1 /= 10;
+            }
+
+            for (var j = i + 1 ; j < nums.Length ; j++)
+            {
+                var num2 = nums[j] % 10;
+
+                if (GCD(num1, num2) == 1)
+                {
+                    result++;
+                }
+            }
+        }
+
+        return result;
+
+        int GCD(int a, int b) => a == 0 ? b : GCD(b % a, a);
+    }
+}
