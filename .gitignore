@@ -14,3 +14,4 @@
 *.dll
 *.cache
 *.dll
+/LeetCodeCSharp/obj
