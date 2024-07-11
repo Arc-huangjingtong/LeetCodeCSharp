@@ -657,37 +657,59 @@ public class Solution_2786
 // 1 <= nums[i], x  <= 106
 
 
-public class Solution
+public class Solution_18
 {
-    //[TestCase(new[] { 2, 5, 1, 4 }, ExpectedResult = 5)]
-    //
-    [TestCase(new[] { 756, 1324, 2419, 495, 106, 111, 1649, 1474, 2001, 1633, 273, 1804, 2102, 1782, 705, 1529, 1761, 1613, 111, 186, 412 }, ExpectedResult = 183)]
-    public int CountBeautifulPairs(int[] nums)
+    public IList<IList<int>> FourSum(int[] nums, int target)
     {
-        var result = 0;
+        Array.Sort(nums); //排序
 
-        for (var i = 0 ; i < nums.Length ; i++)
+        var result = new List<IList<int>>();
+        var len    = nums.Length;
+
+        for (var a = 0 ; a < len - 3 ; a++)
         {
-            var num1 = nums[i];
+            // 枚举第一个数
+            long x = nums[a];                        // 使用 long 避免溢出
+            if (a > 0 && x == nums[a - 1]) continue; // 跳过重复数字
 
-            while (num1 > 10)
+            if (x + nums[a + 1] + nums[a + 2] + nums[a + 3] > target) break; // 优化一
+
+            if (x + nums[len - 3] + nums[len - 2] + nums[len - 1] < target) continue; // 优化二
+
+            for (var b = a + 1 ; b < len - 2 ; b++)
             {
-                num1 /= 10;
-            }
+                // 枚举第二个数
+                long y = nums[b];
+                if (b > a + 1 && y == nums[b - 1]) continue; // 跳过重复数字
 
-            for (var j = i + 1 ; j < nums.Length ; j++)
-            {
-                var num2 = nums[j] % 10;
+                if (x + y + nums[b + 1] + nums[b + 2] > target) break; // 优化一
 
-                if (GCD(num1, num2) == 1)
+                if (x + y + nums[len - 2] + nums[len - 1] < target) continue; // 优化二
+
+                int c = b + 1, d = len - 1;
+                while (c < d)
                 {
-                    result++;
+                    // 双指针枚举第三个数和第四个数
+                    var s = x + y + nums[c] + nums[d]; // 四数之和
+                    if (s > target)
+                        d--;
+                    else if (s < target)
+                        c++;
+                    else
+                    {
+                        // s == target
+                        result.Add([(int)x, (int)y, nums[c], nums[d]]);
+
+                        for (c++ ; c < d && nums[c] == nums[c - 1] ; c++) { }
+
+                        for (d-- ; d > c && nums[d] == nums[d + 1] ; d--) { }
+                    }
                 }
             }
         }
 
         return result;
-
-        int GCD(int a, int b) => a == 0 ? b : GCD(b % a, a);
     }
+
+    //1 <= nums.length <= 200
 }
