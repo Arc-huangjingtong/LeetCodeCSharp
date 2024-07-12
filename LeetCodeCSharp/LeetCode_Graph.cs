@@ -300,3 +300,56 @@ public class Solution_3067
         }
     }
 }
+
+
+
+public class Solution_3112
+{
+    public int[] MinimumTime(int n, int[][] edges, int[] disappear)
+    {
+        List<List<(int u, int v, int w)>> edges2 = [];
+        for (var i = 0; i < n; i++)
+        {
+            edges2.Add([]);
+        }
+        foreach (var item in edges)
+        {
+            var (u, v, w) = (item[0], item[1], item[2]);
+            edges2[u].Add((u, v, w));
+            edges2[v].Add((v, u, w));
+        }
+
+        var dis = new int[n];
+        Array.Fill(dis, int.MaxValue);
+        dis[0] = 0;
+        PriorityQueue<(int u, int v, int w), int> priorityQueue = new();
+        priorityQueue.Enqueue((0, 0, 0), 0);
+
+        while (priorityQueue.Count > 0)
+        {
+            var (_, x0, len0) = priorityQueue.Dequeue();
+            if (len0 > dis[x0])
+            {
+                continue;
+            }
+            foreach (var (_, x1, len1) in edges2[x0])
+            {
+                if (dis[x0] + len1 < dis[x1] && dis[x0] + len1 < disappear[x1])
+                {
+                    dis[x1] = dis[x0] + len1;
+                    priorityQueue.Enqueue((x0, x1, dis[x1]), dis[x1]);
+                }
+            }
+        }
+
+        for (var i = 0; i < dis.Length; i++)
+        {
+            if (dis[i] == int.MaxValue)
+            {
+                dis[i] = -1;
+            }
+        }
+
+        return dis;
+    }
+}

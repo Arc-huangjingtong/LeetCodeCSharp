@@ -713,3 +713,62 @@ public class Solution_18
 
     //1 <= nums.length <= 200
 }
+
+
+/// <summary> 721. 账户合并 </summary>
+public class Solution_721
+{
+    public IList<IList<string>> AccountsMerge(IList<IList<string>> accounts)
+    {
+        var dict   = new Dictionary<string, List<HashSet<string>>>();
+        var result = new List<IList<string>>();
+
+        foreach (var account in accounts)
+        {
+            var name = account[0];
+
+            if (dict.ContainsKey(name))
+            {
+                var flag = true;
+                foreach (var set in dict[name])
+                {
+                    if (set.Overlaps(account.Skip(1)))
+                    {
+                        set.UnionWith(account.Skip(1));
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag)
+                {
+                    dict[name].Add([..account.Skip(1)]);
+                }
+            }
+            else
+            {
+                dict[name] = [[..account.Skip(1)]];
+            }
+        }
+
+
+        foreach (var (name, emailLists) in dict)
+        {
+            foreach (var emailList in emailLists)
+            {
+                var list   = new List<string> { name };
+                var sorted = emailList.ToList();
+                sorted.Sort(string.CompareOrdinal);
+                list.AddRange(sorted);
+                result.Add(list);
+            }
+        }
+
+
+        return result;
+    }
+
+    //[["John","john_newyork@mail.com","john00@mail.com","johnnybravo@mail.com","johnsmith@mail.com"],["Mary","mary@mail.com"]]
+
+    //[["John","john00@mail.com","john_newyork@mail.com","johnsmith@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]
+}

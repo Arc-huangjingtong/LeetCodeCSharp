@@ -2301,7 +2301,7 @@ public partial class UnitTest
         }
     }
 
-    
+
     public class Solution_A001
     {
         public static Random rnc = new Random();
@@ -2370,5 +2370,69 @@ public partial class UnitTest
             Console.WriteLine($"ArcherNum:{ArcherNum} ShielderNum:{ShielderNum} riderNum:{riderNum}");
             Console.WriteLine($"lessArcher:{lessArcher} lessShielder:{lessShielder} lessRider:{lessRider} anyNum:{anyNum}");
         }
+    }
+}
+
+
+public class TestClass
+{
+    public static Test TTTT ;
+    public static TestClass singleton
+    {
+        get
+        {
+            Console.WriteLine("111111111111111");
+            return new();
+        }
+        private set { }
+    }
+
+    //change to int
+    public static implicit operator int(TestClass c)
+    {
+        if (c == null)
+        {
+            throw new Exception();
+        }
+
+        return 1;
+    } 
+}
+
+
+public class Test
+{
+   
+    public static TestClass TestClass { get; set; } = new TestClass();
+
+    public bool Log()
+    {
+        Console.WriteLine("1111");
+        return false;
+    }
+
+    public TestClass this[int Index]
+    {
+        get
+        {
+            Console.WriteLine("333333333");
+            return TestClass;
+        }
+    }
+
+
+    public TestClass TestTest()
+    {
+        Console.WriteLine("222222222");
+        return Test.TestClass;
+    }
+
+
+    [Test]
+    public void TestMethod()
+    {
+        int integer = Log() ? TestClass.TTTT[0] : default;
+
+        Console.WriteLine(integer);
     }
 }
