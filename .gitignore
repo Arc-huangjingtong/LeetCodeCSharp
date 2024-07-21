@@ -16,3 +16,6 @@
 *.dll
 /LeetCodeCSharp/obj
 /LeetCodeCSharp/bin
+
+.fake
+/.VSCodeCounter
