@@ -2,5 +2,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3745c670_002Dcfdb_002D42da_002Dad81_002D44e7b6434660/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SumOfPowers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_3098.SumOfPowers&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Study_Concurrency.Test02&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
