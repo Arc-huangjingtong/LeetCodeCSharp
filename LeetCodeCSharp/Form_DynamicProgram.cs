@@ -56,7 +56,7 @@ public class Solution_1186
     public int MaximumSum(int[] arr)
     {
         int dp0 = arr[0], dp1 = 0, res = arr[0];
-        for (int i = 1 ; i < arr.Length ; i++)
+        for (var i = 1 ; i < arr.Length ; i++)
         {
             dp1 = Math.Max(dp0, dp1 + arr[i]);
             dp0 = Math.Max(dp0, 0) + arr[i];
@@ -275,4 +275,133 @@ public class Solution_1186
     // 时间复杂度：O(n)，其中 n 为 arr 的长度。动态规划的时间复杂度 = 状态个数 × 单个状态的计算时间。本题中状态个数等于 O(n)，单个状态的计算时间为 O(1)，所以动态规划的时间复杂度为 O(n)。
     // 空间复杂度：O(1)。只用到常数级的额外空间。
     // 思考题 如果改成至多删除 k 次，要怎么做？恰好删除 k 次呢？至少删除 k 次呢？
+}
+
+
+///[太难了，未解决]3098. 求出所有子序列的能量和 算术评级: 10!!! 第 127 场双周赛 Q4
+public class Solution_3098
+{
+    // 下面的方法超时了，太暴力了
+    [TestCase(new[] { 1, 2, 3, 4 }, 3, ExpectedResult = 4)]
+    // [TestCase(new[] { -24, -921, 119, -291, -65, -628, 372, 274, 962, -592, -10, 67, -977, 85, -294, 349, -119, -846, -959, -79, -877, 833, 857, 44, 826, -295, -855, 554, -999, 759, -653, -423, -599, -928 }, 19, ExpectedResult = 990202285)]
+    public int SumOfPowers(int[] nums, int k)
+    {
+        const int mod = 1000000007;
+
+        // 1. 排序
+        Array.Sort(nums);
+
+        // 2. 枚举子序列
+        long indexer    = (1  << k)           - 1;
+        var  maxIndexer = (1L << nums.Length) - 1;
+        long sum        = 0;
+
+        while (indexer != 0 && indexer <= maxIndexer)
+        {
+            sum += GetPower(k, nums, indexer);
+
+            indexer = Gosper_Hack(indexer);
+        }
+
+        sum %= mod;
+
+        return (int)sum;
+    }
+
+    public static int GetPower(int k, int[] nums, long indexer)
+    {
+        Span<int> sub   = stackalloc int[k];
+        var       index = 0;
+        var       min   = int.MaxValue;
+        for (var i = 0 ; i < nums.Length ; i++)
+        {
+            if ((indexer & (1L << i)) != 0)
+            {
+                sub[index++] = nums[i];
+            }
+        }
+
+        for (var i = 1 ; i < k ; i++)
+        {
+            min = Math.Min(min, sub[i] - sub[i - 1]);
+        }
+
+        return min;
+    }
+
+    public static long Gosper_Hack(long num)
+    {
+        if (num <= 0) return 0;
+
+        var lowBit = num & -num;
+        var left   = num + lowBit;
+        var p      = left ^ num;
+        var right  = (p >> 2) / lowBit;
+        var result = left | right;
+        return result;
+    }
+
+
+
+    public int SumOfPowers2(int[] nums, int k)
+    {
+        const int MOD = 1000000007, INF = 0x3f3f3f3f;
+
+        var length = nums.Length;
+        var dictss = new Dictionary<int, int>[length][];
+        for (var i = 0 ; i < length ; i++)
+        {
+            dictss[i] = new Dictionary<int, int>[k + 1];
+            for (var j = 0 ; j <= k ; j++)
+            {
+                dictss[i][j] = [];
+            }
+        }
+
+        var res = 0;
+        Array.Sort(nums);
+        for (var i = 0 ; i < length ; i++)
+        {
+            dictss[i][1].Add(INF, 1);
+            for (var j = 0 ; j < i ; j++)
+            {
+                var diff = Math.Abs(nums[i] - nums[j]);
+                for (var p = 2 ; p <= k ; p++)
+                {
+                    foreach (var pair in dictss[j][p - 1])
+                    {
+                        int v       = pair.Key, cnt = pair.Value;
+                        var currKey = Math.Min(diff, v);
+                        dictss[i][p].TryAdd(currKey, 0);
+                        dictss[i][p][currKey] = (dictss[i][p][currKey] + cnt) % MOD;
+                    }
+                }
+            }
+
+
+            foreach (var (v, cnt) in dictss[i][k])
+            {
+                res = (int)((res + 1L * v * cnt % MOD) % MOD);
+            }
+        }
+
+        return res;
+    }
+
+
+
+    // 给你一个长度为 n 的整数数组 nums 和一个 正 整数 k 。
+    // 一个 子序列 的  能量 定义为子序列中 任意 两个元素的差值绝对值的 最小值 。
+    // 请你返回 nums 中长度 等于 k 的 所有 子序列的 能量和 。
+    // 由于答案可能会很大，将答案对 109 + 7 取余 后返回。
+    // 2 <= n == nums.length <= 50
+    // -10^8 <= nums[i] <= 10^8 
+    // 2 <= k <= n
+
+    // help1:Sort nums
+    // help2:There are at most n2 distinct differences. 翻译：最多有 n2 个不同的差值
+    // help3:For a particular difference d, let dp[len][i][j] be the number of subsequences of length len in the subarray nums[0..i] where the last element picked was at index j.
+    // 翻译：对于特定的差值 d，令 dp[len][i][j] 表示子数组 nums[0..i] 中长度为 len 的子序列的数量，其中最后一个选取的元素的下标为 j。
+    // help4:For each index, we can check if it can be picked if nums[i] - nums[j] <= d.
+    // 翻译：对于每个下标，我们可以检查是否可以选取 nums[i]，如果 nums[i] - nums[j] <= d。
 }

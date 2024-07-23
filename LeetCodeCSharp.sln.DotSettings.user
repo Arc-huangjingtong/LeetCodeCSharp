@@ -1,24 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bf4dc58c_002D8421_002D4c64_002D84eb_002Da3c20900b757/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TemperatureTrend" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3745c670_002Dcfdb_002D42da_002Dad81_002D44e7b6434660/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SumOfPowers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution.TemperatureTrend&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_111.MinOperations&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_100346.MinOperations&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_100333.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_100333&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2007.FindOriginalArray&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_454.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1014.MaxScoreSightseeingPair&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution.MaximumTripletValue&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2971.LargestPerimeter&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_3185.CountCompleteDayPairs&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1679.MaxOperations&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1679.MaxOperations2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1679&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2342.MaximumSum&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Test.TestMethod&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_2055.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution.LosingPlayer&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_3098.SumOfPowers&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
