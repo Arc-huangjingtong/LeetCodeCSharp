@@ -91,23 +91,10 @@ public class Solution_2844
         {
             var c = num[i];
             if (found0 && (c == '0' || c == '5') ||
-                found5 && (c == '2' || c == '7')) {
+                found5 && (c == '2' || c == '7'))
+            {
                 return len - i - 2;
             }
-            
-            // if ((found0 && c is '0' or '5') || (found5 && c is '2' or '7'))
-            // {
-            //     return len - i - 2;
-            // }
-
-            // if (c is '0' or '5')
-            // {
-            //     found0 = true;
-            // }
-            // else if (c is '2' or '7')
-            // {
-            //     found5 = true;
-            // }
 
 
             found0 |= c == '0';
