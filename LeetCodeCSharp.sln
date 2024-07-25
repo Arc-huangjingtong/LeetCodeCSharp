@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCodeCSharp", "LeetCodeCSharp\LeetCodeCSharp.csproj", "{EF1E6A81-A237-419F-B1D9-906BB23B45EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "Benchmark\Benchmark.csproj", "{7E55C3E9-FDA5-41B4-8D06-24B951AE56C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{EF1E6A81-A237-419F-B1D9-906BB23B45EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF1E6A81-A237-419F-B1D9-906BB23B45EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF1E6A81-A237-419F-B1D9-906BB23B45EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E55C3E9-FDA5-41B4-8D06-24B951AE56C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E55C3E9-FDA5-41B4-8D06-24B951AE56C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E55C3E9-FDA5-41B4-8D06-24B951AE56C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E55C3E9-FDA5-41B4-8D06-24B951AE56C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
