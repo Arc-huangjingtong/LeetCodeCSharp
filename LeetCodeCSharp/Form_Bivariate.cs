@@ -12,7 +12,9 @@
 // 4. 如果变量元素的索引,有大小关系,则可以一次遍历 [1814. 统计一个数组中好对子的数目]
 // 5. 如果变量元素的索引,没有大小关系,并且可以重复,则需要先遍历一遍,构造哈希表
 // 6. 目的是计数,具体环境下,可能会有具体处理,但是单纯的计数,需要考虑取余操作
-//    (a mod c + b mod c) mod c = (a + b) mod c :即 子项的模运算和,的模运算 等于 总和的模运算
+//  Exa      (a mod c + b mod c) mod c     = (a + b) mod c :即 子项的模运算和,的模运算 等于 总和的模运算
+//           ((a mod c) x (b mod c)) mod c = (a x b) mod c :即 子项的模运算乘积,的模运算 等于 总的模运算
+// 见: 2961. 双模幂运算
 
 
 /// <summary> 1814. 统计一个数组中好对子的数目 </summary>
@@ -525,4 +527,50 @@ public class Solution_454
     // nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0
     // 1 <= n <= 200
     // -2^28 <= nums1[i], nums2[i], nums3[i], nums4[i] <= 2^28
+}
+
+
+/**********************************************************************************************************************/
+
+
+/// <summary> 2961. 双模幂运算 </summary>
+public class Solution_2961
+{
+    public IList<int> GetGoodIndices(int[][] variables, int target)
+    {
+        var ans = new List<int>();
+
+        for (var i = 0 ; i < variables.Length ; i++)
+        {
+            var v = variables[i];
+
+            // 题目的核心就是判断下列式子是否成立
+            if (Pow(Pow(v[0], v[1], 10), v[2], v[3]) == target)
+            {
+                ans.Add(i);
+            }
+        }
+
+        return ans;
+
+        // 可以取模的快速幂运算
+        // 本题 mod 很小，即使平方也不会超过 int 范围，所以不需要用 long
+        static int Pow(int x, int n, int mod)
+        {
+            var res = 1;
+
+            while (n > 0)
+            {
+                if (n % 2 > 0)
+                {
+                    res = res * x % mod;
+                }
+
+                x =  x * x % mod;
+                n /= 2;
+            }
+
+            return res;
+        }
+    }
 }

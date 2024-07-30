@@ -1,6 +1,7 @@
 ﻿namespace LeetCodeCSharp;
 
-//      前缀和
+/****************************************************  基本前缀和  ******************************************************/
+// 前缀和
 // 特征点: 
 // 1.需要提取子数组
 // 2.子数组的信息,由从0开始的right区间 - 从0开始的left区间决定
@@ -274,140 +275,158 @@ public class Solution_2055
 }
 
 
-// 给你一个长度为 n 的整数数组 nums ，n 是 偶数 ，同时给你一个整数 k 。
-//
-// 你可以对数组进行一些操作。每次操作中，你可以将数组中 任一 元素替换为 0 到 k 之间的 任一 整数。
-//
-// 执行完所有操作以后，你需要确保最后得到的数组满足以下条件：
-//
-// 存在一个整数     X ，满足对于所有的 (0 <= i < n) 都有 abs(a[i] - a[n - i - 1]) = X 。
-// 请你返回满足以上条件 最少 修改次数。
-
-
-public class Solution
+/// <summary> 2438. 二的幂数组中查询范围内的乘积 </summary>
+public class Solution_2438
 {
-    public int MinChanges(int[] nums, int k)
+    /// 也是非前缀和的模板题,但是这里的取余操作,是重点需要注意的地方
+    /// 之前错误的做法,就是始终用int装乘积,但是始终会有溢出的风险,其实只要在最开始用long存储即可
+    /// 为什么说是非模板题呢?恰恰是因为取余操作,因为取余的触发是需要特殊处理的,前缀和中的取余会失真
+    public int[] ProductQueries(int n, int[][] queries)
     {
-        var len  = nums.Length;
-        var temp = new (int delta, int setMax)[len / 2];
-        var dict = new Dictionary<int, int>();
+        const int mod = 1000000007;
 
-        for (var i = 0 ; i < len / 2 ; i++)
+        var powers = new List<int>();
+
+        while (n > 0)
         {
-            var left  = nums[i];
-            var right = nums[len - i - 1];
-            var max1  = Math.Max(left,      right);
-            var max2  = Math.Max(k - right, k - left);
-            var max   = Math.Max(max1,      max2);
-            var dis   = Math.Abs(left - right);
-            temp[i] = (dis, max);
-
-            dict.TryAdd(dis, 0);
-            dict[dis]++;
+            powers.Add(n & -n);
+            n &= n - 1;
         }
 
-        var result = int.MaxValue;
+        var result = new int[queries.Length];
 
-        var minOne = int.MaxValue;
-
-        foreach (var keyValue in dict)
+        for (var i = 0 ; i < queries.Length ; i++)
         {
-            var key = keyValue.Key;
-            if (keyValue.Value == 1)
+            var query = queries[i];
+            var left  = query[0];
+            var right = query[1];
+            var temp  = 1L;
+
+            for (var j = left ; j <= right ; j++)
             {
-                minOne = Math.Min(minOne, key);
-                continue;
+                temp = temp * powers[j] % mod;
             }
 
-            var count = 0;
-
-            for (var i = 0 ; i < temp.Length ; i++)
-            {
-                if (temp[i].delta == key)
-                {
-                    continue;
-                }
-
-                if (key > temp[i].setMax)
-                {
-                    count += 2;
-                }
-                else
-                {
-                    count += 1;
-                }
-            }
-
-            result = Math.Min(result, count);
-        }
-
-        if (minOne != int.MaxValue)
-        {
-            var count = 0;
-
-            for (var i = 0 ; i < temp.Length ; i++)
-            {
-                if (temp[i].delta == minOne)
-                {
-                    continue;
-                }
-
-                if (minOne > temp[i].setMax)
-                {
-                    count += 2;
-                }
-                else
-                {
-                    count += 1;
-                }
-            }
-
-            result = Math.Min(result, count);
+            result[i] = (int)temp;
         }
 
 
         return result;
     }
 
+    [Test]
+    public void METHOD()
+    {
+        var n       = 919;
+        var queries = new int[3][];
+        queries[0] = [0, 6];
+        queries[1] = [2, 2];
+        queries[2] = [0, 3];
+        var result = ProductQueries(n, queries);
+    }
+
+
+
+    // 给你一个正整数 n ，你需要找到一个下标从 0 开始的数组 powers ，
+    // 它包含 最少 数目的 2 的幂，且它们的和为 n 。powers 数组是 非递减 顺序的。
+    // 根据前面描述，构造 powers 数组的方法是唯一的
+    // 同时给你一个下标从 0 开始的二维整数数组 queries ，
+    // 其中 queries[i] = [left_i, right_i] ，
+    // 其中 queries[i] 表示请你求出满足 left_i <= j <= right_i 的所有 powers[j] 的乘积
+    // 请你返回一个数组 answers ，长度与 queries 的长度相同，其中 answers[i]是第 i 个查询的答案。由于查询的结果可能非常大，请你将每个 answers[i] 都对 10^9 + 7 取余
+
+
     // 示例 1：
     //
-    // 输入：nums = [1,0,1,2,4,3], k = 4
-    //             [2-3,4-4,1-3]  
-    // 输出：2
-    //
-    // 解释：
-    // 我们可以执行以下操作：
-    //
-    // 将  nums[1] 变为 2 ，结果数组为 nums = [1,2,1,2,4,3] 。
-    // 将  nums[3] 变为 3 ，结果数组为 nums = [1,2,1,3,4,3] 。
-    // 整数 X 为 2 。
-    //
+    // 输入：n = 15, queries = [[0,1],[2,2],[0,3]]
+    // 输出：[2,4,64]
+    // 解释：     [0b1111]       [1,1,2,8,64]
+    // 对于 n = 15 ，得到 powers = [1,2,4,8] 。没法得到元素数目更少的数组。
+    // 第 1 个查询的答案：powers[0] * powers[1] = 1 * 2 = 2 。
+    // 第 2 个查询的答案：powers[2] = 4 。
+    // 第 3 个查询的答案：powers[0] * powers[1] * powers[2] * powers[3] = 1 * 2 * 4 * 8 = 64 。
+    // 每个答案对 10^9 + 7 得到的结果都相同，所以返回 [2,4,64] 。
     // 示例 2：
     //
-    // 输入：nums = [0,1,2,3,3,6,5,4], k = 6
-    //             [4-4,4-5,4-6,0-3]
-    // 输出：2
-    //
+    // 输入：n = 2, queries = [[0,0]]
+    // 输出：[2]
     // 解释：
-    // 我们可以执行以下操作：
+    // 对于 n = 2, powers = [2] 。
+    // 唯一一个查询的答案是 powers[0] = 2 。答案对 10^9 + 7 取余后结果相同，所以返回 [2] 。
     //
-    // 将  nums[3] 变为 0 ，结果数组为 nums = [0,1,2,0,3,6,5,4] 。
-    // 将  nums[4] 变为 4 ，结果数组为 nums = [0,1,2,0,4,6,5,4] 。
-    // 整数 X 为 4 。
+    //
+    // 提示：
+    //
+    // 1 <= n <= 10^9
+    // 1 <= queries.length <= 10^5
+    // 0 <= starti <= endi < powers.length
 }
 
 
-// 给你一个大小为 n x n 的二维矩阵 grid ，一开始所有格子都是白色的。一次操作中，你可以选择任意下标为 (i, j) 的格子，并将第 j 列中从最上面到第 i 行所有格子改成黑色。
-//
-// 如果格子 (i, j) 为白色，且左边或者右边的格子至少一个格子为黑色，那么我们将 grid[i][j] 加到最后网格图的总分中去。
-//
-// 请你返回执行任意次操作以后，最终网格图的 最大 总分数。
+/**********************************************  前缀和 + 哈希表  ******************************************************/
+// 相对于基本体型,多了一层统计子数组的操作
+// 子数组 是数组的一段连续部分
+// 因此子数组是有序的,可以在计算前缀和的时候,同时统计此时前缀和的数量
+// 且子数组可以等于本身,因此在迭代的时候,需要考虑当前索引本身的情况
+// ↑ 因此在计算子数组和的时候,初始化的时候,需要加入一个和为0的情况,表示当前索引本身的情况
 
 
-public class Solution_
+/// <summary> 930. 和相同的二元子数组 </summary>
+public class Solution_930
 {
-    //public long MaximumScore(int[][] grid) { }
+    [TestCase(new[] { 0, 0, 1, 0, 0 },                0, ExpectedResult = 6)]
+    [TestCase(new[] { 1, 0, 1, 0, 1 },                2, ExpectedResult = 4)]
+    [TestCase(new[] { 0, 1, 1, 1, 1 },                3, ExpectedResult = 3)]
+    [TestCase(new[] { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, 0, ExpectedResult = 27)]
+    public int NumSubarraysWithSum(int[] nums, int goal)
+    {
+        for (int i = 0 ; i < nums.Length ; i++)
+        {
+            
+        }
+
+        // 1. 生成sum数组,表示前缀和
+        // sum = 0 ... nums;
+
+        // 2. 生成map,表示当前前缀和的数量
+        // 需要注意的是,子数组是可以等于数组本身的,迭代计算的时候,需要考虑当前索引本身的情况
+        var map = new Dictionary<int, int> { { 0, 1 } };
+
+        var ans = 0;
+
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            // 3. 计算当前索引的前缀和,因为之前扩充了一个,所以这里是i+1 (其实本题不扩充也可以)
+            var right = sum[i + 1];
+            var left  = right - goal; //计算差值
+
+            ans += map.GetValueOrDefault(left);
+
+            map.TryAdd(right, 0);
+            map[right]++;
+        }
+
+        return ans;
+    }
+
+
+    // 给你一个二元数组 nums ，和一个整数 goal ，请你统计并返回有多少个和为 goal 的 [非空] 子数组。
+    //
+    // 子数组 是数组的一段连续部分
+    //
+    // 示例 1：
+    // 输入：nums = [1,0,1,0,1], goal = 2
+    // 输出：4
+    // 解释：
+    // 有 4 个满足题目要求的子数组：[1,0,1]、[1,0,1,0]、[0,1,0,1]、[1,0,1]
+    // 示例 2：
+    //
+    // 输入：nums = [0,0,0,0,0], goal = 0
+    // 输出：15
+    //
+    // 提示：
+    //
+    // 1 <= nums.length <= 3 * 10^4
+    // nums[i] 不是 0 就是 1
+    // 0 <= goal <= nums.length
 }
-
-
-
