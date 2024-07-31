@@ -125,3 +125,36 @@ public class Solution_2844
     [Benchmark]
     public void Test_LingShen() => MinimumOperations_ArcMethod("2245047");
 }
+
+
+/// <summary> 3111. 覆盖所有点的最少矩形数目 </summary>
+public class Solution_3111
+{
+    public int MinRectanglesToCoverPoints(int[][] points, int w)
+    {
+        // 选中所有横坐标,排序
+        var sorted = points.Select(p => p[0]).OrderBy(x => x);
+
+
+        var max = -1;
+        var res = 0;
+
+        foreach (var x in sorted)
+        {
+            if (x <= max) continue;
+
+            // 贪心点 :　直接选最大宽度
+            // 贪心点 :　如果不够，则直接从下一个点开始
+            max = x + w;
+
+            res++;
+        }
+
+
+        return res;
+    }
+
+
+
+    // 题目是说,用等宽(宽度小于w)的条状矩形,覆盖二维空间下 points中的所有点,最少需要多少个矩形
+}
