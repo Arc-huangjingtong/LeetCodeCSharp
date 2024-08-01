@@ -7,11 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/Form_Greedy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Form_Greedy.cs" afterDir="false" />
-    </list>
+    <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +164,7 @@
       <workItem from="1717491652248" duration="82000" />
       <workItem from="1717662781066" duration="1000" />
       <workItem from="1717726779878" duration="372000" />
-      <workItem from="1722479951592" duration="6017000" />
+      <workItem from="1722479951592" duration="8382000" />
     </task>
     <servers />
   </component>
@@ -331,13 +327,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/LeetCodeCSharp/Form_Greedy.cs</url>
-          <line>175</line>
+          <line>181</line>
           <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\Form_Greedy.cs" containingFunctionPresentation="方法 'MaxmiumScore'">
             <startOffsets>
-              <option value="4032" />
+              <option value="4340" />
             </startOffsets>
             <endOffsets>
-              <option value="4059" />
+              <option value="4367" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="35" />
