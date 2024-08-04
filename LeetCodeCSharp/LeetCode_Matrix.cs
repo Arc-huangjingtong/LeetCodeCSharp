@@ -242,3 +242,56 @@ public class Solution_2713
         return row.Max();
     }
 }
+
+
+/// <summary> 3143. 正方形中的最多点数 </summary>
+public class Solution_3143
+{
+    public int maxPointsInsideSquare(int[][] points, String s)
+    {
+        var               num  = points.Length;
+        Span<(int, char)> sort = stackalloc (int, char)[num];
+
+
+        for (var i = 0 ; i < num ; i++)
+        {
+            sort[i] = (Math.Max(Math.Abs(points[i][0]), Math.Abs(points[i][1])), s[i]);
+        }
+
+        sort.Sort((a, b) => a.Item1 - b.Item1);
+
+
+        var tagSet = new HashSet<char>();
+
+        for (var i = 0 ; i < num ; i++)
+        {
+            var tag = sort[i].Item2;
+            if (tagSet.Add(tag)) continue;
+
+            var point = sort[i].Item1;
+
+
+            for (var j = i ; j >= 0 ; j--)
+            {
+                if (sort[j].Item1 == point) continue;
+
+                return j + 1;
+            }
+
+            return 0;
+        }
+
+
+        return num;
+    }
+
+    [Test]
+    public void METHOD()
+    {
+        //[[1,-1]] 'a'
+        int[][] points = [[2, 2], [-1, -2], [-4, 4], [-3, 1], [3, -3]];
+        string  s      = "abdca";
+
+        Console.WriteLine(maxPointsInsideSquare(points, s));
+    }
+}
