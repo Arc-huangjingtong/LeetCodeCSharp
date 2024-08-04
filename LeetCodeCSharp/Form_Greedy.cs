@@ -158,3 +158,83 @@ public class Solution_3111
 
     // 题目是说,用等宽(宽度小于w)的条状矩形,覆盖二维空间下 points中的所有点,最少需要多少个矩形
 }
+
+
+/// <summary> LCP 40. 心算挑战 </summary>
+public class Solution_LCP40
+{
+    // 贪心点 : 先计算最大和,如何是偶数,则直接返回;
+    // 贪心点 : 和的奇偶性,是会被一个子集的奇偶性所影响的,所以我们需要找到一个最小的奇数和一个最小的偶数,然后替换掉他们即可
+    // 思考  : 思考两种方案的大小为什么不需要全部算出来然后比较?
+    // cnt = 3 [10000,a(偶数),b(奇数),x(奇数),y(偶数)] (a > b > x > y) 且 a y为偶数,bx为奇数  => x - a > y - b
+    // cnt = 3 [10000,8(偶数),7(奇数),5(奇数),4(偶数)] 如果能证明: b + x > a + y 就行了
+
+    [TestCase(new[] { 1, 2, 8, 9 }, 3, ExpectedResult = 18)]
+    [TestCase(new[] { 3, 3, 1 },    1, ExpectedResult = 0)]
+    public int MaxmiumScore(int[] cards, int cnt)
+    {
+        // 1. 从大到小排序
+        Array.Sort(cards, (a, b) => b - a);
+
+        // 2. 选取最大的cnt个数
+        var sum     = 0;
+        var minOdd  = int.MaxValue; // 奇数
+        var minEven = int.MaxValue; // 偶数
+
+        for (var i = 0 ; i < cnt ; i++)
+        {
+            var card = cards[i];
+            sum += card;
+
+            if (card % 2 == 1)
+            {
+                minOdd = Math.Min(minOdd, card);
+            }
+            else
+            {
+                minEven = Math.Min(minEven, card);
+            }
+        }
+
+        if (sum % 2 == 0) return sum;
+
+
+        // 3. 找到最大奇数和最大偶数
+        for (var i = cnt ; i < cards.Length ; i++)
+        {
+            var card = cards[i];
+
+            if (minEven != int.MaxValue && card % 2 == 1)
+            {
+                sum += card;
+                sum -= minEven;
+
+                return sum;
+            }
+
+            if (minOdd != int.MaxValue && card % 2 == 0)
+            {
+                sum += card;
+                sum -= minOdd;
+                return sum;
+            }
+        }
+
+        return 0;
+    }
+
+
+
+    // 求cards中最大的cnt个子集的偶数和 ,不满足则返回0
+
+    // 偶数 + 偶数 = 偶数
+    // 奇数 + 奇数 = 偶数
+    // 偶数 + 奇数 = 奇数
+
+
+    // 最大的前三个数的可能性
+    // 1. 三个偶数 [√]
+    // 2. 两个偶数,一个奇数 [找到最小的数字,然后换成奇偶不一样的数字即可]
+    // 3. 一个偶数,两个奇数 [√]
+    // 4. 三个奇数 [只需要把最小的奇数换成偶数即可]
+}
