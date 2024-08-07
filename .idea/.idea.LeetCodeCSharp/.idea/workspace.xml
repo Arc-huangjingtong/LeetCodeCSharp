@@ -8,12 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/LeetCodeCSharp/Form_DFS.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/Common_Basic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Common_Basic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Matrix.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Matrix.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_Golbal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/UnitTest_Golbal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/Form_DynamicProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Form_DynamicProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Concurrency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Concurrency.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,10 +37,9 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/MethodImplAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/12e92f53b2f148a3aabdec53d64f032c381908/1f/3850ddd5/Expression`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d3a451850004403293b134b9fe18ce3fc8f920/4f/3b3725cc/Span`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d3a451850004403293b134b9fe18ce3fc8f920/50/b7aa79e2/MemoryExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/898d0281d4384079892e5795b7b1928d16e00/ea/99e28c65/0200002Fpdb11High.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/898d0281d4384079892e5795b7b1928d16e00/ea/99e28c65/0200002Fpdb11Low.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b2b917c507d64d0980727dbdd83b6585c8f8a0/61/75bd22f6/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -62,15 +59,20 @@
   "keyToString": {
     "3745c670-cfdb-42da-ad81-44e7b6434660.executor": "Debug",
     "6ef26612-e545-4dca-8d7b-7fdb8506c71f.executor": "Debug",
+    "773a4449-fda9-4fe6-8c5d-7fbcfda90cd2.executor": "Debug",
     "7943af6d-79fd-4bd1-826d-a04ef224ce34.executor": "Debug",
     "9395cc66-5649-49d0-8bb2-09ede1010d63.executor": "Debug",
+    "94b6680c-2bee-480d-8368-8cb152adc1b0.executor": "Debug",
     "99a6ad9d-6c8f-4eac-aef6-cd8895c9b2f1.executor": "Debug",
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "a1f79423-7f84-43a4-9d35-c84429c34c72.executor": "Debug",
     "a93ac737-846b-4ef1-94a1-954eca8cc2ac.executor": "Run",
+    "cdabf6e6-a00d-4f2b-968a-39ead1e4eef9.executor": "Debug",
     "cf197e88-d421-4315-9276-6844ed836af1.executor": "Debug",
+    "d543d28a-4059-4bab-8332-8d9bdb576e15.executor": "Debug",
+    "f6521743-1a5f-4d5d-9353-c7a6b5039238.executor": "Debug",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "F:/LeetCodeCSharp",
@@ -84,9 +86,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\Windows11\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Windows11\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Windows11\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -174,6 +176,7 @@
       <workItem from="1717662781066" duration="1000" />
       <workItem from="1717726779878" duration="372000" />
       <workItem from="1722675499127" duration="14935000" />
+      <workItem from="1723011183560" duration="19786000" />
     </task>
     <servers />
   </component>
@@ -319,19 +322,6 @@
           <line>411</line>
           <properties documentPath="F:\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Array.cs" containingFunctionPresentation="方法 'MaximumLength'" />
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Matrix.cs</url>
-          <line>263</line>
-          <properties documentPath="D:\Project\LeetCodeCSharp\LeetCodeCSharp\LeetCode_Matrix.cs" containingFunctionPresentation="方法 'maxPointsInsideSquare'">
-            <startOffsets>
-              <option value="6871" />
-            </startOffsets>
-            <endOffsets>
-              <option value="6904" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

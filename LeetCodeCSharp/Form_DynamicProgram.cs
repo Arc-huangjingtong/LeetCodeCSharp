@@ -278,7 +278,7 @@ public class Solution_1186
 }
 
 
-///[太难了，未解决]3098. 求出所有子序列的能量和 算术评级: 10!!! 第 127 场双周赛 Q4
+/// [太难了，未解决] 3098. 求出所有子序列的能量和 算术评级: 10!!! 第 127 场双周赛 Q4
 public class Solution_3098
 {
     // 下面的方法超时了，太暴力了
@@ -407,5 +407,82 @@ public class Solution_3098
 }
 
 
+/// [太难了，未解决] 3130. 找出所有稳定的二进制数组 II
+/// https://leetcode.cn/problems/find-all-possible-stable-binary-arrays-ii/description/
+public class Solution_3130
+{
+    private const int MOD = 1_000_000_007;
+    private const int MX  = 1001;
 
-//Concurrency
+    private static readonly long[] F     = new long[MX]; // f[i] = i!
+    private static readonly long[] INV_F = new long[MX]; // inv_f[i] = i!^-1
+
+    static Solution_3130()
+    {
+        F[0] = 1;
+        for (var i = 1 ; i < MX ; i++)
+        {
+            F[i] = F[i - 1] * i % MOD;
+        }
+
+        INV_F[MX - 1] = Pow(F[MX - 1], MOD - 2);
+        for (var i = MX - 1 ; i > 0 ; i--)
+        {
+            INV_F[i - 1] = INV_F[i] * i % MOD;
+        }
+    }
+
+    public int NumberOfStableArrays(int zero, int one, int limit)
+    {
+        if (zero > one)
+        {
+            // swap，保证空间复杂度为 O(min(zero, one))
+            return NumberOfStableArrays(one, zero, limit);
+        }
+
+        var f0 = new long[zero + 3];
+        for (var i = (zero - 1) / limit + 1 ; i <= zero ; i++)
+        {
+            f0[i] = Comb(zero - 1, i - 1);
+            for (var j = 1 ; j <= (zero - i) / limit ; j++)
+            {
+                f0[i] = (f0[i] + (1 - j % 2 * 2) * Comb(i, j) * Comb(zero - j * limit - 1, i - 1)) % MOD;
+            }
+        }
+
+        long ans = 0;
+        for (var i = (one - 1) / limit + 1 ; i <= Math.Min(one, zero + 1) ; i++)
+        {
+            var f1 = Comb(one - 1, i - 1);
+            for (var j = 1 ; j <= (one - i) / limit ; j++)
+            {
+                f1 = (f1 + (1 - j % 2 * 2) * Comb(i, j) * Comb(one - j * limit - 1, i - 1)) % MOD;
+            }
+
+            ans = (ans + (f0[i - 1] + f0[i] * 2 + f0[i + 1]) * f1) % MOD;
+        }
+
+        return (int)((ans + MOD) % MOD); // 保证结果非负
+    }
+
+    private static long Comb(int n, int m)
+    {
+        return F[n] * INV_F[m] % MOD * INV_F[n - m] % MOD;
+    }
+
+    private static long Pow(long x, int n)
+    {
+        long res = 1;
+        for (; n > 0 ; n /= 2)
+        {
+            if (n % 2 > 0)
+            {
+                res = res * x % MOD;
+            }
+
+            x = x * x % MOD;
+        }
+
+        return res;
+    }
+}

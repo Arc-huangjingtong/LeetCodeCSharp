@@ -1,6 +1,7 @@
 ﻿namespace LeetCodeCSharp;
 
 using System.Diagnostics;
+using System.Threading;
 
 
 /// Study Concurrency
@@ -326,10 +327,8 @@ public class Solution_1114
     {
         // 第一种方式
         //表示一个线程同步事件，当发出信号时，该事件会在释放一个等待线程后自动重置。此类不能继承。
-        private AutoResetEvent _second = new(false);
-        private AutoResetEvent _three  = new(false);
-
-
+        private readonly AutoResetEvent _second = new(false);
+        private readonly AutoResetEvent _three  = new(false);
 
         public void First(Action printFirst)
         {
@@ -350,4 +349,270 @@ public class Solution_1114
             printThird();
         }
     }
+}
+
+
+/// 1115. 交替打印FooBar
+public class Solution_1115
+{
+    /// 单线程做法
+    public class FooBar01(int Count)
+    {
+        public int Counter1 = 0;
+        public int Counter2 = 0;
+
+        public void Foo(Action printFoo)
+        {
+            for (; Counter1 < Count ;)
+            {
+                if (Counter1 == Counter2)
+                {
+                    printFoo(); // printFoo() outputs "foo". Do not change or remove this line.
+                    Counter1++;
+                }
+
+                Thread.Sleep(1);
+            }
+        }
+
+        public void Bar(Action printBar)
+        {
+            for (; Counter2 < Count ;)
+            {
+                if (Counter1 > Counter2)
+                {
+                    printBar(); // printBar() outputs "bar". Do not change or remove this line.
+                    Counter2++;
+                }
+
+                Thread.Sleep(1);
+            }
+        }
+    }
+
+
+    /// 线程同步事件 的 做法
+    public class FooBar02(int Count)
+    {
+        private readonly AutoResetEvent Event01 = new(false);
+        private readonly AutoResetEvent Event02 = new(true);
+
+        public void Foo(Action printFoo)
+        {
+            for (var i = 0 ; i < Count ; i++)
+            {
+                Event02.WaitOne();
+                printFoo(); // printFoo() outputs "foo". Do not change or remove this line.
+                Event01.Set();
+            }
+        }
+
+        public void Bar(Action printBar)
+        {
+            for (var i = 0 ; i < Count ; i++)
+            {
+                Event01.WaitOne();
+                printBar(); // printBar() outputs "bar". Do not change or remove this line.
+                Event02.Set();
+            }
+        }
+    }
+
+
+
+    //两个不同的线程将会共用一个 FooBar 实例:
+    //线程 A 将会调用 foo() 方法
+    //线程 B 将会调用 bar() 方法
+    //请设计修改程序，以确保 "foobar" 被输出 n 次。
+
+
+    [Test]
+    public void METHOD()
+    {
+        var fooBar = new FooBar01(1000);
+
+        var thread1 = new Thread(() =>
+        {
+            fooBar.Foo(() => Console.Write("Foo"));
+        });
+
+        var thread2 = new Thread(() =>
+        {
+            fooBar.Bar(() => Console.Write("Bar"));
+        });
+        thread1.Start(); // 使操作系统将当前实例的状态更改为“正在运行”。
+        thread2.Start();
+        thread1.Join(); //阻止调用线程，直到该实例表示的线程终止，同时继续执行标准的COM和 SendMessage 抽取
+        thread2.Join();
+    }
+}
+
+
+/// 1116. 打印零与奇偶数
+public class Solution_1116
+{
+    public class ZeroEvenOdd(int Count)
+    {
+        private readonly AutoResetEvent Event_Zero = new(true);
+        private readonly AutoResetEvent Event_Even = new(false);
+        private readonly AutoResetEvent Event_Odd  = new(false);
+
+
+        // 2024-08-07 19:58:22 出现了一个很耽误时间的错误
+        // 因为Indexer一开始是从 0开始计数的,所以奇偶判断要反着来
+        // 为什么要单独计数,而不是使用统一的Indexer? 我自己卡在这里
+        // 后来看答案,如果使用统一的Indexer,极端情况,假设Count = 1 , 那么直接卡死在第三个函数上
+        public void Zero(Action<int> printNumber)
+        {
+            for (var Indexer = 1 ; Indexer <= Count ; Indexer++)
+            {
+                Event_Zero.WaitOne();
+                printNumber(0);
+
+                if (Indexer % 2 == 0)
+                {
+                    Event_Even.Set();
+                }
+                else
+                {
+                    Event_Odd.Set();
+                }
+            }
+        }
+
+        public void Even(Action<int> printNumber)
+        {
+            for (var Indexer = 2 ; Indexer <= Count ; Indexer += 2)
+            {
+                Event_Even.WaitOne();
+
+
+                printNumber(Indexer);
+
+                Event_Zero.Set();
+            }
+        }
+
+        public void Odd(Action<int> printNumber)
+        {
+            for (var Indexer = 1 ; Indexer <= Count ; Indexer += 2)
+            {
+                Event_Odd.WaitOne();
+
+                printNumber(Indexer);
+
+                Event_Zero.Set();
+            }
+        }
+    }
+
+
+    public class ZeroEvenOdd02(int Count)
+    {
+        private readonly AutoResetEvent Event_Zero = new(true);
+        private readonly AutoResetEvent Event_Even = new(false);
+        private readonly AutoResetEvent Event_Odd  = new(false);
+
+        public void Zero(Action<int> printNumber)
+        {
+            for (var i = 0 ; i < Count ; i++)
+            {
+                Event_Zero.WaitOne();
+
+                printNumber(0);
+                if (i % 2 == 0)
+                {
+                    Event_Odd.Set();
+                }
+                else
+                {
+                    Event_Even.Set();
+                }
+            }
+        }
+
+        public void Even(Action<int> printNumber)
+        {
+            for (var i = 2 ; i <= Count ; i += 2)
+            {
+                Event_Even.WaitOne();
+                printNumber(i);
+                Event_Zero.Set();
+            }
+        }
+
+        public void Odd(Action<int> printNumber)
+        {
+            for (int i = 1 ; i <= Count ; i += 2)
+            {
+                Event_Odd.WaitOne();
+                printNumber(i);
+                Event_Zero.Set();
+            }
+        }
+    }
+
+
+
+    [Test]
+    public void METHOD()
+    {
+        var zeroEvenOdd = new ZeroEvenOdd(3);
+
+        var thread1 = new Thread(() =>
+        {
+            zeroEvenOdd.Zero(Console.Write);
+        });
+
+        var thread2 = new Thread(() =>
+        {
+            zeroEvenOdd.Even(Console.Write);
+        });
+
+        var thread3 = new Thread(() =>
+        {
+            zeroEvenOdd.Odd(Console.Write);
+        });
+
+        thread1.Start();
+        thread2.Start();
+        thread3.Start();
+
+        thread1.Join();
+        thread2.Join();
+        thread3.Join();
+    }
+
+
+
+    // 现有函数 printNumber 可以用一个整数参数调用，并输出该整数到控制台。
+    // 例如，调用 printNumber(7) 将会输出 7 到控制台。
+    // 给你类 ZeroEvenOdd 的一个实例，该类中有三个函数：zero、even 和 odd 。ZeroEvenOdd 的相同实例将会传递给三个不同线程：
+
+    // 线程 A：调用 zero() ，只输出 0
+    // 线程 B：调用 even() ，只输出偶数
+    // 线程 C：调用 odd()  ，只输出奇数
+    // 修改给出的类，以输出序列 "010203040506..." ，其中序列的长度必须为 2n 。
+
+    // 实现 ZeroEvenOdd 类 :
+    // ZeroEvenOdd(int n) 用数字 n 初始化对象，表示需要输出的数
+    // void zero(printNumber) 调用 printNumber 以输出一个0
+    // void even(printNumber) 调用 printNumber 以输出偶数
+    // void odd (printNumber) 调用 printNumber 以输出奇数
+
+
+    // 示例 1:
+    // 
+    // 输入: n = 2
+    // 输出: "0 1 0 2"
+    // 解释：三条线程异步执行，其中一个调用 zero()，另一个线程调用 even()，最后一个线程调用odd()。正确的输出为 "0102"。
+    //
+    // 示例 2:
+    //
+    // 输入: n = 5
+    // 输出: "0(A) 1(C) 0(A) 2(B) 0(A) 3(C) 0(A) 4(B) 0(A) 5(C)"
+    //
+    // 提示:
+    //
+    // 1 <= n <= 1000
 }
