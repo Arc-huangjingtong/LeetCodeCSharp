@@ -1,34 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4a77e553_002D5584_002D4114_002D95ee_002Df3731bc25d27/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="METHOD" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d1837b1b_002Da59c_002D4aff_002D89b7_002D0c609baa1874/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="METHOD" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1116.METHOD&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1117.METHOD&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a458bb77_002D75d5_002D454d_002D81d5_002D19db29f0c3a3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="METHOD #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1116.METHOD&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b0b8cd51_002Dc3ed_002D4501_002D8127_002Da0ebaaaf5aa5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="METHOD #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::EF1E6A81-A237-419F-B1D9-906BB23B45EA::net8.0::LeetCodeCSharp.Solution_1116.METHOD&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	
-	
-	
-	
-	
-	
-	
-	</wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

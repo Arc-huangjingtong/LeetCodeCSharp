@@ -10,8 +10,8 @@
     <list default="true" id="5b4cd677-e2f3-45f6-8722-347752fc465f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LeetCodeCSharp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/Form_DynamicProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Form_DynamicProgram.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Concurrency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Concurrency.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/Helper_GlobalUsings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Helper_GlobalUsings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LeetCodeCSharp/LeetCode_Concurrency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LeetCodeCSharp/Study_Concurrency.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +40,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/898d0281d4384079892e5795b7b1928d16e00/ea/99e28c65/0200002Fpdb11High.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/898d0281d4384079892e5795b7b1928d16e00/ea/99e28c65/0200002Fpdb11Low.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b2b917c507d64d0980727dbdd83b6585c8f8a0/61/75bd22f6/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b2b917c507d64d0980727dbdd83b6585c8f8a0/c1/2adeb04e/SemaphoreSlim.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LeetCodeCSharp/UnitTest_2.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -71,6 +72,7 @@
     "a93ac737-846b-4ef1-94a1-954eca8cc2ac.executor": "Run",
     "cdabf6e6-a00d-4f2b-968a-39ead1e4eef9.executor": "Debug",
     "cf197e88-d421-4315-9276-6844ed836af1.executor": "Debug",
+    "d1837b1b-a59c-4aff-89b7-0c609baa1874.executor": "Debug",
     "d543d28a-4059-4bab-8332-8d9bdb576e15.executor": "Debug",
     "f6521743-1a5f-4d5d-9353-c7a6b5039238.executor": "Debug",
     "git-widget-placeholder": "main",
@@ -177,6 +179,7 @@
       <workItem from="1717726779878" duration="372000" />
       <workItem from="1722675499127" duration="14935000" />
       <workItem from="1723011183560" duration="19786000" />
+      <workItem from="1723100705580" duration="11782000" />
     </task>
     <servers />
   </component>
