@@ -238,3 +238,69 @@ public class Solution_LCP40
     // 3. 一个偶数,两个奇数 [√]
     // 4. 三个奇数 [只需要把最小的奇数换成偶数即可]
 }
+
+
+//3129. 找出所有稳定的二进制数组 I
+public class Solution_3129
+{
+    public int NumberOfStableArrays(int zero, int one, int limit)
+    {
+        const int MOD = 1000000007;
+
+        var dp = new int[zero + 1][][];
+
+        for (var i = 0 ; i <= zero ; i++)
+        {
+            dp[i] = new int[one + 1][];
+            for (var j = 0 ; j <= one ; j++)
+            {
+                dp[i][j] = new int[2];
+            }
+        }
+
+        for (var i = Math.Min(zero, limit) ; i >= 0 ; i--)
+        {
+            dp[i][0][0] = 1;
+        }
+
+        for (var j = Math.Min(one, limit) ; j >= 0 ; j--)
+        {
+            dp[0][j][1] = 1;
+        }
+
+        for (var i = 1 ; i <= zero ; i++)
+        {
+            for (var j = 1 ; j <= one ; j++)
+            {
+                dp[i][j][0] = (dp[i - 1][j][0] + dp[i - 1][j][1]) % MOD;
+                if (i > limit)
+                {
+                    dp[i][j][0] = (dp[i][j][0] - dp[i - limit - 1][j][1] + MOD) % MOD;
+                }
+
+                dp[i][j][1] = (dp[i][j - 1][0] + dp[i][j - 1][1]) % MOD;
+                if (j > limit)
+                {
+                    dp[i][j][1] = (dp[i][j][1] - dp[i][j - limit - 1][0] + MOD) % MOD;
+                }
+            }
+        }
+
+        return (dp[zero][one][0] + dp[zero][one][1]) % MOD;
+    }
+
+
+
+    // 1 <= zero, one, limit <= 200
+    // 给你 3 个正整数 zero ，one 和 limit 
+    //
+    // 一个 二进制数组
+    // arr 如果满足以下条件，那么我们称它是 稳定的 ：
+    //
+    // 0 在 arr 中出现次数 恰好 为 zero
+    // 1 在 arr 中出现次数 恰好 为 one 
+    // arr 中每个长度超过 limit 的 子数都 同时 包含 0 和 1 。
+    // 请你返回     稳定 二进制数组的 总 数目。
+    //
+    // 由于答案可能很大，将它对 109 + 7 取余 后返回。
+}
