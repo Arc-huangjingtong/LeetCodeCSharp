@@ -486,3 +486,241 @@ public class Solution_3130
         return res;
     }
 }
+
+
+/// <summary> 32. 最长有效括号 </summary>
+public class Solution_32
+{
+    //这道题用动态规划显然很麻烦,尤其是考虑第二种情况
+    [TestCase("(()", ExpectedResult = 2)]
+    [TestCase(")()", ExpectedResult = 2)]
+    public int LongestValidParentheses_DP(string str)
+    {
+        Span<int> dpSpan = stackalloc int[str.Length];
+        var       maxRes = 0;
+        for (var i = 1 ; i < str.Length ; i++)
+        {
+            if (str[i] != ')') continue;
+
+            if (str[i - 1] == '(') // 如果 ')' 前面一个是 '(' 则 dp[i] = dp[i-2] + 2
+            {
+                dpSpan[i] = (i >= 2 ? dpSpan[i - 2] : 0) + 2;
+            }
+            // 如果 ')' 前面一个是 ')' 且前面一个有效括号的前面一个是 '(' 则 dp[i] = dp[i-1] + dp[i-dp[i-1]-2] + 2
+            // 例如: "( ( ( ) ) )"
+            //       0 1 2 3 4 5
+            //   DP: 0 0 0 2 4 6
+            else if (i > dpSpan[i - 1] && str[i - dpSpan[i - 1] - 1] == '(') //跳到DP值的前一个位置,如何能和他组成配对,则dp[i] = dp[i-1] + dp[i-dp[i-1]-2] + 2
+            {
+                // dp[i] = dp[i-1] + dp[i-dp[i-1]-2] + 2
+                dpSpan[i] = dpSpan[i - 1] + (i - dpSpan[i - 1] >= 2 ? dpSpan[i - dpSpan[i - 1] - 2] : 0) + 2;
+                // 三部分组成: 前一个的DP值, 前一个的DP值的前一个的DP值, 自身匹配成功了的2
+                // 例如: "( ) ( ( ( ) ) )"
+            }
+
+
+            maxRes = Math.Max(maxRes, dpSpan[i]); // 维护最大的dp[i]
+        }
+
+        return maxRes;
+    }
+
+
+    [TestCase("(()", ExpectedResult = 2)]
+    [TestCase(")()", ExpectedResult = 2)]
+    public int LongestValidParentheses(string str)
+    {
+        var balance = 0;
+        var resMax  = 0;
+        var curLen  = 0;
+
+        for (int i = 0, len = str.Length ; i < len ; i++)
+        {
+            if (str[i] == '(')
+            {
+                balance++;
+            }
+            else
+            {
+                balance--;
+            }
+
+            curLen++;
+
+            if (balance == 0)
+            {
+                resMax = Math.Max(resMax, curLen);
+            }
+            else if (balance < 0)
+            {
+                balance = 0;
+                curLen  = 0;
+            }
+        }
+
+        balance = 0;
+
+        curLen = 0;
+
+        for (var i = str.Length - 1 ; i >= 0 ; i--)
+        {
+            if (str[i] == ')')
+            {
+                balance++;
+            }
+            else
+            {
+                balance--;
+            }
+
+            curLen++;
+
+            if (balance == 0)
+            {
+                resMax = Math.Max(resMax, curLen);
+            }
+            else if (balance < 0)
+            {
+                balance = 0;
+                curLen  = 0;
+            }
+        }
+
+
+        return resMax;
+    }
+
+
+    [TestCase("(()", ExpectedResult = 2)]
+    [TestCase(")()", ExpectedResult = 2)]
+    public int LongestValidParentheses_Stack(string str)
+    {
+        var left = new Stack<int>(new[] { -1 });
+        var max  = 0;
+        for (int i = 0, len = str.Length ; i < len ; i++)
+        {
+            if (str[i] == '(')
+            {
+                left.Push(i);
+                continue;
+            }
+
+            left.Pop(); // '('和')' 一起拿走
+            if (left.Count == 0)
+            {
+                left.Push(i); //用于计算长度的定位元素
+            }
+            else
+            {
+                max = Math.Max(max, i - left.Peek()); //计算长度
+            }
+        }
+
+        return max;
+    }
+}
+
+
+/// <summary> 3148. 矩阵中的最大得分 </summary>
+public class Solution_3148
+{
+    // DP思路:最大得分 = 以此为顶点的分值 - 以此为顶点矩形内的最小值 
+
+    public int MaxScore(IList<IList<int>> grid)
+    {
+        var m   = grid.Count;
+        var n   = grid[0].Count;
+        var dp  = new int[m, n];
+        var max = int.MinValue;
+
+        for (var i = 0 ; i < m ; i++)
+        {
+            for (var j = 0 ; j < n ; j++)
+            {
+                dp[i, j] = grid[i][j];
+
+                if (i != 0)
+                {
+                    dp[i, j] = Math.Min(dp[i, j], dp[i - 1, j]);
+                    max      = Math.Max(max, grid[i][j] - dp[i - 1, j]);
+                }
+
+                if (j != 0)
+                {
+                    dp[i, j] = Math.Min(dp[i, j], dp[i, j - 1]);
+                    max      = Math.Max(max, grid[i][j] - dp[i, j - 1]);
+                }
+            }
+        }
+
+        return max;
+    }
+
+
+    public int MaxScore2(IList<IList<int>> grid)
+    {
+        var dp = new int[grid.Count, grid[0].Count];
+
+        for (var i = 0 ; i < grid.Count ; i++)
+        {
+            for (var j = 0 ; j < grid[i].Count ; j++)
+            {
+                dp[i, j] = grid[i][j];
+
+                if (i != 0)
+                {
+                    dp[i, j] = Math.Min(dp[i, j], dp[i - 1, j]);
+                }
+
+                if (j != 0)
+                {
+                    dp[i, j] = Math.Min(dp[i, j], dp[i, j - 1]);
+                }
+            }
+        }
+
+        var max = int.MinValue;
+
+        for (var i = 0 ; i < grid.Count ; i++)
+        {
+            for (var j = 0 ; j < grid[i].Count ; j++)
+            {
+                if (i != 0)
+                {
+                    max = Math.Max(max, grid[i][j] - dp[i - 1, j]);
+                }
+
+                if (j != 0)
+                {
+                    max = Math.Max(max, grid[i][j] - dp[i, j - 1]);
+                }
+            }
+        }
+
+
+        // 9 8 7
+        // 6 5 4
+        // 3 2 1
+
+
+        return max;
+    }
+
+    [Test]
+    public void METHOD()
+    {
+        int[][] test =
+        [
+            [9, 5, 7, 3], [8, 9, 6, 1], [6, 7, 14, 3], [2, 5, 3, 1]
+        ];
+        //9  5  5  3
+        //8  5  6  1
+        //6  6  6  1
+        //2  2  3  1
+
+
+        var res = MaxScore(test);
+
+        Console.WriteLine(res);
+    }
+}
