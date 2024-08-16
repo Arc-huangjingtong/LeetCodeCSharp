@@ -774,3 +774,38 @@ public class Solution_721
 }
 
 
+public class Solution_3132
+{
+    public int MinimumAddedInteger(int[] nums1, int[] nums2)
+    {
+        Array.Sort(nums1);
+        Array.Sort(nums2);
+        int m = nums1.Length, n = nums2.Length;
+        foreach (int i in new int[] { 2, 1, 0 })
+        {
+            int left = i + 1, right = 1;
+            while (left < m && right < n)
+            {
+                if (nums1[left] - nums2[right] == nums1[i] - nums2[0])
+                {
+                    ++right;
+                }
+
+                ++left;
+            }
+
+            if (right == n)
+            {
+                return nums2[0] - nums1[i];
+            }
+        }
+
+        // 本题不会有无解的情况
+        return 0;
+    }
+
+
+
+    //[ 4, 8,12,16,20]
+    //[      10,14,18]
+}
