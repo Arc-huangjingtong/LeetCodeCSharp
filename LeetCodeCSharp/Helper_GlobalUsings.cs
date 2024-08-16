@@ -13,3 +13,6 @@ global using System.Text.RegularExpressions;
 global using LeetCodeCSharp;
 /// BenchmarkDotNet
 global using BenchmarkDotNet.Attributes;
+/// Thread
+global using System.Diagnostics;
+global using System.Threading;

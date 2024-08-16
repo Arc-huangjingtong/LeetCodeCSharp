@@ -486,31 +486,3 @@ public class Solution_3130
         return res;
     }
 }
-
-
-public class Solution_1035
-{
-    public int MaxUncrossedLines(int[] nums1, int[] nums2)
-    {
-        int m  = nums1.Length, n = nums2.Length;
-        var dp = new int[m + 1, n + 1];
-        for (var i = 1 ; i <= m ; i++)
-        {
-            var num1 = nums1[i - 1];
-            for (var j = 1 ; j <= n ; j++)
-            {
-                var num2 = nums2[j - 1];
-                if (num1 == num2)
-                {
-                    dp[i, j] = dp[i - 1, j - 1] + 1;
-                }
-                else
-                {
-                    dp[i, j] = Math.Max(dp[i - 1, j], dp[i, j - 1]);
-                }
-            }
-        }
-
-        return dp[m, n];
-    }
-}

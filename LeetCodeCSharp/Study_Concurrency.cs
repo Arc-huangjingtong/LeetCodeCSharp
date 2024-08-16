@@ -1,6 +1,15 @@
 ﻿namespace LeetCodeCSharp;
+///////////////////////////////////////////////////// 多线程 ////////////////////////////////////////////////////////////
+/*
+ * 单线程是一个人做一件事,多线程是多个人做不同的事
+ * IDE的调试中,可以看出,代码的执行顺序是乱的,我们需要线程间的通信,来控制代码的执行顺序,这就是多线程问题的核心
+ * 还有一个问题就是如何避免死锁,死锁是指两个或两个以上的进程在执行过程中,因争夺资源而造成的一种互相等待的现象 见 1226. 哲学家进餐
+ *
+ * 人生也是如此,我们往往不能一心多用,但是却又很多事情同事进行,如何让它们有条理,这是我们需要解决的问题
+ *
+ *
+ */
 
-using System.Diagnostics;
 using System.Threading;
 
 
@@ -352,7 +361,7 @@ public class Solution_1114
 }
 
 
-/// 1115. 交替打印FooBar
+/// 1115. 交替打印 FooBar
 public class Solution_1115
 {
     /// 单线程做法
@@ -615,4 +624,345 @@ public class Solution_1116
     // 提示:
     //
     // 1 <= n <= 1000
+}
+
+
+/// 1117. H2O 生成
+public class Solution_1117
+{
+    public class H2O
+    {
+        private SemaphoreSlim Sp_H = new(2);
+        private SemaphoreSlim Sp_O = new(0);
+
+
+        public void Hydrogen(Action releaseHydrogen)
+        {
+            Sp_H.Wait();
+            releaseHydrogen();
+            if (Sp_H.CurrentCount == 0)
+            {
+                Sp_O.Release();
+            }
+        }
+
+        public void Oxygen(Action releaseOxygen)
+        {
+            Sp_O.Wait();
+            releaseOxygen();
+
+            // 如果这么写
+            // Sp_O.Wait();
+            // Sp_O.Wait();
+            // 如果只有两个线程那么,只有专门制作氧气的线程才能执行
+            // 如果有更多线程,很可能会被其中两个线程个占用一个Sp_O,导致卡死
+
+            Sp_H.Release(2);
+        }
+    }
+
+
+    // 试了蛮久才发现这个问题，写成题解记录一下
+    // 题目中提到的氢线程和氧线程是两 种 线程而不是两 个 线程，(应该是一个元素一个线程
+    // 所以同类型的氢线程和氧线程可能会有多个。由于C#的SemaphoreSlim并没有Java的acquire(n)类似的一次性减去多个信号量的方法(C#中的Wait(int32)是等待n毫秒后超时)
+
+    [Test]
+    public void METHOD()
+    {
+        var h2O = new H2O();
+
+        var thread1 = new Thread(() =>
+        {
+            for (int i = 0 ; i < 20 ; i++)
+            {
+                h2O.Hydrogen(() => Console.Write("H"));
+            }
+        });
+
+        var thread2 = new Thread(() =>
+        {
+            for (int i = 0 ; i < 10 ; i++)
+            {
+                h2O.Oxygen(() => Console.Write("O"));
+            }
+        });
+
+        thread1.Start();
+        thread2.Start();
+
+        thread1.Join();
+        thread2.Join();
+    }
+
+
+    // 现在有两种线程，氧 oxygen 和氢 hydrogen，你的目标是组织这两种线程来产生水分子。
+    //
+    // 存在一个屏障（barrier）使得每个线程必须等候直到一个完整水分子能够被产生出来。
+    //
+    // 氢和氧线程会被分别给予 releaseHydrogen 和 releaseOxygen 方法来允许它们突破屏障。
+    //
+    // 这些线程应该三三成组突破屏障并能立即组合产生一个水分子。
+    //
+    // 你必须保证产生一个水分子所需线程的结合必须发生在下一个水分子产生之前。
+    //
+    // 换句话说:
+    //
+    // 如果一个氧线程到达屏障时没有氢线程到达，它必须等候直到两个氢线程到达。
+    // 如果一个氢线程到达屏障时没有其它线程到达，它必须等候直到一个氧线程和另一个氢线程到达。
+    // 书写满足这些限制条件的氢、氧线程同步代码。
+    //
+    //
+    //
+    // 示例 1:
+    //
+    // 输入: water = "HOH"
+    // 输出: "HHO"
+    // 解释: "HOH" 和 "OHH" 依然都是有效解。
+    // 示例 2:
+    //
+    // 输入: water = "OOHHHH"
+    // 输出: "HHOHHO"
+    // 解释: "HOHHHO", "OHHHHO", "HHOHOH", "HOHHOH", "OHHHOH", "HHOOHH", "HOHOHH" 和 "OHHOHH" 依然都是有效解。
+    //
+    //
+    // 提示：
+    //
+    // 3 * n == water.length
+    // 1 <= n <= 20
+    // water[i] == 'O' or 'H'
+    // 输入字符串 water 中的 'H' 总数将会是 2 * n 。
+    // 输入字符串 water 中的 'O' 总数将会是 n 。
+}
+
+
+/// 1195. 交替打印字符串 等价于=> 1116. 打印零与奇偶数
+public class Solution_1195
+{
+    //using System.Threading;
+
+
+    public class FizzBuzz(int Count)
+    {
+        private readonly AutoResetEvent Event_Number   = new(false);
+        private readonly AutoResetEvent Event_Buzz     = new(false);
+        private readonly AutoResetEvent Event_Fizz     = new(false);
+        private readonly AutoResetEvent Event_FizzBuzz = new(false);
+
+        public void Fizz(Action printFizz)
+        {
+            for (var i = 3 ; i <= Count ; i += 3)
+            {
+                if (i % 5 == 0) continue;
+
+                Event_Fizz.WaitOne();
+                printFizz();
+                Event_Number.Set();
+            }
+        }
+
+        public void Buzz(Action printBuzz)
+        {
+            for (var i = 5 ; i <= Count ; i += 5)
+            {
+                if (i % 3 == 0) continue;
+
+                Event_Buzz.WaitOne();
+                printBuzz();
+                Event_Number.Set();
+            }
+        }
+
+        public void Fizzbuzz(Action printFizzBuzz)
+        {
+            for (var i = 15 ; i <= Count ; i += 15)
+            {
+                Event_FizzBuzz.WaitOne();
+                printFizzBuzz();
+                Event_Number.Set();
+            }
+        }
+
+
+        public void Number(Action<int> printNumber)
+        {
+            for (var i = 1 ; i <= Count ; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    Event_FizzBuzz.Set();
+                    Event_Number.WaitOne();
+                }
+                else if (i % 3 == 0)
+                {
+                    Event_Fizz.Set();
+                    Event_Number.WaitOne();
+                }
+                else if (i % 5 == 0)
+                {
+                    Event_Buzz.Set();
+                    Event_Number.WaitOne();
+                }
+                else
+                {
+                    printNumber(i);
+                }
+            }
+        }
+    }
+
+
+    // 编写一个可以从 1 到 n 输出代表这个数字的字符串的程序，但是：
+    //
+    // 如果这个数字可以被 3 整除，输出 "fizz"。
+    // 如果这个数字可以被 5 整除，输出 "buzz"。
+    // 如果这个数字可以同时被 3 和 5 整除，输出 "fizzbuzz"。
+    // 例如，当 n = 15，输出： 1, 2, fizz, 4, buzz, fizz, 7, 8, fizz, buzz, 11, fizz, 13, 14, fizzbuzz。
+    //
+    // 假设有这么一个类：
+    //
+    // class FizzBuzz
+    // {
+    //     public FizzBuzz(int n) { ... }              // constructor
+    //     public void fizz(printFizz)         { ... } // only output "fizz"
+    //     public void buzz(printBuzz)         { ... } // only output "buzz"
+    //     public void fizzbuzz(printFizzBuzz) { ... } // only output "fizzbuzz"
+    //     public void number(printNumber)     { ... } // only output the numbers
+    // }
+    //
+    // 请你实现一个有四个线程的多线程版  FizzBuzz， 同一个 FizzBuzz 实例会被如下四个线程使用：
+    //
+    // 线程A将调用 fizz() 来判断是否能被 3 整除，如果可以，则输出           fizz。
+    // 线程B将调用 buzz() 来判断是否能被 5 整除，如果可以，则输出           buzz。
+    // 线程C将调用 fizzbuzz() 来判断是否同时能被 3 和 5 整除，如果可以，则输出 fizzbuzz。
+    // 线程D将调用 number() 来实现输出既不能被 3 整除也不能被 5 整除的数字。
+    //
+    //
+    // 提示：
+    //
+    // 本题已经提供了打印字符串的相关方法，如 printFizz() 等，具体方法名请参考答题模板中的注释部分。
+}
+
+
+/// 1226. 哲学家进餐
+public class Solution_1226
+{
+    // 前面说过，该题的本质是考察如何避免死锁
+    // 而当5个哲学家都左手持有其左边的叉子 或 当5个哲学家都右手持有其右边的叉子时，会发生死锁
+    // 故只需设计1个避免发生上述情况发生的策略即可
+    // 即可以让一部分哲学家优先去获取其左边的叉子，再去获取其右边的叉子；再让剩余哲学家优先去获取其右边的叉子，再去获取其左边的叉子
+    // 或者只让四个哲学家吃,其他的等待即可
+
+
+    public class DiningPhilosophers
+    {
+        private readonly AutoResetEvent[] forks =
+        [
+            new(true)
+          , new(true)
+          , new(true)
+          , new(true)
+          , new(true)
+        ];
+
+        private readonly SemaphoreSlim semaphore = new(4);
+
+
+
+        public void WantsToEat(int philosopher, Action pickLeftFork, Action pickRightFork, Action eat, Action putLeftFork, Action putRightFork)
+        {
+            var leftEvent  = forks[philosopher];
+            var rightEvent = forks[(philosopher + 1) % 5];
+
+            semaphore.Wait();
+
+            leftEvent.WaitOne();
+            pickLeftFork();
+
+            rightEvent.WaitOne();
+            pickRightFork();
+
+            eat();
+
+            putRightFork();
+            rightEvent.Set();
+
+            putLeftFork();
+            leftEvent.Set();
+
+            semaphore.Release();
+        }
+
+
+
+        //private final Semaphore[] chopsList =
+        //{
+        //    new Semaphore(1),
+        //    new Semaphore(1),
+        //    new Semaphore(1),
+        //    new Semaphore(1),
+        //    new Semaphore(1),
+        //};
+        //
+        //private final Semaphore philosopherNums = new Semaphore(4);
+        //
+        //    
+        //public void wantsToEat(int      philosopher,
+        //                       Runnable pickLeftFork,
+        //                       Runnable pickRightFork,
+        //                       Runnable eat,
+        //                       Runnable putLeftFork,
+        //                       Runnable putRightFork) throws InterruptedException
+        // {
+        //     int leftIndex  = (philosopher + 1) % 5;
+        //     int rightIndex = philosopher;
+        //     philosopherNums.acquire();
+        //     chopsList[leftIndex].acquire();
+        //     chopsList[rightIndex].acquire();
+        //     pickLeftFork.run();
+        //     pickRightFork.run();
+        //     eat.run();
+        //     putLeftFork.run();
+        //     putRightFork.run();
+        //     chopsList[leftIndex].release();
+        //     chopsList[rightIndex].release();
+        //     philosopherNums.release();
+        // }
+        //
+    }
+
+
+    // 5 个沉默寡言的哲学家围坐在圆桌前，每人面前一盘意面。叉子放在哲学家之间的桌面上。（5 个哲学家，5 根叉子）
+    // 所有的哲学家都只会在思考和进餐两种行为间交替。
+    // 哲学家只有同时拿到左边和右边的叉子才能吃到面，而同一根叉子在同一时间只能被一个哲学家使用。
+    // 每个哲学家吃完面后都需要把叉子放回桌面以供其他哲学家吃面。
+    // 只要条件允许，哲学家可以拿起左边或者右边的叉子，但在没有同时拿到左右叉子时不能进食。
+    // 假设面的数量没有限制，哲学家也能随便吃，不需要考虑吃不吃得下。
+    // 设计一个进餐规则（并行算法）使得每个哲学家都不会挨饿；也就是说，在没有人知道别人什么时候想吃东西或思考的情况下，每个哲学家都可以在吃饭和思考之间一直交替下去。
+
+    //哲学家从 0 到 4 按 顺时针 编号。请实现函数 void wantsToEat(philosopher, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork)：
+    //
+    //philosopher  哲学家的编号。
+    //pickLeftFork 和 pickRightFork 表示拿起左边或右边的叉子。
+    //eat          表示吃面。
+    //putLeftFork  和 putRightFork 表示放下左边或右边的叉子。
+    //由于哲学家不是在吃面就是在想着啥时候吃面，所以思考这个方法没有对应的回调。
+    //给你 5 个线程，每个都代表一个哲学家，请你使用类的同一个对象来模拟这个过程。在最后一次调用结束之前，可能会为同一个哲学家多次调用该函数。
+    //
+    //示例：
+    //
+    //输入：n = 1
+    //输出：[[4,2,1],[4,1,1],[0,1,1],[2,2,1],[2,1,1],[2,0,3],[2,1,2],[2,2,2],[4,0,3],[4,1,2],[0,2,1],[4,2,2],[3,2,1],[3,1,1],[0,0,3],[0,1,2],[0,2,2],[1,2,1],[1,1,1],[3,0,3],[3,1,2],[3,2,2],[1,0,3],[1,1,2],[1,2,2]]
+    //解释:
+    //n 表示每个哲学家需要进餐的次数。
+    //输出数组描述了叉子的控制和进餐的调用，它的格式如下：
+    //output[i] = [a, b, c] (3个整数)
+    //- a 哲学家编号。
+    //- b 指定叉子：{1 : 左边, 2 : 右边}.
+    // - c 指定行为：{1 : 拿起, 2 : 放下, 3 : 吃面}。
+    // 如 [4,2,1] 表示 4 号哲学家拿起了右边的叉子。
+    //  
+    //
+    // 提示：
+    //
+    // 1 <= n <= 60
 }
