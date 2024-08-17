@@ -486,3 +486,24 @@ public class Solution_3130
         return res;
     }
 }
+
+
+public class Solution
+{
+    [TestCase("leetcodeleet", 4, ExpectedResult = 1)]
+    public int MinimumOperationsToMakeKPeriodic(string word, int k)
+    {
+        var dict = new Dictionary<string, int>();
+        var max  = 0;
+
+        for (int i = k ; i <= word.Length ; i+=k)
+        {
+            var sub = word[(i - k)..i];
+            dict.TryAdd(sub, 0);
+            dict[sub]++;
+            max = Math.Max(dict[sub], max);
+        }
+
+        return word.Length / k - max;
+    }
+}
