@@ -488,22 +488,42 @@ public class Solution_3130
 }
 
 
-public class Solution
+/// [太难了，未解决] 552. 学生出勤记录 II
+public class Solution_552
 {
-    [TestCase("leetcodeleet", 4, ExpectedResult = 1)]
-    public int MinimumOperationsToMakeKPeriodic(string word, int k)
+    private const           int     MOD  = 1_000_000_007;
+    private const           int     MX   = 100_001;
+    private static readonly int[,,] Memo = new int[MX, 2, 3];
+
+    public int CheckRecord(int n)
     {
-        var dict = new Dictionary<string, int>();
-        var max  = 0;
+        return Dfs(n, 0, 0);
 
-        for (int i = k ; i <= word.Length ; i+=k)
+        static int Dfs(int i, int j, int k)
         {
-            var sub = word[(i - k)..i];
-            dict.TryAdd(sub, 0);
-            dict[sub]++;
-            max = Math.Max(dict[sub], max);
-        }
+            if (i == 0)
+            {
+                return 1;
+            }
 
-        return word.Length / k - max;
+            if (Memo[i, j, k] > 0)
+            {
+                // 之前计算过
+                return Memo[i, j, k];
+            }
+
+            long res = Dfs(i - 1, j, 0);
+            if (j == 0)
+            {
+                res += Dfs(i - 1, 1, 0);
+            }
+
+            if (k < 2)
+            {
+                res += Dfs(i - 1, j, k + 1);
+            }
+
+            return Memo[i, j, k] = (int)(res % MOD);
+        }
     }
 }
