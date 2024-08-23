@@ -381,6 +381,9 @@ public class Solution_2438
 // 通过 前缀和+哈希表,我们就能发现,枚举子数组的右边界,维护子数组的左边界,是一个非常好的思路
 // 算法世界,就是一个不断优化的过程,不断优化的过程,就是不断的学习的过程
 
+// 提炼: 前缀和只是双变量问题的变体,核心思想任然是[ 枚举右，维护左 ]
+//      在[ 前缀和 + 哈希表 ]中, 前缀和一般用于当前最大子数组,哈希表用于统计各种操作
+
 
 /// <summary> 930. 和相同的二元子数组 </summary>
 public class Solution_930
@@ -440,4 +443,172 @@ public class Solution_930
     // 1 <= nums.length <= 3 * 10^4
     // nums[i] 不是 0 就是 1
     // 0 <= goal <= nums.length
+}
+
+
+/// <summary> 1524. 和为奇数的子数组数目 算术评级: 5 第 31 场双周赛Q2 </summary>
+public class Solution_1524
+{
+    // 难点:子数组的奇偶性统计,会随着遍历的递进发生逆转
+    [TestCase(new[] { 1, 3, 5 },             ExpectedResult = 4)]
+    [TestCase(new[] { 2, 4, 6 },             ExpectedResult = 0)]
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6, 7 }, ExpectedResult = 16)]
+    [TestCase(new[] { 100, 100, 99, 99 },    ExpectedResult = 4)]
+    public int NumOfSubarrays(int[] arr)
+    {
+        const int mod     = 1000000007;
+        long      counter = 0L;
+        var       odd     = 0; //奇数
+        var       even    = 0; //偶数
+
+        for (int i = 0, len = arr.Length ; i < len ; i++)
+        {
+            var isOdd = arr[i] % 2 == 1;
+            counter += (isOdd ? even : odd);
+            counter += isOdd ? 1 : 0;
+
+            if (isOdd)
+            {
+                var temp = odd;
+                odd  = even + 1;
+                even = temp;
+            }
+            else
+            {
+                even++;
+            }
+        }
+
+        return (int)(counter % mod);
+    }
+
+    // 官解 : 这个 sum有点像是一个falg,因为它变化是有规律的(且本题中单项不会超过100,所以不会溢出),只有两个状态,维护一个综合即可
+    // 实际sum的意思是目前为止的最大数组,然后减去之前存的子数组的统计,相减即可
+    public int NumOfSubarrays2(int[] arr)
+    {
+        const int MODULO = 1000000007;
+        int       odd    = 0, even = 1;
+        int       res    = 0;
+        int       sum    = 0;
+        for (int i = 0, len = arr.Length ; i < len ; i++)
+        {
+            sum += arr[i];
+            res =  (res + (sum % 2 == 0 ? odd : even)) % MODULO;
+            if (sum % 2 == 0)
+            {
+                even++;
+            }
+            else
+            {
+                odd++;
+            }
+        }
+
+        return res;
+    }
+
+    // 奇偶表 : 奇偶相同则为偶,奇偶不同则为奇(加减乘都是这个规律)(正负都可)
+
+    // 给你一个整数数组 arr , 请你返回和为 奇数 的子数组数目
+    //
+    // 由于答案可能会很大，请你将结果对 10^9 + 7 取余后返回
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：arr = [1,3,5]
+    // 输出：4
+    // 解释：所有的子数组为 [[1],[1,3],[1,3,5],[3],[3,5],[5]] 。
+    // 所有子数组的和为 [1,4,9,3,8,5].
+    // 奇数和包括 [1,9,3,5] ，所以答案为 4 。
+    // 示例 2 ：
+    //
+    // 输入：arr = [2,4,6]
+    // 输出：0
+    // 解释：所有子数组为 [[2],[2,4],[2,4,6],[4],[4,6],[6]] 。
+    // 所有子数组和为 [2,6,12,4,10,6] 。
+    // 所有子数组和都是偶数，所以答案为 0 。
+    // 示例 3：
+    //
+    // 输入：arr = [1,2,3,4,5,6,7]
+    // 输出：16
+    // 示例 4：
+    //
+    // 输入：arr = [100,100,99,99]
+    // 输出：4
+    // 示例 5：
+    //
+    // 输入：arr = [7]
+    // 输出：1
+    //
+    //
+    // 提示：
+    //
+    // 1 <= arr.length <= 10^5
+    // 1 <= arr[i] <= 100
+}
+
+
+/// <summary> 974. 和可被 K 整除的子数组 算术评级: 5 第 119 场周赛Q3 </summary>
+public class Solution_974
+{
+    // 前缀和+哈希表标准模板题
+    [TestCase(new[] { 4, 5, 0, -2, -3, 1 }, 5, ExpectedResult = 7)]
+    [TestCase(new[] { 5 },                  9, ExpectedResult = 0)]
+    public int SubarraysDivByK(int[] nums, int k)
+    {
+        // 1. 申明累计和
+        var sum = 0;
+
+        // 2. 申明结果
+        var res = 0;
+
+        // 3. 申明用于统计之前子数组中的对k的余数的数量
+        Span<int> dict = stackalloc int[k];
+
+        // 4. 初始化,表示当前索引本身的情况,处理边界
+        dict[0] = 1;
+
+        // 5. 正常遍历数组
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            // 6. 计算前缀和
+            sum += nums[i];
+
+            // 7. 进行指定操作
+            var mod = (sum % k + k) % k;
+
+            // 7.1. 找到指令操作和哈希表之间的联系,进行计数操作,用于迭代结果
+            res += dict[mod];
+
+            // 8. 统计指令操作的数量
+            dict[mod]++;
+        }
+
+        return res;
+    }
+
+    // 给定一个整数数组 nums 和一个整数 k ，返回其中元素之和可被 k 整除的非空 子数组 的数目。
+    //
+    // 子数组 是数组中 连续 的部分。
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [4,5,0,-2,-3,1], k = 5
+    // 输出：7
+    // 解释：
+    // 有 7 个子数组满足其元素之和可被 k = 5 整除：
+    // [4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+    // 示例 2:
+    //
+    // 输入: nums = [5], k = 9
+    // 输出: 0
+    //
+    //
+    // 提示:
+    //
+    // 1 <= nums.length <= 3 * 10^4
+    // -10^4 <= nums[i] <= 10^4
+    // 2 <= k <= 10^4
 }
