@@ -457,7 +457,7 @@ public class Solution_1524
     public int NumOfSubarrays(int[] arr)
     {
         const int mod     = 1000000007;
-        long      counter = 0L;
+        var       counter = 0L;
         var       odd     = 0; //奇数
         var       even    = 0; //偶数
 
@@ -488,8 +488,8 @@ public class Solution_1524
     {
         const int MODULO = 1000000007;
         int       odd    = 0, even = 1;
-        int       res    = 0;
-        int       sum    = 0;
+        var       res    = 0;
+        var       sum    = 0;
         for (int i = 0, len = arr.Length ; i < len ; i++)
         {
             sum += arr[i];
@@ -611,4 +611,103 @@ public class Solution_974
     // 1 <= nums.length <= 3 * 10^4
     // -10^4 <= nums[i] <= 10^4
     // 2 <= k <= 10^4
+}
+
+
+/// <summary> 523. 连续的子数组和 算术评级: 5 中等 </summary>
+public class Solution_523
+{
+    // 这题虽然是模板提,但是难度在于判断边界情况,根据定义,子数组至少为2,且 0 也是倍数,这个就很恶心
+    [TestCase(new[] { 23, 2, 4, 6, 7 },            6,  ExpectedResult = true)]
+    [TestCase(new[] { 23, 2, 6, 4, 7 },            6,  ExpectedResult = true)]
+    [TestCase(new[] { 23, 2, 6, 4, 7 },            13, ExpectedResult = false)]
+    [TestCase(new[] { 0, 0 },                      1,  ExpectedResult = true)]
+    [TestCase(new[] { 1, 2, 12 },                  6,  ExpectedResult = false)]
+    [TestCase(new[] { 1, 2, 3 },                   5,  ExpectedResult = true)]
+    [TestCase(new[] { 0, 1, 0, 3, 0, 4, 0, 4, 0 }, 5,  ExpectedResult = false)] //[0,1,0,3,0,4,0,4,0]
+    [TestCase(new[] { 23, 2, 4, 6, 6 },            7,  ExpectedResult = true)]  //[23,2,4,6,6]
+    public bool CheckSubarraySum(int[] nums, int k)
+    {
+        if (nums.Length < 2) return false;
+
+        var dict = new Dictionary<int, bool> { { 0, true } };
+
+        var sum = nums[0];
+
+        for (int i = 1, len = nums.Length ; i < len ; i++)
+        {
+            sum += nums[i];
+
+            dict.TryAdd((sum + k) % k, false);
+
+            if (sum >= k && dict[(sum + k) % k]) return true;
+
+            if (nums[i] + nums[i - 1] == 0) return true;
+
+            dict.TryAdd((sum - nums[i] - nums[i - 1]) % k, false);
+
+            dict[(sum - nums[i] - nums[i - 1]) % k] = true;
+        }
+
+        Console.WriteLine(sum);
+
+        return dict[(sum + k) % k];
+    }
+
+    public bool CheckSubarraySum2(int[] nums, int k)
+    {
+        if (nums.Length < 2) return false;
+
+        var dictionary = new Dictionary<int, int> { { 0, -1 } };
+
+        var remainder = 0;
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            remainder = (remainder + nums[i]) % k;
+            if (!dictionary.TryAdd(remainder, i))
+            {
+                var prevIndex = dictionary[remainder];
+                if (i - prevIndex >= 2)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+
+    // 给你一个整数数组 nums 和一个整数 k ，如果 nums 有一个 好的子数组 返回 true ，否则返回 false：
+    //
+    // 一个 好的子数组 是：
+    // 1. 子数组长度 至少为 2
+    // 2. 子数组元素总和为 k 的倍数 (如果存在一个整数 n ，令整数  x 符合 x = n * k ，则称 x 是 k 的一个倍数。0 始终 视为 k 的一个倍数。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [23,2,4,6,7], k = 6
+    // 输出：true
+    // 解释：[2,4] 是一个大小为 2 的子数组，并且和为 6 。
+    // 示例 2：
+    //
+    // 输入：nums = [23,2,6,4,7], k = 6
+    // 输出：true
+    // 解释：[23, 2, 6, 4, 7] 是大小为 5 的子数组，并且和为 42 。 
+    // 42 是 6 的倍数，因为 42 = 7 * 6 且 7 是一个整数。
+    // 示例 3：
+    //
+    // 输入：nums = [23,2,6,4,7], k = 13
+    // 输出：false
+    //
+    //
+    // 提示：
+    //
+    // 1 <= nums.length <= 105
+    // 0 <= nums[i] <= 109
+    // 0 <= sum(nums[i]) <= 2^31 - 1
+    // 1 <= k <= 2^31 - 1
 }
