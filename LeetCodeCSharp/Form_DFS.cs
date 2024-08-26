@@ -32,3 +32,41 @@ public class Solution_572
 }
 
 
+/// <summary> 690. 员工的重要性 </summary>
+public class Solution_690
+{
+    // Definition for Employee.
+    public class Employee
+    {
+        public int        id;
+        public int        importance;
+        public IList<int> subordinates;
+    }
+
+
+    // DFS 标准模板
+    public int GetImportance(IList<Employee> employees, int id)
+    {
+        var dict = new Dictionary<int, Employee>();
+
+        foreach (var employee in employees)
+        {
+            dict[employee.id] = employee;
+        }
+
+        return DFS(id);
+
+        int DFS(int id)
+        {
+            var employee = dict[id];
+            var sum      = employee.importance;
+
+            foreach (var subordinate in employee.subordinates)
+            {
+                sum += DFS(subordinate);
+            }
+
+            return sum;
+        }
+    }
+}
