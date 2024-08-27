@@ -1,5 +1,7 @@
 ﻿namespace LeetCodeCSharp;
 
+// 提炼 : 找到一种按顺序枚举子数组的高效方法,即维护左,枚举右,这样可以在O(n)的时间复杂度内解决问题
+//       本质上是一种贪心,这种有顺序的枚举,可以在过程中进行一些统计,方便解决问题
 /****************************************************  基本前缀和  ******************************************************/
 // 前缀和
 // 特征点: 
@@ -872,4 +874,49 @@ public class Solution_2588
     //
     // 1 <= nums.length <= 10^5
     // 0 <= nums[i] <= 10^6
+}
+
+
+/// <summary> 525. 连续数组 算术评级: 5 </summary>
+public class Solution_525
+{
+    [TestCase(new[] { 0, 1, 0 }, ExpectedResult = 2)]
+    public int FindMaxLength(int[] nums)
+    {
+        var dict = new Dictionary<int, int> { { 0, 0 } };
+
+        var balance = 0;
+        var res     = 0;
+
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            balance += nums[i] == 0 ? -1 : 1; // -1 , 0 , -1 
+
+            res = Math.Max(res, i + 1 - dict.GetValueOrDefault(balance, int.MaxValue));
+
+            dict.TryAdd(balance, int.MaxValue);
+            dict[balance] = Math.Min(dict[balance], i + 1);
+        }
+
+        return res;
+    }
+
+    // 给定一个二进制数组 nums , 找到含有相同数量的 0 和 1 的最长连续子数组，并返回该子数组的长度。
+    //
+    // 示例 1:
+    //
+    // 输入: nums = [0,1]
+    // 输出: 2
+    // 说明: [0, 1] 是具有相同数量 0 和 1 的最长连续子数组。
+    // 示例 2:
+    //
+    // 输入: nums = [0,1,0]
+    // 输出: 2
+    // 说明: [0, 1] (或 [1, 0]) 是具有相同数量0和1的最长连续子数组。
+    //
+    //
+    // 提示：
+    //
+    // 1 <= nums.length <= 10^5
+    // nums[i] 不是 0 就是 1
 }

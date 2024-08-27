@@ -809,3 +809,52 @@ public class Solution_3132
     //[ 4, 8,12,16,20]
     //[      10,14,18]
 }
+
+
+[MemoryDiagnoser]
+public class Solution_Temp
+{
+    public int Sum_Foreach(int[] numbers)
+    {
+        var sum = 0;
+
+        foreach (var number in numbers)
+        {
+            sum += number;
+        }
+
+        return sum;
+    }
+
+
+    public int Sum_For(int[] numbers)
+    {
+        var sum = 0;
+
+        for (int i = 0, len = numbers.Length ; i < len ; i++)
+        {
+            sum += numbers[i];
+        }
+
+        return sum;
+    }
+
+
+    [Benchmark]
+    public void METHOD_Sum_Foreach()
+    {
+        var numbers = Enumerable.Range(0, 100000).ToArray();
+        var sum     = Sum_Foreach(numbers);
+
+        //Console.WriteLine(sum);
+    }
+
+    [Benchmark]
+    public void METHOD_Sum_For()
+    {
+        var numbers = Enumerable.Range(0, 100000).ToArray();
+        var sum     = Sum_For(numbers);
+
+        //Console.WriteLine(sum);
+    }
+}
