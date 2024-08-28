@@ -920,3 +920,86 @@ public class Solution_525
     // 1 <= nums.length <= 10^5
     // nums[i] 不是 0 就是 1
 }
+
+
+/// <summary> 3026. 最大好子数组和 算术评级: 6 第 123 场双周赛Q3 1817 </summary>
+public class Solution_3026
+{
+    [TestCase(new[] { 1, 2, 3, 4, 5, 6 }, 1, ExpectedResult = 11)]
+    [TestCase(new[] { -1, 3, 2, 4, 5 },   3, ExpectedResult = 11)]
+    [TestCase(new[] { -1, -2, -3, -4 },   2, ExpectedResult = -6)]
+    public long MaximumSubarraySum(int[] nums, int k)
+    {
+        // key:指定的元素值,value:到这个元素值的和
+        var dict = new Dictionary<long, long>();
+        var ans  = long.MinValue;
+        var sum  = 0L;
+
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            // [1, 2, 3, 4, 5, 6], k = 1
+
+            dict.TryAdd(nums[i], long.MaxValue);
+
+            dict[nums[i]] = Math.Min(dict[nums[i]], sum);
+
+            sum += nums[i];
+
+            if (dict.TryGetValue(nums[i] - k, out var value))
+            {
+                ans = Math.Max(ans, sum - value);
+            }
+
+            if (dict.TryGetValue(nums[i] + k, out value))
+            {
+                ans = Math.Max(ans, sum - value);
+            }
+
+
+            // num - x = k
+            //
+            // num > x && x == num - k || num < x && x == num + k
+        }
+
+
+        return ans == long.MinValue ? 0 : ans;
+    }
+
+    //  ABS(a-b) = k
+    //=> a-b = k || b-a = k
+
+    // a > b && b = a - k || a < b && b = a + k
+
+
+    // 给你一个长度为 n 的数组 nums 和一个 正 整数 k 。
+    // 
+    // 如果 nums 的一个子数组中，第一个元素和最后一个元素差的绝对值恰好为k ，我们称这个子数组为 好 的
+    // 换句话说，如果子数组 nums[i..j] 满足 |nums[i] - nums[j]| == k ，那么它是一个好子数组。
+    //
+    // 请你返回 nums 中 好 子数组的 最大 和，如果没有好子数组，返回 0 。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [1,2,3,4,5,6], k = 1
+    // 输出：11
+    // 解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 1 。好子数组有 [1,2] ，[2,3] ，[3,4] ，[4,5] 和 [5,6] 。最大子数组和为 11 ，对应的子数组为 [5,6] 。
+    // 示例 2：
+    //
+    // 输入：nums = [-1,3,2,4,5], k = 3
+    // 输出：11
+    // 解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 3 。好子数组有 [-1,3,2] 和 [2,4,5] 。最大子数组和为 11 ，对应的子数组为 [2,4,5] 。
+    // 示例 3：
+    //
+    // 输入：nums = [-1,-2,-3,-4], k = 2
+    // 输出：-6
+    // 解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 2 。好子数组有 [-1,-2,-3] 和 [-2,-3,-4] 。最大子数组和为 -6 ，对应的子数组为 [-1,-2,-3] 。
+    //
+    //
+    // 提示：
+    //
+    // 2 <= nums.length <= 10^5
+    // -10^9 <= nums[i] <= 10^9
+    // 1 <= k <= 10^9
+}
