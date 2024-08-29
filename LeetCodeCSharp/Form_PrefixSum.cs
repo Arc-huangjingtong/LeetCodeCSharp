@@ -1003,3 +1003,35 @@ public class Solution_3026
     // -10^9 <= nums[i] <= 10^9
     // 1 <= k <= 10^9
 }
+
+
+/// <summary> 3144. 分割字符频率相等的最少子字符串 </summary>
+public class Solution
+{
+    const int INF = 0x3F3F3F3F;
+
+    public int MinimumSubstringsInPartition(string str)
+    {
+        int   len = str.Length;
+        int[] d   = new int[len + 1];
+        Array.Fill(d, INF);
+        d[0] = 0;
+        for (int i = 1 ; i <= len ; i++)
+        {
+            var occCnt = new Dictionary<char, int>();
+            int maxCnt = 0;
+            for (int j = i ; j >= 1 ; j--)
+            {
+                occCnt.TryAdd(str[j - 1], 0);
+                occCnt[str[j - 1]]++;
+                maxCnt = Math.Max(maxCnt, occCnt[str[j - 1]]);
+                if (maxCnt * occCnt.Count == (i - j + 1) && d[j - 1] != INF)
+                {
+                    d[i] = Math.Min(d[i], d[j - 1] + 1);
+                }
+            }
+        }
+
+        return d[len];
+    }
+}
