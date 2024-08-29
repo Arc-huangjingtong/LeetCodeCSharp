@@ -1003,3 +1003,157 @@ public class Solution_3026
     // -10^9 <= nums[i] <= 10^9
     // 1 <= k <= 10^9
 }
+
+
+//[投了] 1850的题确实难
+/// <summary> 1477. 找两个和为目标值且不重叠的子数组 算术评级: 6第 28 场双周赛Q3 1851 </summary>
+public class Solution_1477
+{
+    [TestCase(new[] { 3, 2, 2, 4, 3 },                   3, ExpectedResult = 2)]
+    [TestCase(new[] { 7, 3, 4, 7 },                      7, ExpectedResult = 2)]
+    [TestCase(new[] { 4, 3, 2, 6, 2, 3, 4 },             6, ExpectedResult = -1)] // 只有一个是不行的
+    [TestCase(new[] { 5, 5, 4, 4, 5 },                   3, ExpectedResult = -1)] // 一个都没有的情况
+    [TestCase(new[] { 1, 2, 2, 3, 2, 6, 7, 2, 1, 4, 8 }, 5, ExpectedResult = 4)]
+    public int MinSumOfLengths(int[] arr, int target)
+    {
+        // 1. key : 前缀和 value : 数组右区间
+        var dict = new Dictionary<int, int> { { 0, 0 } };
+        var ress = new List<(int, int)>();
+
+        // 2. 申明结果
+        var sum = 0;
+
+        // 3. [3,2,2,4,3], target = 3
+        for (int i = 0, len = arr.Length ; i < len ; i++)
+        {
+            sum += arr[i];
+
+            dict.TryAdd(sum, i + 1);
+            dict[sum] = i + 1;
+
+            if (dict.TryGetValue(sum - target, out var value))
+            {
+                ress.Add((value, i));
+            }
+        }
+
+        if (ress.Count <= 1) return -1;
+
+
+        var res = int.MaxValue;
+
+        for (int i = 0, len = ress.Count ; i < len ; i++)
+        {
+            var (left1, right1) = ress[i];
+
+            for (int j = i + 1 ; j < len ; j++)
+            {
+                var (left2, right2) = ress[j];
+
+                if (left1 > right2 || left2 > right1)
+                {
+                    res = Math.Min(res, right1 - left1 + right2 - left2 + 2);
+                }
+            }
+        }
+
+
+        return res == int.MaxValue ? -1 : res;
+    }
+
+
+    // [1,2,2,3,2,6,7,2,1,4,8]  target = 5
+    // 
+
+    // 给你一个整数数组 arr 和一个整数值 target
+    //
+    // 请你在 arr 中找 两个互不重叠的子数组 且它们的和都等于 target 。可能会有多种方案，请你返回满足要求的两个子数组长度和的 最小值
+    //
+    // 请返回满足要求的最小长度和，如果无法找到这样的两个子数组，请返回 -1
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：arr = [3,2,2,4,3], target = 3
+    // 输出：2
+    // 解释：只有两个子数组和为 3 （[3] 和 [3]）。它们的长度和为 2 。
+    // 示例 2：
+    //
+    // 输入：arr = [7,3,4,7], target = 7
+    // 输出：2
+    // 解释：尽管我们有 3 个互不重叠的子数组和为 7 （[7], [3,4] 和 [7]），但我们会选择第一个和第三个子数组，因为它们的长度和 2 是最小值。
+    // 示例 3：
+    //
+    // 输入：arr = [4,3,2,6,2,3,4], target = 6
+    // 输出：-1
+    // 解释：我们只有一个和为 6 的子数组。
+    // 示例 4：
+    //
+    // 输入：arr = [5,5,4,4,5], target = 3
+    // 输出：-1
+    // 解释：我们无法找到和为 3 的子数组。
+    // 示例 5：
+    //
+    // 输入：arr = [3,1,1,1,5,1,2,1], target = 3
+    // 输出：3
+    // 解释：注意子数组 [1,2] 和 [2,1] 不能成为一个方案因为它们重叠了。
+    //
+    //
+    // 提示：
+    //
+    // 1 <= arr.length <= 10^5
+    // 1 <= arr[i] <= 1000
+    // 1 <= target <= 10^8
+
+    //测试样例不够充分，刚刚测过一个能AC的代码，但是结果是错误的：
+    // [1 ,2 ,1 ,3, 1]
+    // 4 
+    //
+    // 预期5，但是输出-1，仍然能过。
+    //
+    // 该样例特殊性：
+    // 子数组有： [1,2,1] [1,3][3,1]，排序之后是 [1,3] [3,1] [1,2,1] 
+    // 很多判断 [1,3] [3,1] 重合，[1,3] [1,2,1]也重合，结果返回-1，
+    // 而实际结果应为5。 [3,1] 与 [1,2,1]
+
+
+    // 双指针写法
+    [TestCase(new[] { 3, 2, 2, 4, 3 },       3, ExpectedResult = 2)]
+    [TestCase(new[] { 7, 3, 4, 7 },          7, ExpectedResult = 2)]
+    [TestCase(new[] { 4, 3, 2, 6, 2, 3, 4 }, 6, ExpectedResult = -1)] // 只有一个是不行的
+    [TestCase(new[] { 5, 5, 4, 4, 5 },       3, ExpectedResult = -1)] // 一个都没有的情况
+    public int MinSumOfLengths2(int[] arr, int target)
+    {
+        int sum = 0, minSumOfLens = int.MaxValue;
+
+        Span<int> dp = stackalloc int[arr.Length + 1];
+
+        // dp[i]表示区间[0,i)之间最短的和为target的子数组，先初始化为一个较大的数表示不存在。因为会做加法运算，不能初始化为INT_MAX
+        dp[0] = arr.Length + 1;
+
+        for (int right = 0, left = 0, length = arr.Length ; right < length ; ++right)
+        {
+            sum += arr[right]; //累计前缀和
+
+            while (sum > target)
+            {
+                sum -= arr[left++];
+            }
+
+            if (sum == target)
+            {
+                int len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
+
+                minSumOfLens = Math.Min(minSumOfLens, len + dp[left]); // 如果有解，我们遍历了所有的第二个子数组，同时加上它前面长度最短的第一个子数组就是答案
+
+                dp[right + 1] = Math.Min(dp[right], len); // 更新dp，取长度更小的一个
+            }
+            else
+            {
+                dp[right + 1] = dp[right]; // 不是一个和为target的子数组，dp[i]保持不变
+            }
+        }
+
+        return minSumOfLens > arr.Length ? -1 : minSumOfLens; // 大于size说明没有找到两个不重叠的子数组
+    }
+}
