@@ -54,7 +54,6 @@ public class Note_Optimize
 }
 
 
-
 // Node：
 // 1.当参数范围很小的时候,可以考虑使用暴力枚举
 
@@ -66,3 +65,16 @@ public class Note_Optimize
 // # 什么是子数组不重叠?
 // - 即两个区间的交集为空,区间一般特指双闭区间
 // - 区间的值是更具数组的最左边和最右边的[索引]决定的
+
+
+public class Note_Temp
+{
+    [TestCase(3)]
+    public void METHOD(int input)
+    {
+        var sum = 1       + 2 + 3 + 4;
+        var res = sum / 2 + input;
+
+        Console.WriteLine(res);
+    }
+}

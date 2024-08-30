@@ -1157,3 +1157,157 @@ public class Solution_1477
         return minSumOfLens > arr.Length ? -1 : minSumOfLens; // 大于size说明没有找到两个不重叠的子数组
     }
 }
+
+
+/***************************************************  距离和  **********************************************************/
+
+
+///<summary> 1685. 有序数组中差绝对值之和 算术评级: 6 第 41 场双周赛Q2-1496 </summary>
+public class Solution_1685
+{
+    //其实可以再优化,但是感觉没必要了
+
+    [TestCase(new[] { 2, 3, 5 }, ExpectedResult = new[] { 4, 3, 5 })]
+    public int[] GetSumAbsoluteDifferences(int[] nums)
+    {
+        var result = new int[nums.Length];
+
+        for (int i = 0, len = nums.Length, sum = 0 ; i < len ; i++)
+        {
+            result[i] =  (2 * i - (len - 1)) * nums[i] - sum;
+            sum       += nums[i];
+        }
+
+        for (int i = nums.Length - 1, sum = 0 ; i >= 0 ; i--)
+        {
+            result[i] += sum;
+            sum       += nums[i];
+        }
+
+        return result;
+    }
+
+    // [a1,a2,a3,a4,a5,a6]  a1 >= a2 >= a3 >= a4
+    // 
+    // r3 = a3-a1 + a3-a2 + || + a4-a3 + a5-a3 + a6-a3
+    // r3 = 左 + 右 ;
+    // 左 : (3-1)a3 - (a1+a2)    => (Index)*an - (a1+...+a(n-1))
+    // 右 : (a4+a5+a6)-(6-3)a3   => (a(n+1)+...+a(Len-1)) - (Len-Index-1)*an
+    // 左+右 = (Index)*an - (a1+...+a(n-1)) + (a(n+1)+...+a(Len-1)) - (Len-Index-1)*an
+    //      = (2Index - (len - 1)) * an + (a(n+1)+...+a(Len-1)) - (a1+...+a(n-1))
+    //    0,1,2
+    //   [2,3,5]
+    //res[4,3,5] 
+    //  len = 3
+    //   r1 = -2*2+3+5 = 4
+    //   r2 = -2*1+5 = 3
+    //
+
+
+    // 给你一个 非递减 有序整数数组 nums
+    // 请你建立并返回一个整数数组 result，它跟 nums 长度相同，
+    // 且result[i] 等于 nums[i] 与数组中所有其他元素差的绝对值之和
+    //
+    // 换句话说， result[i] 等于 sum(|nums[i]-nums[j]|) ，其中 0 <= j < nums.length 且 j != i （下标从 0 开始）。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [2,3,5]
+    // 输出：[4,3,5] 
+    // sum = 10
+    // 10-2*3 = 4
+    //
+    // 解释：假设数组下标从 0 开始，那么
+    //     result[0] = |2-2| + |2-3| + |2-5| = 0 + 1 + 3 = 4，
+    // result[1] = |3-2| + |3-3| + |3-5| = 1 + 0 + 2 = 3，
+    // result[2] = |5-2| + |5-3| + |5-5| = 3 + 2 + 0 = 5。
+    // 示例 2：
+    //
+    // 输入：nums = [1,4,6,8,10]
+    // 输出：[24,15,13,15,21]
+    //
+    //
+    // 提示：
+    //
+    // 2 <= nums.length <= 10^5
+    // 1 <= nums[i] <= nums[i + 1] <= 10^4
+}
+
+
+/****************************************************  其他  ***********************************************************/
+
+
+///<summary> 3153. 所有数对中数位不同之和 算术评级: 5 第 398 场周赛Q3-1645 </summary>
+public class Solution_3153
+{
+    [TestCase(new[] { 13, 23, 12 },     ExpectedResult = 4)]
+    [TestCase(new[] { 10, 10, 10, 10 }, ExpectedResult = 0)]
+    public long SumDigitDifferences(int[] nums)
+    {
+        var  digNum = nums[0].ToString().Length;
+        var  dict   = new int[digNum, 10];
+        long result = digNum * nums.Length * (nums.Length - 1) / 2;
+
+        foreach (var num in nums)
+        {
+            var str = num.ToString();
+            for (var i = 0 ; i < digNum ; i++)
+            {
+                var key = str[i] - '0';
+                dict[i, key]++;
+
+                if (dict[i, key] >= 2)
+                {
+                    result -= dict[i, key] - 1;
+                }
+            }
+        }
+
+
+        return result;
+    }
+
+    // 
+    //
+    // 你有一个数组 nums ，它只包含 正 整数，所有正整数的数位长度都 相同 。
+    //
+    // 两个整数的 数位不同 指的是两个整数 相同 位置上不同数字的数目。
+    //
+    // 请你返回 nums 中 所有 整数对里，数位不同之和。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [13,23,12]
+    // 1 2 1 = 2
+    // 3 3 2 = 2
+    //
+    // 输出：4
+    //
+    // 解释：
+    // 计算过程如下：
+    // - 13 和 23 的数位不同为 1 。
+    // - 13 和 12 的数位不同为 1 。
+    // - 23 和 12 的数位不同为 2 。
+    // 所以所有整数数对的数位不同之和为 1 + 1 + 2 = 4 。
+    //
+    // 示例 2：
+    //
+    // 输入：nums = [10,10,10,10]
+    //
+    // 输出：0
+    //
+    // 解释：
+    // 数组中所有整数都相同，所以所有整数数对的数位不同之和为 0 。
+    //
+    //
+    //
+    // 提示：
+    //
+    // 2 <= nums.length <= 10^5
+    // 1 <= nums[i] < 10^9
+    // nums 中的整数都有相同的数位长度
+}
