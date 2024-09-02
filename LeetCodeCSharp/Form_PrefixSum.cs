@@ -1046,7 +1046,7 @@ public class Solution_1477
         {
             var (left1, right1) = ress[i];
 
-            for (int j = i + 1 ; j < len ; j++)
+            for (var j = i + 1 ; j < len ; j++)
             {
                 var (left2, right2) = ress[j];
 
@@ -1142,7 +1142,7 @@ public class Solution_1477
 
             if (sum == target)
             {
-                int len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
+                var len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
 
                 minSumOfLens = Math.Min(minSumOfLens, len + dp[left]); // 如果有解，我们遍历了所有的第二个子数组，同时加上它前面长度最短的第一个子数组就是答案
 
@@ -1256,7 +1256,7 @@ public class Solution_2615
 
         dict.Clear();
 
-        for (int i = nums.Length - 1 ; i >= 0 ; i--)
+        for (var i = nums.Length - 1 ; i >= 0 ; i--)
         {
             dict.TryAdd(nums[i], (0, 0));
             dict[nums[i]] =  (dict[nums[i]].Item1 + 1, dict[nums[i]].Item2 + i);
@@ -1298,6 +1298,103 @@ public class Solution_2615
     //
     // 1 <= nums.length <= 105
     // 0 <= nums[i] <= 109
+}
+
+
+/***************************************************  异或和  **********************************************************/
+// 异或和核心公式：xor[a..b] = xor[0..a-1] ^ xor[0..b] 
+// 推导原理 : a^b^b = a 且 连续异或具有交换律,他是无序的
+
+
+///<summary> 1310. 子数组异或查询 算术评级: 4 第 170 场周赛Q2-1460 </summary>
+public class Solution_1310
+{
+    public int[] XorQueries(int[] arr, int[][] queries)
+    {
+        var result = new int[queries.Length];
+        var xor    = new int[arr.Length];
+
+        xor[0] = arr[0];
+
+        for (int i = 1, len = arr.Length ; i < len ; i++)
+        {
+            xor[i] = xor[i - 1] ^ arr[i];
+        }
+
+        for (int i = 0, len = queries.Length ; i < len ; i++)
+        {
+            result[i] = queries[i][0] == 0 ? xor[queries[i][1]] : xor[queries[i][1]] ^ xor[queries[i][0] - 1];
+        }
+
+        return result;
+    }
+
+
+    public class PrefixXor
+    {
+        public static int[] ComputePrefixXor(int[] arr)
+        {
+            var   n         = arr.Length;
+            var prefixXor = new int[n];
+            prefixXor[0] = arr[0];
+            for (var i = 1 ; i < n ; i++)
+            {
+                prefixXor[i] = prefixXor[i - 1] ^ arr[i];
+            }
+
+            return prefixXor;
+        }
+
+        public static int QueryXor(int[] prefixXor, int L, int R)
+        {
+            if (L == 0)
+            {
+                return prefixXor[R];
+            }
+
+            return prefixXor[R] ^ prefixXor[L - 1];
+        }
+    }
+
+
+    // 有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] = [Li, Ri]
+    //
+    // 对于每个查询 i，请你计算从 Li 到 Ri 的 XOR 值（即 arr[Li] xor arr[Li+1] xor ... xor arr[Ri]）作为本次查询的结果。
+    //
+    // 并返回一个包含给定查询 queries 所有结果的数组
+    // Xor : 异或
+    // 异或运算是一个二进制运算，用符号XOR或者^表示，其运算法则是对运算符两侧数的每一个二进制位，同值取0，异值取1。
+    // 10011 -- 10011
+    // 10101 -- 00110
+    // 10110 -- 00010
+    // 示例 1：
+    //
+    // 输入：arr = [1,3,4,8], queries = [[0,1],[1,2],[0,3],[3,3]]
+    // 输出：[2,7,14,8] 
+    // 解释：
+    // 数组中元素的二进制表示形式是：
+    // 1 = 0001 
+    // 3 = 0011 
+    // 4 = 0100 
+    // 8 = 1000 
+    // 查询的 XOR 值为：
+    // [0,1] = 1 xor 3 = 2 
+    // [1,2] = 3 xor 4 = 7 
+    // [0,3] = 1 xor 3 xor 4 xor 8 = 14 
+    // [3,3] = 8
+    // 示例 2：
+    //
+    // 输入：arr = [4,8,2,10], queries = [[2,3],[1,3],[0,0],[0,3]]
+    // 输出：[8,0,4,4]
+    //
+    //
+    // 提示：
+    //
+    // 1 <= arr.length <= 3 * 10^4
+    // 1 <= arr[i] <= 10^9
+    // 1 <= queries.length <= 3 * 10^4
+    // queries[i].length == 2
+    // 0 <= queries[i][0] <= queries[i][1] < arr.length
 }
 
 

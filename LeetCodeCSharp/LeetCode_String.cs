@@ -592,9 +592,9 @@
         [Test]
         public void Test()
         {
-            float f  = 0.4f;
-            float f2 = 0.40000002f;
-            float f3 = 0.4f + 0.00000002f;
+            var f  = 0.4f;
+            var f2 = 0.40000002f;
+            var f3 = 0.4f + 0.00000002f;
             
             Console.WriteLine(f2);
             Console.WriteLine(f3);
