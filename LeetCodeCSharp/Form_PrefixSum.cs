@@ -1162,6 +1162,7 @@ public class Solution_1477
 /***************************************************  距离和  **********************************************************/
 // 距离和一般指的是两个数之间的距离和,这个距离和可以是绝对值,也可以是平方和,也可以是其他的,特征是需要能有条理的统计距离的正负
 // 注意：这类题目一般都比较大，尤其是对本身坐标相乘的时候，尽量使用long，防止溢出
+// 写法上，一般需要两次遍历，第一次遍历是统计左边的距离和，第二次遍历是统计右边的距禿和，然后再进行计算
 
 
 ///<summary> 1685. 有序数组中差绝对值之和 算术评级: 6 第 41 场双周赛Q2-1496 </summary>
@@ -1298,6 +1299,90 @@ public class Solution_2615
     //
     // 1 <= nums.length <= 105
     // 0 <= nums[i] <= 109
+}
+
+
+///<summary> 2602. 使数组元素全部相等的最少操作次数 算术评级: 6第 338 场周赛Q3-1903 </summary> 
+public class Solution_2602
+{
+    [TestCase(new[] { 3, 1, 6, 8 }, new[] { 1, 5 }, ExpectedResult = new long[] { 14, 10 })]
+    public IList<long> MinOperations(int[] nums, int[] queries)
+    {
+        Array.Sort(nums); // 1 3 6 8
+
+        var res = new long[queries.Length];
+
+        Span<long> suf1 = stackalloc long[nums.Length + 1]; // 0  1  4  10 18
+        Span<long> suf2 = stackalloc long[nums.Length + 1]; // 18 17 14 8  0
+
+        long sum1 = 0L, sum2 = 0L;
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            sum1 += nums[i];
+            sum2 += nums[len - i - 1];
+            suf1[i           + 1]     = sum1;
+            suf2[len         - i - 1] = sum2;
+        }
+
+        for (int i = 0, len = queries.Length ; i < len ; i++)
+        {
+            var query = queries[i];
+            var index = Array.BinarySearch(nums, query);
+
+            if (index < 0)
+            {
+                index = (~index);
+            }
+
+            // 0  ~ an   : n*an - sum【0..n】
+            // an ~ len  : sum【an..len】 - (len-n)*an
+
+            res[i] = (2L * index - nums.Length) * 1L * query + suf2[index] - suf1[index];
+        }
+
+
+        return res;
+    }
+
+    // 给你一个正整数数组 nums
+    //
+    // 同时给你一个长度为 m 的整数数组 queries 。第 i 个查询中，你需要将 nums 中所有元素变成 queries[i] 。你可以执行以下操作 任意 次：
+    //
+    // 将数组里一个元素  增大 或者 减小 1 。
+    // 请你返回一个长度为 m 的数组 answer ，其中 answer[i]是将 nums 中所有元素变成 queries[i] 的 最少 操作次数。
+    //
+    // 注意，每次查询后，数组变回最开始的值。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [3,1,6,8], queries = [1,5]
+    // 输出：[14,10]
+    // 解释：第一个查询，我们可以执行以下操作：
+    // - 将 nums[0] 减小 2 次，nums = [1,1,6,8] 。
+    // - 将 nums[2] 减小 5 次，nums = [1,1,1,8] 。
+    // - 将 nums[3] 减小 7 次，nums = [1,1,1,1] 。
+    // 第一个查询的总操作次数为 2 + 5 + 7 = 14 。
+    // 第二个查询，我们可以执行以下操作：
+    // - 将 nums[0] 增大 2 次，nums = [5,1,6,8] 。
+    // - 将 nums[1] 增大 4 次，nums = [5,5,6,8] 。
+    // - 将 nums[2] 减小 1 次，nums = [5,5,5,8] 。
+    // - 将 nums[3] 减小 3 次，nums = [5,5,5,5] 。
+    // 第二个查询的总操作次数为 2 + 4 + 1 + 3 = 10 。
+    // 示例 2：
+    //
+    // 输入：nums = [2,9,6,3], queries = [10]
+    // 输出：[20]
+    // 解释：我们可以将数组中所有元素都增大到 10 ，总操作次数为 8 + 1 + 4 + 7 = 20 。
+    //
+    //
+    // 提示：
+    //
+    // n == nums.length
+    //     m == queries.length
+    // 1 <= n, m <= 10^5
+    // 1 <= nums[i], queries[i] <= 10^9
 }
 
 
