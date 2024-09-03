@@ -7,7 +7,7 @@ public class Solution_3133
     public long MinEnd(int n, int x)
     {
         long res = x;
-        for (int i = 1 ; i < n ; i++)
+        for (var i = 1 ; i < n ; i++)
         {
             res = (uint)x | (res + 1);
         }

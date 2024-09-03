@@ -781,7 +781,7 @@ public class Solution_3132
         Array.Sort(nums1);
         Array.Sort(nums2);
         int m = nums1.Length, n = nums2.Length;
-        foreach (int i in new int[] { 2, 1, 0 })
+        foreach (var i in new int[] { 2, 1, 0 })
         {
             int left = i + 1, right = 1;
             while (left < m && right < n)

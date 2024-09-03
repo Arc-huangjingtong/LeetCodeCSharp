@@ -1257,7 +1257,7 @@ public class Solution_2615
 
         dict.Clear();
 
-        for (int i = nums.Length - 1 ; i >= 0 ; i--)
+        for (var i = nums.Length - 1 ; i >= 0 ; i--)
         {
             dict.TryAdd(nums[i], (0, 0));
             dict[nums[i]] =  (dict[nums[i]].Item1 + 1, dict[nums[i]].Item2 + i);
@@ -1302,87 +1302,175 @@ public class Solution_2615
 }
 
 
-///<summary> 2602. 使数组元素全部相等的最少操作次数 算术评级: 6第 338 场周赛Q3-1903 </summary> 
-public class Solution_2602
+/***************************************************  异或和  **********************************************************/
+// 异或和核心公式：xor[a..b] = xor[0..a-1] ^ xor[0..b] 
+// 推导原理 : a^b^b = a 且 连续异或具有交换律,他是无序的
+
+
+///<summary> 1310. 子数组异或查询 算术评级: 4 第 170 场周赛Q2-1460 </summary>
+public class Solution_1310
 {
-    [TestCase(new[] { 3, 1, 6, 8 }, new[] { 1, 5 }, ExpectedResult = new long[] { 14, 10 })]
-    public IList<long> MinOperations(int[] nums, int[] queries)
+    public int[] XorQueries(int[] arr, int[][] queries)
     {
-        Array.Sort(nums); // 1 3 6 8
+        var result = new int[queries.Length];
+        var xor    = new int[arr.Length];
 
-        var res = new long[queries.Length];
+        xor[0] = arr[0];
 
-        Span<long> suf1 = stackalloc long[nums.Length + 1]; // 0  1  4  10 18
-        Span<long> suf2 = stackalloc long[nums.Length + 1]; // 18 17 14 8  0
-
-        long sum1 = 0L, sum2 = 0L;
-        for (int i = 0, len = nums.Length ; i < len ; i++)
+        for (int i = 1, len = arr.Length ; i < len ; i++)
         {
-            sum1 += nums[i];
-            sum2 += nums[len - i - 1];
-            suf1[i           + 1]     = sum1;
-            suf2[len         - i - 1] = sum2;
+            xor[i] = xor[i - 1] ^ arr[i];
         }
 
         for (int i = 0, len = queries.Length ; i < len ; i++)
         {
-            var query = queries[i];
-            var index = Array.BinarySearch(nums, query);
+            result[i] = queries[i][0] == 0 ? xor[queries[i][1]] : xor[queries[i][1]] ^ xor[queries[i][0] - 1];
+        }
 
-            if (index < 0)
+        return result;
+    }
+
+
+    public class PrefixXor
+    {
+        public static int[] ComputePrefixXor(int[] arr)
+        {
+            var n         = arr.Length;
+            var prefixXor = new int[n];
+            prefixXor[0] = arr[0];
+            for (var i = 1 ; i < n ; i++)
             {
-                index = (~index);
+                prefixXor[i] = prefixXor[i - 1] ^ arr[i];
             }
 
-            // 0  ~ an   : n*an - sum【0..n】
-            // an ~ len  : sum【an..len】 - (len-n)*an
+            return prefixXor;
+        }
 
-            res[i] = (2L * index - nums.Length) * 1L * query + suf2[index] - suf1[index];
+        public static int QueryXor(int[] prefixXor, int L, int R)
+        {
+            if (L == 0)
+            {
+                return prefixXor[R];
+            }
+
+            return prefixXor[R] ^ prefixXor[L - 1];
+        }
+    }
+
+
+    // 有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] = [Li, Ri]
+    //
+    // 对于每个查询 i，请你计算从 Li 到 Ri 的 XOR 值（即 arr[Li] xor arr[Li+1] xor ... xor arr[Ri]）作为本次查询的结果。
+    //
+    // 并返回一个包含给定查询 queries 所有结果的数组
+    // Xor : 异或
+    // 异或运算是一个二进制运算，用符号XOR或者^表示，其运算法则是对运算符两侧数的每一个二进制位，同值取0，异值取1。
+    // 10011 -- 10011
+    // 10101 -- 00110
+    // 10110 -- 00010
+    // 示例 1：
+    //
+    // 输入：arr = [1,3,4,8], queries = [[0,1],[1,2],[0,3],[3,3]]
+    // 输出：[2,7,14,8] 
+    // 解释：
+    // 数组中元素的二进制表示形式是：
+    // 1 = 0001 
+    // 3 = 0011 
+    // 4 = 0100 
+    // 8 = 1000 
+    // 查询的 XOR 值为：
+    // [0,1] = 1 xor 3 = 2 
+    // [1,2] = 3 xor 4 = 7 
+    // [0,3] = 1 xor 3 xor 4 xor 8 = 14 
+    // [3,3] = 8
+    // 示例 2：
+    //
+    // 输入：arr = [4,8,2,10], queries = [[2,3],[1,3],[0,0],[0,3]]
+    // 输出：[8,0,4,4]
+    //
+    //
+    // 提示：
+    //
+    // 1 <= arr.length <= 3 * 10^4
+    // 1 <= arr[i] <= 10^9
+    // 1 <= queries.length <= 3 * 10^4
+    // queries[i].length == 2
+    // 0 <= queries[i][0] <= queries[i][1] < arr.length
+}
+
+
+/// <summary> 1177. 构建回文串检测 算术评级: 4 第 152 场周赛Q3-1848 </summary>
+public class Solution_1177
+{
+    public IList<bool> CanMakePaliQueries(string str, int[][] queries)
+    {
+        var res = new bool[queries.Length];
+        var bit = 0;
+        var xor = new int[str.Length];
+
+        xor[0] = 1 << (str[0] - 'a');
+
+        for (int i = 1, len = str.Length ; i < len ; i++)
+        {
+            xor[i] = xor[i - 1] ^ (1 << (str[i] - 'a'));
+        }
+
+        foreach (var entry in queries)
+        {
+            var left  = entry[0];
+            var right = entry[1];
+            var k     = entry[2];
+
+            var xorLR = left == 0 ? xor[right] : xor[right] ^ xor[left - 1];
+
+            var oneCount = 0;
+
+            for (int i = 0 ; i < 26 ; i++)
+            {
+                if ((xorLR & (1 << i)) != 0)
+                {
+                    oneCount++;
+                }
+            }
+
+            res[bit++] = oneCount / 2 <= k;
         }
 
 
         return res;
     }
 
-    // 给你一个正整数数组 nums
+    // 
+    // 给你一个字符串 s，请你对 s 的子串进行检测。
     //
-    // 同时给你一个长度为 m 的整数数组 queries 。第 i 个查询中，你需要将 nums 中所有元素变成 queries[i] 。你可以执行以下操作 任意 次：
+    // 每次检测，待检子串都可以表示为 queries[i] = [left, right, k]。
+    // 我们可以 重新排列 子串 s[left], ..., s[right]，并从中选择 最多 k 项替换成任何小写英文字母
+    // 如果在上述检测过程中，子串可以变成回文形式的字符串，那么检测结果为 true，否则结果为 false。
     //
-    // 将数组里一个元素  增大 或者 减小 1 。
-    // 请你返回一个长度为 m 的数组 answer ，其中 answer[i]是将 nums 中所有元素变成 queries[i] 的 最少 操作次数。
+    // 返回答案数组 answer[]，其中 answer[i] 是第 i 个待检子串 queries[i] 的检测结果。
     //
-    // 注意，每次查询后，数组变回最开始的值。
-    //
+    // 注意：在替换时，子串中的每个字母都必须作为 独立的 项进行计数，也就是说，如果 s[left..right] = "aaa" 且 k = 2，我们只能替换其中的两个字母。（另外，任何检测都不会修改原始字符串 s，可以认为每次检测都是独立的）
     //
     //
-    // 示例 1：
     //
-    // 输入：nums = [3,1,6,8], queries = [1,5]
-    // 输出：[14,10]
-    // 解释：第一个查询，我们可以执行以下操作：
-    // - 将 nums[0] 减小 2 次，nums = [1,1,6,8] 。
-    // - 将 nums[2] 减小 5 次，nums = [1,1,1,8] 。
-    // - 将 nums[3] 减小 7 次，nums = [1,1,1,1] 。
-    // 第一个查询的总操作次数为 2 + 5 + 7 = 14 。
-    // 第二个查询，我们可以执行以下操作：
-    // - 将 nums[0] 增大 2 次，nums = [5,1,6,8] 。
-    // - 将 nums[1] 增大 4 次，nums = [5,5,6,8] 。
-    // - 将 nums[2] 减小 1 次，nums = [5,5,5,8] 。
-    // - 将 nums[3] 减小 3 次，nums = [5,5,5,5] 。
-    // 第二个查询的总操作次数为 2 + 4 + 1 + 3 = 10 。
-    // 示例 2：
+    // 示例：
     //
-    // 输入：nums = [2,9,6,3], queries = [10]
-    // 输出：[20]
-    // 解释：我们可以将数组中所有元素都增大到 10 ，总操作次数为 8 + 1 + 4 + 7 = 20 。
+    // 输入：s = "abcda", queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]
+    // 输出：[true,false,false,true,true]
+    // 解释：
+    // queries[0] : 子串 = "d"，回文。
+    // queries[1] : 子串 = "bc"，不是回文。
+    // queries[2] : 子串 = "abcd"，只替换 1 个字符是变不成回文串的。
+    // queries[3] : 子串 = "abcd"，可以变成回文的 "abba"。 也可以变成 "baab"，先重新排序变成 "bacd"，然后把 "cd" 替换为 "ab"。
+    // queries[4] : 子串 = "abcda"，可以变成回文的 "abcba"。
     //
     //
     // 提示：
     //
-    // n == nums.length
-    //     m == queries.length
-    // 1 <= n, m <= 10^5
-    // 1 <= nums[i], queries[i] <= 10^9
+    // 1 <= s.length, queries.length <= 10^5
+    // 0 <= queries[i][0] <= queries[i][1] < s.length
+    // 0 <= queries[i][2] <= s.length
+    //     s 中只有小写英文字母
 }
 
 

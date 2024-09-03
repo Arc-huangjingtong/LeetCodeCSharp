@@ -552,7 +552,7 @@ public class Solution_1116
 
         public void Odd(Action<int> printNumber)
         {
-            for (int i = 1 ; i <= Count ; i += 2)
+            for (var i = 1 ; i <= Count ; i += 2)
             {
                 Event_Odd.WaitOne();
                 printNumber(i);
@@ -673,7 +673,7 @@ public class Solution_1117
 
         var thread1 = new Thread(() =>
         {
-            for (int i = 0 ; i < 20 ; i++)
+            for (var i = 0 ; i < 20 ; i++)
             {
                 h2O.Hydrogen(() => Console.Write("H"));
             }
@@ -681,7 +681,7 @@ public class Solution_1117
 
         var thread2 = new Thread(() =>
         {
-            for (int i = 0 ; i < 10 ; i++)
+            for (var i = 0 ; i < 10 ; i++)
             {
                 h2O.Oxygen(() => Console.Write("O"));
             }
