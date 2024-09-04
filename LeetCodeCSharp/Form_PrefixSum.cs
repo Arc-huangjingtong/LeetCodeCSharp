@@ -1548,3 +1548,190 @@ public class Solution_3153
     // 1 <= nums[i] < 10^9
     // nums 中的整数都有相同的数位长度
 }
+
+
+///<summary> 1895. 最大的幻方 算术评级: 5 第54场双周赛 Q3-1781 </summary>
+public class Solution_1895
+{
+    public int LargestMagicSquare(int[][] grid)
+    {
+        int m = grid.Length, n = grid[0].Length;
+
+        var rowsum = new int[m, n]; // 每一行的前缀和
+        var colsum = new int[m, n]; // 每一列的前缀和
+
+        for (int i = 0 ; i < m ; ++i)
+        {
+            rowsum[i, 0] = grid[i][0];
+
+            for (int j = 1 ; j < n ; ++j)
+            {
+                rowsum[i, j] = rowsum[i, j - 1] + grid[i][j];
+            }
+        }
+
+        for (int j = 0 ; j < n ; ++j)
+        {
+            colsum[0, j] = grid[0][j];
+
+            for (int i = 1 ; i < m ; ++i)
+            {
+                colsum[i, j] = colsum[i - 1, j] + grid[i][j];
+            }
+        }
+
+        // 从大到小枚举边长 edge
+        for (int edge = Math.Min(m, n) ; edge >= 2 ; --edge)
+        {
+            // 枚举正方形的左上角位置 (i,j)
+            for (int i = 0 ; i + edge <= m ; ++i)
+            {
+                for (int j = 0 ; j + edge <= n ; ++j)
+                {
+                    // 计算每一行、列、对角线的值应该是多少（以第一行为样本）
+                    int  stdsum = rowsum[i, j + edge - 1] - (j != 0 ? rowsum[i, j - 1] : 0);
+                    bool check  = true;
+                    // 枚举每一行并用前缀和直接求和
+                    // 由于我们已经拿第一行作为样本了，这里可以跳过第一行
+                    for (int ii = i + 1 ; ii < i + edge ; ++ii)
+                    {
+                        if (rowsum[ii, j + edge - 1] - (j != 0 ? rowsum[ii, j - 1] : 0) != stdsum)
+                        {
+                            check = false;
+                            break;
+                        }
+                    }
+
+                    if (!check)
+                    {
+                        continue;
+                    }
+
+                    // 枚举每一列并用前缀和直接求和
+                    for (int jj = j ; jj < j + edge ; ++jj)
+                    {
+                        if (colsum[i + edge - 1, jj] - (i != 0 ? colsum[i - 1, jj] : 0) != stdsum)
+                        {
+                            check = false;
+                            break;
+                        }
+                    }
+
+                    if (!check)
+                    {
+                        continue;
+                    }
+
+                    // d1 和 d2 分别表示两条对角线的和
+                    // 这里 d 表示 diagonal
+                    int d1 = 0, d2 = 0;
+                    // 不使用前缀和，直接遍历求和
+                    for (int k = 0 ; k < edge ; ++k)
+                    {
+                        d1 += grid[i + k][j        + k];
+                        d2 += grid[i + k][j + edge - 1 - k];
+                    }
+
+                    if (d1 == stdsum && d2 == stdsum)
+                    {
+                        return edge;
+                    }
+                }
+            }
+        }
+
+        return 1;
+    }
+
+    // 一个 k x k 的 幻方 指的是一个 k x k 填满整数的方格阵，且每一行、每一列以及两条对角线的和 全部相等 。
+    // 幻方中的整数 不需要互不相同 。显然，每个 1 x 1 的方格都是一个幻方。
+    //
+    // 给你一个 m x n 的整数矩阵 grid ，请你返回矩阵中 最大幻方 的 尺寸 （即边长 k）。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    //
+    // 输入：grid =  [7,1,4,5,6]             
+    //              [2,5,1,6,4]     5  1  6
+    //              [1,5,4,3,2]     5  4  3
+    //              [1,2,7,3,4]     2  7  3        
+    // 输出：3
+    // 解释：最大幻方尺寸为 3 。
+    // 每一行，每一列以及两条对角线的和都等于 12 。
+    // - 每一行的和：5+1+6 = 5+4+3 = 2+7+3 = 12
+    // - 每一列的和：5+5+2 = 1+4+7 = 6+3+3 = 12
+    // - 对角线的和：5+4+3 = 6+4+2 = 12
+    // 示例 2：
+    //
+    //
+    // 输入：grid = [[5,1,3,1],[9,3,3,1],[1,3,3,8]]
+    // 输出：2
+    //
+    //
+    // 提示：
+    //
+    // m,n == grid.length
+    // 1 <= m, n <= 50
+    // 1 <= grid[i][j] <= 10^6
+}
+
+
+///<summary> 2860. 让所有学生保持开心的分组方法数 算术评级: 4 第 363 场周赛Q2-1626 </summary>
+public class Solution_2860
+{
+    public int CountWays(IList<int> nums)
+    {
+        nums = nums.OrderBy(x => x).ToList();
+
+        var ans = nums[0] > 0 ? 1 : 0; // 一个学生都不选
+
+        for (var i = 1 ; i < nums.Count ; i++)
+        {
+            if (nums[i - 1] < i && i < nums[i])
+            {
+                ans++;
+            }
+        }
+
+        return ans + 1; // 一定可以都选
+    }
+
+
+
+    // 给你一个下标从 0 开始、长度为 n 的整数数组 nums ，其中 n 是班级中学生的总数。班主任希望能够在让所有学生保持开心的情况下选出一组学生：
+    //
+    // 如果能够满足下述两个条件之一，则认为第 i 位学生将会保持开心：
+    //
+    // 这位学生被选中，并且被选中的学生人数   严格大于 nums[i] 。
+    // 这位学生没有被选中，并且被选中的学生人数 严格小于 nums[i] 。
+    // 返回能够满足让所有学生保持开心的分组方法的数目。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [1,1]
+    // 输出：2
+    // 解释：
+    // 有两种可行的方法：
+    // 班主任没有选中学生。
+    // 班主任选中所有学生形成一组。 
+    // 如果班主任仅选中一个学生来完成分组，那么两个学生都无法保持开心。因此，仅存在两种可行的方法。
+    // 示例 2：
+    //
+    // 输入：nums = [6,0,3,3,6,7,2,7] => Sort: [0,2,3,3,6,6,7,7]
+    // 输出：3
+    // 解释：
+    // 存在三种可行的方法：
+    // 班主任选中下标为 1 的学生形成一组。          [0]
+    // 班主任选中下标为 1、2、3、6 的学生形成一组。  [0,2,3,3]
+    // 班主任选中所有学生形成一组。                [0,2,3,3,6,6,7,7]
+    //
+    //
+    // 提示：
+    //
+    // 1 <= nums.length <= 10^5
+    // 0 <= nums[i] < nums.length
+}
