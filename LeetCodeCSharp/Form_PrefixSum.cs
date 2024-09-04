@@ -1046,7 +1046,7 @@ public class Solution_1477
         {
             var (left1, right1) = ress[i];
 
-            for (var j = i + 1 ; j < len ; j++)
+            for (int j = i + 1 ; j < len ; j++)
             {
                 var (left2, right2) = ress[j];
 
@@ -1142,7 +1142,7 @@ public class Solution_1477
 
             if (sum == target)
             {
-                var len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
+                int len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
 
                 minSumOfLens = Math.Min(minSumOfLens, len + dp[left]); // 如果有解，我们遍历了所有的第二个子数组，同时加上它前面长度最短的第一个子数组就是答案
 
@@ -1162,6 +1162,7 @@ public class Solution_1477
 /***************************************************  距离和  **********************************************************/
 // 距离和一般指的是两个数之间的距离和,这个距离和可以是绝对值,也可以是平方和,也可以是其他的,特征是需要能有条理的统计距离的正负
 // 注意：这类题目一般都比较大，尤其是对本身坐标相乘的时候，尽量使用long，防止溢出
+// 写法上，一般需要两次遍历，第一次遍历是统计左边的距离和，第二次遍历是统计右边的距禿和，然后再进行计算
 
 
 ///<summary> 1685. 有序数组中差绝对值之和 算术评级: 6 第 41 场双周赛Q2-1496 </summary>
