@@ -1474,6 +1474,150 @@ public class Solution_1177
 }
 
 
+/*************************************************  二维前缀和  *********************************************************/
+// 核心公式 :
+// 前缀和生成 : prefixSum[i][j] = prefixSum[i-1][j] + prefixSum[i][j-1] - prefixSum[i-1][j-1] + matrix[i][j]
+// 区域和计算 : sumRegion(row1, col1, row2, col2) = prefixSum[row2][col2] - prefixSum[row1-1][col2] - prefixSum[row2][col1-1] + prefixSum[row1-1][col1-1]
+// 评价 : 有意思的几何知识
+
+
+/// <summary>[标准模板] 304. 二维区域和检索 - 矩阵不可变 算术评级: 5 中等 </summary>
+public class Solution_304
+{
+    public class NumMatrix
+    {
+        int[,] prefixSum;
+
+        public NumMatrix(int[][] matrix)
+        {
+            var row = matrix.Length;
+            var col = matrix[0].Length;
+
+            prefixSum = new int[row + 1, col + 1]; //扩大是为了防止计算[0,0]的时候越界
+
+            for (int i = 1 ; i <= row ; i++)
+            {
+                for (int j = 1 ; j <= col ; j++)
+                {
+                    prefixSum[i, j] = prefixSum[i - 1, j] + prefixSum[i, j - 1] - prefixSum[i - 1, j - 1] + matrix[i - 1][j - 1];
+                }
+            }
+        }
+
+        public int SumRegion(int row1, int col1, int row2, int col2)
+        {
+            //此时如果row1=0或者col1=0，会越界，所以需要特殊处理
+            return prefixSum[row2 + 1, col2 + 1] - prefixSum[row1, col2 + 1] - prefixSum[row2 + 1, col1] + prefixSum[row1, col1];
+        }
+    }
+
+
+    // 给定一个二维矩阵 matrix，以下类型的多个请求：
+    //
+    // 计算其子矩形范围内元素的总和，该子矩阵的 左上角 为 (row1, col1) ，右下角 为 (row2, col2) 。
+    // 实现                   NumMatrix 类：
+    //
+    // NumMatrix(int[][] matrix) 给定整数矩阵                                                                       matrix 进行初始化
+    // int sumRegion(int row1, int col1, int row2, int col2) 返回 左上角 (row1, col1) 、右下角 (row2, col2) 所描述的子矩阵的元素 总和 。
+    //  
+    //
+    // 示例 1：
+    //
+    //
+    //
+    // 输入: 
+    // ["NumMatrix","sumRegion","sumRegion","sumRegion"]
+    // [[[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]],[2,1,4,3],[1,1,2,2],[1,2,2,4]]
+    // 输出: 
+    // [null, 8, 11, 12]
+    //
+    // 解释:
+    // NumMatrix numMatrix = new NumMatrix([[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]);
+    // numMatrix.sumRegion(2, 1, 4, 3); // return 8 (红色矩形框的元素总和)
+    // numMatrix.sumRegion(1, 1, 2, 2); // return 11 (绿色矩形框的元素总和)
+    // numMatrix.sumRegion(1, 2, 2, 4); // return 12 (蓝色矩形框的元素总和)
+
+
+    /**
+     * Your NumMatrix object will be instantiated and called as such:
+     * NumMatrix obj = new NumMatrix(matrix);
+     * int param_1 = obj.SumRegion(row1,col1,row2,col2);
+     */
+}
+
+
+/// <summary>[模板] 1314. 矩阵区域和 算术评级: 5 第 17 场双周赛Q2-1484 </summary>
+public class Solution_1314
+{
+    public int[][] MatrixBlockSum(int[][] mat, int k)
+    {
+        var prefixSum = new int[mat.Length + 1, mat[0].Length + 1];
+
+        for (int i = 1 ; i <= mat.Length ; i++)
+        {
+            for (int j = 1 ; j <= mat[0].Length ; j++)
+            {
+                prefixSum[i, j] = prefixSum[i - 1, j] + prefixSum[i, j - 1] - prefixSum[i - 1, j - 1] + mat[i - 1][j - 1];
+            }
+        }
+
+        var result = new int[mat.Length][];
+
+        for (int i = 0 ; i < mat.Length ; i++)
+        {
+            result[i] = new int[mat[0].Length];
+
+            for (int j = 0 ; j < mat[0].Length ; j++)
+            {
+                int row1 = Math.Max(0, i          - k);
+                int col1 = Math.Max(0, j          - k);
+                int row2 = Math.Min(mat.Length    - 1, i + k);
+                int col2 = Math.Min(mat[0].Length - 1, j + k);
+
+                // 之前+1了,所以这里也要+1
+                result[i][j] = prefixSum[row2 + 1, col2 + 1] - prefixSum[row1, col2 + 1] - prefixSum[row2 + 1, col1] + prefixSum[row1, col1];
+            }
+        }
+
+        return result;
+    }
+
+
+
+    // 给你一个 m x n 的矩阵 mat 和一个整数 k ，请你返回一个矩阵 answer ，其中每个 answer[i][j] 是所有满足下述条件的元素 mat[r][c] 的和： 
+    //
+    // i - k <= r <= i + k, 
+    // j - k <= c <= j + k
+    // 且 (r, c) 在矩阵内。
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：mat = [
+    //             [1,2,3],
+    //             [4,5,6],
+    //             [7,8,9]
+    //            ], k = 1
+    // 输出：[
+    //       [12,21,16]
+    //      ,[27,45,33]
+    //      ,[24,39,28]
+    //      ]
+    // 示例 2：
+    //
+    // 输入：mat = [[1,2,3],[4,5,6],[7,8,9]], k = 2
+    // 输出：[[45,45,45],[45,45,45],[45,45,45]]
+    //
+    //
+    // 提示：
+    //
+    // m == mat.length
+    //     n == mat[i].length
+    // 1 <= m, n, k <= 100
+    // 1 <= mat[i][j] <= 100
+}
+
+
 /****************************************************  其他  ***********************************************************/
 
 

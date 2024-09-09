@@ -1,5 +1,80 @@
 ﻿namespace LeetCodeCSharp;
 
+/// <summary> 3176. 求出最长好子序列 I  算术评级: 6 第 132 场双周赛Q3-1849 </summary>
+/// <remarks> 3177. 求出最长好子序列 II 算术评级: 9 第 132 场双周赛Q4-2365 </remarks>
+public class Solution_3176
+{
+    public int MaximumLength(int[] nums, int k)
+    {
+        var       dp = new Dictionary<int, int[]>();
+        Span<int> zd = stackalloc int[k + 1];
+
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            var v = nums[i];
+            dp.TryAdd(v, new int[1 + k]);
+
+            var tmp = dp[v];
+            for (var j = 0 ; j <= k ; j++)
+            {
+                tmp[j]++;
+                if (j > 0)
+                {
+                    tmp[j] = Math.Max(tmp[j], zd[j - 1] + 1);
+                }
+            }
+
+            for (var j = 0 ; j <= k ; j++)
+            {
+                zd[j] = Math.Max(zd[j], tmp[j]);
+            }
+        }
+
+        return zd[k];
+    }
+
+
+    // 给你一个整数数组 nums 和一个 非负 整数 k 。
+    // 如果一个整数序列 seq 满足在下标范围 [0, seq.length - 2] 中
+    // 最多只有 k 个下标 i 满足 seq[i] != seq[i + 1] ，那么我们称这个整数序列为 好 序列。
+    //
+    // 请你返回 nums 中 好子序列的最长长度。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [1,2,1,1,3], k = 2
+    //
+    // 输出：4
+    //
+    // 解释：
+    //
+    // 最长好子序列为 [*1,*2,*1,*1,3] 。
+    //
+    // 示例 2：
+    //
+    // 输入：nums = [1,2,3,4,5,1], k = 0
+    //
+    // 输出：2
+    //
+    // 解释：
+    //
+    // 最长好子序列为 [*1,2,3,4,5,*1] 。
+    //
+    //
+    //
+    // 提示：
+    // 1 <= nums.length <= 500
+    // 1 <= nums[i] <= 109
+    // 0 <= k <= min(nums.length, 25)
+    // 提示：
+    // 1 <= nums.length <= 5 * 103
+    // 1 <= nums[i] <= 109
+    // 0 <= k <= min(50, nums.length)
+}
+
+
 ///<summary> 53. 最大子数组和 </summary>
 public class Solution_53
 {
