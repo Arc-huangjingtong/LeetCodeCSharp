@@ -1946,63 +1946,163 @@ public class Solution_2848
 }
 
 
-/// <summary> 1893. 检查是否区域内所有整数都被覆盖 算术评级: 2 第 54 场双周赛Q1-1307 </summary>
-public class Solution_1893
+/// <summary> 1854. 人口最多的年份 算术评级: 3 第 240 场周赛Q1-1370 </summary>
+public class Solution_1854
 {
-    public bool IsCovered(int[][] ranges, int left, int right)
+    public int MaximumPopulation(int[][] logs)
     {
-        Span<int> diff = stackalloc int[52];
+        Span<int> diff = stackalloc int[102];
 
-        foreach (var range in ranges)
+        foreach (var log in logs)
         {
-            diff[range[0]]++;
-            diff[range[1] + 1]--;
+            diff[log[0] - 1950]++;
+            diff[log[1] - 1950]--;
         }
 
-        int sum = 0;
+        var max = 0;
 
-        for (var i = 1 ; i <= 50 ; i++)
+        for (int i = 1 ; i < 102 ; i++)
         {
-            sum += diff[i];
-            if (i >= left && i <= right && sum <= 0)
+            diff[i] += diff[i - 1];
+            if (diff[i] > diff[max])
             {
-                return false;
+                max = i;
             }
         }
 
-        return true;
+        return max + 1950;
     }
 
+    // [[1950,1961]
+    // ,[1960,1971]
+    // ,[1970,1981]]   // 1 2 1 1 1 0
+
+    // [2008,2026],
+    // [2004,2008],
+    // [2034,2035],
+    // [1999,2050],
+    // [2049,2050],
+    // [2011,2035],
+    // [1966,2033],
+    // [2044,2049]
     // 
-    // 相关标签
-    //     相关企业
-    // 提示
-    //     给你一个二维整数数组 ranges 和两个整数 left 和 right 。每个 ranges[i] = [starti, endi] 表示一个从 starti 到 endi 的 闭区间 。
     //
-    // 如果闭区间 [left, right] 内每个整数都被 ranges 中 至少一个 区间覆盖，那么请你返回 true ，否则返回 false 。
+    // 给你一个二维整数数组 logs ，其中每个 logs[i] = [birthi, deathi] 表示第 i 个人的出生和死亡年份。
     //
-    // 已知区间 ranges[i] = [starti, endi] ，如果整数 x 满足 starti <= x <= endi ，那么我们称整数x 被覆盖了。
+    // 年份 x 的 人口 定义为这一年期间活着的人的数目。
+    // 第 i 个人被计入年份 x 的人口需要满足：x 在闭区间 [birthi, deathi - 1] 内。注意，人不应当计入他们死亡当年的人口中。
+    //
+    // 返回 人口最多 且 最早 的年份。
     //
     //
     //
     // 示例 1：
     //
-    // 输入：ranges = [[1,2],[3,4],[5,6]], left = 2, right = 5
-    // 输出：true
-    // 解释：2 到 5 的每个整数都被覆盖了：
-    // - 2 被第一个区间覆盖。
-    // - 3 和 4 被第二个区间覆盖。
-    // - 5 被第三个区间覆盖。
+    // 输入：logs = [[1993,1999],[2000,2010]]
+    // 输出：1993
+    // 解释：人口最多为 1 ，而 1993 是人口为 1 的最早年份。
     // 示例 2：
     //
-    // 输入：ranges = [[1,10],[10,20]], left = 21, right = 21
-    // 输出：false
-    // 解释：21 没有被任何一个区间覆盖。
+    // 输入：logs = [[1950,1961],[1960,1971],[1970,1981]]
+    // 输出：1960
+    // 解释： 
+    // 人口最多为 2 ，分别出现在 1960 和 1970 。
+    // 其中最早年份是 1960 。
     //
     //
     // 提示：
     //
-    // 1 <= ranges.length <= 50
-    // 1 <= starti <= endi <= 50
-    // 1 <= left <= right <= 50
+    // 1 <= logs.length <= 100
+    // 1950 <= birthi < deathi <= 2050
+}
+
+
+/// <summary> 57. 插入区间 算术评级: 5-中等 </summary>
+public class Solution_57
+{
+    public int[][] Insert(int[][] intervals, int[] newInterval)
+    {
+        var dict = new SortedDictionary<int, int>();
+
+        foreach (var interval in intervals)
+        {
+            dict.TryAdd(interval[0], 0);
+            dict.TryAdd(interval[1], 0);
+
+            dict[interval[0]]++;
+            dict[interval[1]]--;
+        }
+
+        dict.TryAdd(newInterval[0], 0);
+        dict.TryAdd(newInterval[1], 0);
+
+        dict[newInterval[0]]++;
+        dict[newInterval[1]]--;
+
+        var res = new List<int[]>();
+
+        var start = 0;
+
+        foreach (var entry in dict)
+        {
+            start += entry.Value;
+
+            if (start >= 1 && (res.Count == 0 || res[^1].Length != 1))
+            {
+                res.Add([entry.Key]);
+            }
+            else if (start == 0 && (res.Count == 0 || res[^1].Length != 1))
+            {
+                res.Add([entry.Key, entry.Key]);
+            }
+            else if (start == 0)
+            {
+                res[^1] = [res[^1][0], entry.Key];
+            }
+        }
+
+
+        return res.ToArray();
+    }
+
+    [Test]
+    public void METHOD()
+    {
+        int[][] t = [[1, 5]];
+
+        Insert(t, [0, 0]);
+    }
+
+
+    // 给你一个 无重叠的 ，按照区间起始端点排序的区间列表 intervals，
+    // 其中 intervals[i] = [starti, endi] 表示第 i 个区间的开始和结束，
+    // 并且 intervals 按照 starti 升序排列。同样给定一个区间 newInterval = [start, end] 表示另一个区间的开始和结束。
+    //
+    // 在 intervals 中插入区间 newInterval，使得 intervals 依然按照 starti 升序排列，且区间之间不重叠（如果有必要的话，可以合并区间）。
+    //
+    // 返回插入之后的 intervals。
+    //
+    // 注意 你不需要原地修改 intervals。你可以创建一个新数组然后返回它。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：intervals = [[1,3],[6,9]], newInterval = [2,5]
+    // 输出：[[1,5],[6,9]]
+    // 示例 2：
+    //
+    // 输入：intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+    // 输出：[[1,2],[3,10],[12,16]]
+    // 解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。
+    //
+    //
+    // 提示：
+    //
+    // 0 <= intervals.length <= 10^4
+    // intervals[i].length == 2
+    // 0 <= starti <= endi <= 10^5
+    // intervals 根据 starti 按 升序 排列
+    // newInterval.length == 2
+    // 0 <= start <= end <= 10^5
 }
