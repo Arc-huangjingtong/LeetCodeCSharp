@@ -2106,3 +2106,137 @@ public class Solution_57
     // newInterval.length == 2
     // 0 <= start <= end <= 10^5
 }
+
+
+/// <summary> 1094. 拼车 算术评级: 4 第 142 场周赛Q2-1441 </summary>
+public class Solution_1094
+{
+    public bool CarPooling(int[][] trips, int capacity)
+    {
+        Span<int> diff = stackalloc int[1001];
+
+        for (int i = 0, len = trips.Length ; i < len ; i++)
+        {
+            diff[trips[i][1]] += trips[i][0];
+            diff[trips[i][2]] -= trips[i][0];
+        }
+
+        var sum = 0;
+
+        //[2,1,5],[3,3,7]  4
+
+        foreach (var value in diff)
+        {
+            sum += value;
+            if (sum > capacity)
+            {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
+
+
+    // 车上最初有 capacity 个空座位。
+    // 车 只能 向一个方向行驶（也就是说，不允许掉头或改变方向）
+    //
+    // 给定整数 capacity 和一个数组 trips ,
+    // trip[i] = [numPassengersi, fromi, toi] 表示第 i 次旅行有 numPassengersi 乘客，
+    // 接他们和放他们的位置分别是 fromi 和 toi 。这些位置是从汽车的初始位置向东的公里数。
+    //
+    // 当且仅当你可以在所有给定的行程中接送所有乘客时，返回 true，否则请返回 false。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：trips = [[2,1,5],[3,3,7]], capacity = 4
+    // 输出：false
+    // 示例 2：
+    //
+    // 输入：trips = [[2,1,5],[3,3,7]], capacity = 5
+    // 输出：true
+    //
+    //
+    // 提示：
+    //
+    // 1 <= trips.length <= 1000
+    // trips[i].length == 3
+    // 1 <= numPassengersi <= 100
+    // 0 <= fromi < toi <= 1000
+    // 1 <= capacity <= 10^5
+}
+
+
+/// <summary> 732. 我的日程安排表 III 算术评级: 6 困难 </summary>
+public class Solution_732
+{
+    public class MyCalendarThree
+    {
+        private readonly SortedDictionary<int, int> _diff = new();
+
+        public int Book(int startTime, int endTime)
+        {
+            _diff.TryAdd(startTime, 0);
+            _diff.TryAdd(endTime,   0);
+
+            _diff[startTime]++;
+            _diff[endTime]--;
+
+            var ans = 0;
+            var sum = 0;
+
+            foreach (var value in _diff.Values)
+            {
+                sum += value;
+                ans =  Math.Max(ans, sum);
+            }
+
+            return ans;
+        }
+        
+    }
+
+
+    /*
+     * Your MyCalendarThree object will be instantiated and called as such:
+     * MyCalendarThree obj = new MyCalendarThree();
+     * int param_1 = obj.Book(startTime,endTime);
+     */
+
+
+    // 当 k 个日程存在一些非空交集时（即, k 个日程包含了一些相同时间），就会产生 k 次预订
+    //
+    // 给你一些日程安排 [startTime, endTime) , 请你在每个日程安排添加后，返回一个整数 k , 表示所有先前日程安排会产生的最大 k 次预订
+    //
+    // 实现一个 MyCalendarThree 类来存放你的日程安排，你可以一直添加新的日程安排。
+    //
+    // MyCalendarThree() 初始化对象。
+    // int book(int startTime, int endTime) 返回一个整数 k ，表示日历中存在的 k 次预订的最大值
+    //
+    //
+    // 示例:
+    //
+    // 输入:
+    // ["MyCalendarThree", "book", "book", "book", "book", "book", "book"]
+    // [[      ], [10, 20], [50, 60], [10, 40], [5, 15], [5, 10], [25, 55]]
+    // 输出：
+    // [null, 1, 1, 2, 3, 3, 3]
+    //
+    // 解释：
+    // MyCalendarThree myCalendarThree = new MyCalendarThree();
+    // myCalendarThree.book(10, 20); // 返回 1 , 第一个日程安排可以预订并且不存在相交，所以最大 k 次预订是 1 次预订
+    // myCalendarThree.book(50, 60); // 返回 1 , 第二个日程安排可以预订并且不存在相交，所以最大 k 次预订是 1 次预订
+    // myCalendarThree.book(10, 40); // 返回 2 , 第三个日程安排 [10, 40) 与第一个日程安排相交，所以最大 k 次预订是 2 次预订
+    // myCalendarThree.book( 5, 15); // 返回 3 , 剩下的日程安排的最大 k 次预订是 3 次预订
+    // myCalendarThree.book( 5, 10); // 返回 3
+    // myCalendarThree.book(25, 55); // 返回 3
+    //
+    //
+    // 提示:
+    // 0 <= startTime < endTime <= 10^9
+    // 每个测试用例，调用 book 函数最多不超过 400次
+}
