@@ -1046,7 +1046,7 @@ public class Solution_1477
         {
             var (left1, right1) = ress[i];
 
-            for (int j = i + 1 ; j < len ; j++)
+            for (var j = i + 1 ; j < len ; j++)
             {
                 var (left2, right2) = ress[j];
 
@@ -1142,7 +1142,7 @@ public class Solution_1477
 
             if (sum == target)
             {
-                int len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
+                var len = right - left + 1; // 区间[left,right]是一个和为target的子数组，该子数组长度为len
 
                 minSumOfLens = Math.Min(minSumOfLens, len + dp[left]); // 如果有解，我们遍历了所有的第二个子数组，同时加上它前面长度最短的第一个子数组就是答案
 
@@ -1425,7 +1425,7 @@ public class Solution_1177
 
             var oneCount = 0;
 
-            for (int i = 0 ; i < 26 ; i++)
+            for (var i = 0 ; i < 26 ; i++)
             {
                 if ((xorLR & (1 << i)) != 0)
                 {
@@ -1495,9 +1495,9 @@ public class Solution_304
 
             prefixSum = new int[row + 1, col + 1]; //扩大是为了防止计算[0,0]的时候越界
 
-            for (int i = 1 ; i <= row ; i++)
+            for (var i = 1 ; i <= row ; i++)
             {
-                for (int j = 1 ; j <= col ; j++)
+                for (var j = 1 ; j <= col ; j++)
                 {
                     prefixSum[i, j] = prefixSum[i - 1, j] + prefixSum[i, j - 1] - prefixSum[i - 1, j - 1] + matrix[i - 1][j - 1];
                 }
@@ -1553,9 +1553,9 @@ public class Solution_1314
     {
         var prefixSum = new int[mat.Length + 1, mat[0].Length + 1];
 
-        for (int i = 1 ; i <= mat.Length ; i++)
+        for (var i = 1 ; i <= mat.Length ; i++)
         {
-            for (int j = 1 ; j <= mat[0].Length ; j++)
+            for (var j = 1 ; j <= mat[0].Length ; j++)
             {
                 prefixSum[i, j] = prefixSum[i - 1, j] + prefixSum[i, j - 1] - prefixSum[i - 1, j - 1] + mat[i - 1][j - 1];
             }
@@ -1563,16 +1563,16 @@ public class Solution_1314
 
         var result = new int[mat.Length][];
 
-        for (int i = 0 ; i < mat.Length ; i++)
+        for (var i = 0 ; i < mat.Length ; i++)
         {
             result[i] = new int[mat[0].Length];
 
-            for (int j = 0 ; j < mat[0].Length ; j++)
+            for (var j = 0 ; j < mat[0].Length ; j++)
             {
-                int row1 = Math.Max(0, i          - k);
-                int col1 = Math.Max(0, j          - k);
-                int row2 = Math.Min(mat.Length    - 1, i + k);
-                int col2 = Math.Min(mat[0].Length - 1, j + k);
+                var row1 = Math.Max(0, i          - k);
+                var col1 = Math.Max(0, j          - k);
+                var row2 = Math.Min(mat.Length    - 1, i + k);
+                var col2 = Math.Min(mat[0].Length - 1, j + k);
 
                 // 之前+1了,所以这里也要+1
                 result[i][j] = prefixSum[row2 + 1, col2 + 1] - prefixSum[row1, col2 + 1] - prefixSum[row2 + 1, col1] + prefixSum[row1, col1];
@@ -1705,40 +1705,40 @@ public class Solution_1895
         var rowsum = new int[m, n]; // 每一行的前缀和
         var colsum = new int[m, n]; // 每一列的前缀和
 
-        for (int i = 0 ; i < m ; ++i)
+        for (var i = 0 ; i < m ; ++i)
         {
             rowsum[i, 0] = grid[i][0];
 
-            for (int j = 1 ; j < n ; ++j)
+            for (var j = 1 ; j < n ; ++j)
             {
                 rowsum[i, j] = rowsum[i, j - 1] + grid[i][j];
             }
         }
 
-        for (int j = 0 ; j < n ; ++j)
+        for (var j = 0 ; j < n ; ++j)
         {
             colsum[0, j] = grid[0][j];
 
-            for (int i = 1 ; i < m ; ++i)
+            for (var i = 1 ; i < m ; ++i)
             {
                 colsum[i, j] = colsum[i - 1, j] + grid[i][j];
             }
         }
 
         // 从大到小枚举边长 edge
-        for (int edge = Math.Min(m, n) ; edge >= 2 ; --edge)
+        for (var edge = Math.Min(m, n) ; edge >= 2 ; --edge)
         {
             // 枚举正方形的左上角位置 (i,j)
-            for (int i = 0 ; i + edge <= m ; ++i)
+            for (var i = 0 ; i + edge <= m ; ++i)
             {
-                for (int j = 0 ; j + edge <= n ; ++j)
+                for (var j = 0 ; j + edge <= n ; ++j)
                 {
                     // 计算每一行、列、对角线的值应该是多少（以第一行为样本）
-                    int  stdsum = rowsum[i, j + edge - 1] - (j != 0 ? rowsum[i, j - 1] : 0);
-                    bool check  = true;
+                    var stdsum = rowsum[i, j + edge - 1] - (j != 0 ? rowsum[i, j - 1] : 0);
+                    var check  = true;
                     // 枚举每一行并用前缀和直接求和
                     // 由于我们已经拿第一行作为样本了，这里可以跳过第一行
-                    for (int ii = i + 1 ; ii < i + edge ; ++ii)
+                    for (var ii = i + 1 ; ii < i + edge ; ++ii)
                     {
                         if (rowsum[ii, j + edge - 1] - (j != 0 ? rowsum[ii, j - 1] : 0) != stdsum)
                         {
@@ -1753,7 +1753,7 @@ public class Solution_1895
                     }
 
                     // 枚举每一列并用前缀和直接求和
-                    for (int jj = j ; jj < j + edge ; ++jj)
+                    for (var jj = j ; jj < j + edge ; ++jj)
                     {
                         if (colsum[i + edge - 1, jj] - (i != 0 ? colsum[i - 1, jj] : 0) != stdsum)
                         {
@@ -1771,7 +1771,7 @@ public class Solution_1895
                     // 这里 d 表示 diagonal
                     int d1 = 0, d2 = 0;
                     // 不使用前缀和，直接遍历求和
-                    for (int k = 0 ; k < edge ; ++k)
+                    for (var k = 0 ; k < edge ; ++k)
                     {
                         d1 += grid[i + k][j        + k];
                         d2 += grid[i + k][j + edge - 1 - k];
@@ -1963,7 +1963,7 @@ public class Solution_1854
 
         var max = 0;
 
-        for (int i = 1 ; i < 102 ; i++)
+        for (var i = 1 ; i < 102 ; i++)
         {
             diff[i] += diff[i - 1];
             if (diff[i] > diff[max])
@@ -2349,3 +2349,115 @@ public class Solution_2381
     // 0 <= directioni <= 1
     // s 只包含小写英文字母。
 }
+
+
+/// <summary>★★★ 995. K 连续位的最小翻转次数 算术评级: 8 第 124 场周赛Q3 1835 </summary>
+public class Solution_995
+{
+    [TestCase(new[] { 0, 1, 0 },                1, ExpectedResult = 2)]
+    [TestCase(new[] { 1, 1, 0 },                2, ExpectedResult = -1)]
+    [TestCase(new[] { 0, 0, 0, 1, 0, 1, 1, 0 }, 3, ExpectedResult = 3)]
+    public int MinKBitFlips(int[] nums, int k)
+    {
+        Span<int> diff = stackalloc int[nums.Length + 1];
+
+        var res = 0;
+        var cur = 0;
+
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            cur ^= diff[i];
+
+            if ((nums[i] ^ cur) == 1) continue;
+
+
+            diff[i] ^= 1;
+
+            if (i + k <= len)
+            {
+                diff[i + k] ^= 1;
+            }
+            else
+            {
+                return -1;
+            }
+
+            cur ^= 1;
+
+
+            res++;
+        }
+
+        return res;
+    }
+
+
+    public int MinKBitFlips2(int[] nums, int k)
+    {
+        Span<int> diff = stackalloc int[nums.Length + 1];
+
+        var revertCount = 0;
+        var res         = 0;
+
+        for (int i = 0, len = nums.Length ; i < len ; i++)
+        {
+            revertCount += diff[i];
+            if ((nums[i] + revertCount) % 2 == 0)
+            {
+                if (i + k > len)
+                {
+                    return -1;
+                }
+
+                res++;
+                revertCount++;
+                diff[i + k]--;
+            }
+        }
+
+        return res;
+    }
+    // 
+    // 11000011
+    // 100001
+    // 01010101010101010101   5
+    // 101010
+    //  101011
+    // 1^1 = 0  0^1 = 1  1^0 = 1  0^0 = 0
+
+    // 给定一个二进制数组 nums 和一个整数 k 。
+    //
+    // k位翻转 就是从 nums 中选择一个长度为 k 的 子数组 ，同时把子数组中的每一个 0 都改成 1 ，把子数组中的每一个 1 都改成 0 。
+    //
+    // 返回数组中不存在 0 所需的最小 k位翻转 次数。如果不可能，则返回 -1 。
+    //
+    // 子数组 是数组的 连续 部分。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：nums = [0,1,0], K = 1
+    // 输出：2
+    // 解释：先翻转 A[0]，然后翻转 A[2]。
+    // 示例 2：
+    //
+    // 输入：nums = [1,1,0], K = 2
+    // 输出：-1
+    // 解释：无论我们怎样翻转大小为 2 的子数组，我们都不能使数组变为 [1,1,1]。
+    // 示例 3：
+    //
+    // 输入：nums = [0,0,0,1,0,1,1,0], K = 3
+    // 输出：3
+    // 解释：
+    // 翻转 A[0], A[1], A[2]: A变成 [1,1,1,1,0,1,1,0]
+    // 翻转 A[4], A[5], A[6]: A变成 [1,1,1,1,1,0,0,0]
+    // 翻转 A[5], A[6], A[7]: A变成 [1,1,1,1,1,1,1,1]
+    //
+    //
+    // 提示：
+    //
+    // 1 <= nums.length <= 10^5
+    // 1 <= k <= nums.length
+}
+
