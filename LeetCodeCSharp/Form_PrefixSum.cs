@@ -2315,12 +2315,63 @@ public class Solution_2381
 {
     public string ShiftingLetters(string s, int[][] shifts)
     {
-        return default;
+        var diff = new SortedDictionary<int, int>();
+
+        for (int i = 0, len = shifts.Length ; i < len ; i++)
+        {
+            var start = shifts[i][0];
+            var end   = shifts[i][1] + 1;
+
+            diff.TryAdd(start, 0);
+            diff.TryAdd(end,   0);
+
+            var factor = shifts[i][2] == 1 ? 1 : -1;
+
+            diff[start] += factor;
+            diff[end]   -= factor;
+        }
+
+        var sum = 0;
+
+        Span<char> span = stackalloc char[s.Length];
+
+        for (var i = 0 ; i < s.Length ; i++)
+        {
+            sum += diff.GetValueOrDefault(i);
+
+            if (sum < 0)
+            {
+                sum = 26 + sum % 26;
+            }
+
+            var c = (char)((s[i] - 'a' + sum) % 26 + 'a');
+            span[i] = c;
+        }
+
+
+        return new string(span);
     }
 
-    // 给你一个小写英文字母组成的字符串 s 和一个二维整数数组 shifts ，其中 shifts[i] = [starti, endi, directioni] 。对于每个 i ，将 s 中从下标 starti 到下标 endi （两者都包含）所有字符都进行移位运算，如果 directioni = 1 将字符向后移位，如果 directioni = 0 将字符向前移位。
+    [Test]
+    public void METHOD()
+    {
+        // var res = ShiftingLetters("abc", new[] { new[] { 0, 1, 0 }, new[] { 1, 2, 1 }, new[] { 0, 2, 1 } });
+
+        int[][] aa  = [[4, 8, 0], [4, 4, 0], [2, 4, 0], [2, 4, 0], [6, 7, 1], [2, 2, 1], [0, 2, 1], [8, 8, 0], [1, 3, 1]];
+        var     res = ShiftingLetters("xuwdbdqik", aa);
+
+        //"ywxcxcqii"
+        // ywxc^cqii
+
+
+        Console.WriteLine(res);
+    }
+
+    // 给你一个小写英文字母组成的字符串 s 和一个二维整数数组 shifts ，其中 shifts[i] = [starti, endi, directioni] 。
+    // 对于每个 i ，将 s 中从下标 starti 到下标 endi （两者都包含）所有字符都进行移位运算，如果 directioni = 1 将字符向后移位，如果 directioni = 0 将字符向前移位。
     //
-    // 将一个字符 向后 移位的意思是将这个字符用字母表中 下一个 字母替换（字母表视为环绕的，所以 'z' 变成 'a'）。类似的，将一个字符 向前 移位的意思是将这个字符用字母表中 前一个 字母替换（字母表是环绕的，所以 'a' 变成 'z' ）。
+    // 将一个字符 向后 移位的意思是将这个字符用字母表中 下一个 字母替换（字母表视为环绕的，所以 'z' 变成 'a'）。
+    // 类似的，将一个字符 向前 移位的意思是将这个字符用字母表中 前一个 字母替换（字母表是环绕的，所以 'a' 变成 'z' ）。
     //
     // 请你返回对 s 进行所有移位操作以后得到的最终字符串。
     //
@@ -2343,7 +2394,7 @@ public class Solution_2381
     //
     // 提示：
     //
-    // 1 <= s.length, shifts.length <= 5 * 104
+    // 1 <= s.length, shifts.length <= 5 * 10^4
     // shifts[i].length == 3
     // 0 <= starti <= endi < s.length
     // 0 <= directioni <= 1
@@ -2460,4 +2511,3 @@ public class Solution_995
     // 1 <= nums.length <= 10^5
     // 1 <= k <= nums.length
 }
-
