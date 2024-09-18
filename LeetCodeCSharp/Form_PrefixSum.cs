@@ -2461,3 +2461,42 @@ public class Solution_995
     // 1 <= k <= nums.length
 }
 
+
+public class Solution_11111
+{
+    public bool BackspaceCompare(string s, string t)
+    {
+        var curS = s.Length - 1;
+        var curT = t.Length - 1;
+
+        while (true)
+        {
+            var countS = 0;
+            while (curS >= 0 && (s[curS] == '#' || countS > 0))
+            {
+                countS += s[curS] == '#' ? 1 : -1;
+                curS--;
+            }
+
+            var countT = 0;
+            while (curT >= 0 && (t[curT] == '#' || countT > 0))
+            {
+                countT += t[curT] == '#' ? 1 : -1;
+                curT--;
+            }
+
+            if (curS < 0 && curT < 0)
+            {
+                return true;
+            }
+
+            if (curS < 0 || curT < 0 || s[curS] != t[curT])
+            {
+                return false;
+            }
+
+            curS--;
+            curT--;
+        }
+    }
+}
