@@ -277,3 +277,104 @@ public class Solution_71
     // path 由英文字母，数字，'.'，'/' 或 '_' 组成。
     // path 是一个有效的 Unix 风格绝对路径。
 }
+
+
+/// <summary> 3170. 删除星号以后字典序最小的字符串 算术评级: 5 第 400 场周赛Q3 - 1772 </summary>
+public class Solution_3170
+{
+    [TestCase("aaba*", ExpectedResult = "aab")]
+    [TestCase("abc",   ExpectedResult = "abc")]
+    public string ClearStars(string str)
+    {
+        var stacks = new List<int>[26];
+
+        for (var i = 0 ; i < 26 ; i++)
+        {
+            stacks[i] = [];
+        }
+
+        for (var i = 0 ; i < str.Length ; i++)
+        {
+            var c = str[i];
+            if (c == '*')
+            {
+                foreach (var stack in stacks)
+                {
+                    if (stack.Count > 0)
+                    {
+                        stack.RemoveAt(stack.Count - 1);
+                        break;
+                    }
+                }
+
+                continue;
+            }
+
+            stacks[c - 'a'].Add(i);
+        }
+
+        var res = new StringBuilder();
+
+        for (var i = str.Length - 1 ; i >= 0 ; i--)
+        {
+            for (var index = 0 ; index < stacks.Length ; index++)
+            {
+                var stack = stacks[index];
+                if (stack.Count > 0 && stack[^1] == i)
+                {
+                    res.Append((char)('a' + index));
+                    stack.RemoveAt(stack.Count - 1);
+                    break;
+                }
+            }
+        }
+
+        var result = res.ToString();
+
+        // 反转字符串
+        var resultArray = result.ToCharArray();
+
+        Array.Reverse(resultArray);
+
+        return new string(resultArray);
+    }
+
+    // 给你一个字符串 s 。它可能包含任意数量的 '*' 字符。你的任务是删除所有的 '*' 字符。
+    //
+    // 当字符串还存在至少一个 '*' 字符时，你可以执行以下操作：
+    //
+    // 删除最左边的 '*' 字符，同时删除该星号字符左边一个字典序 最小 的字符。如果有多个字典序最小的字符，你可以删除它们中的任意一个。
+    // 请你返回删除所有 '*' 字符以后，剩余字符连接而成的 
+    //     字典序最小
+    // 的字符串。
+    //
+    //
+    //
+    // 示例 1：
+    //
+    // 输入：s = "aaba*"
+    //
+    // 输出："aab"
+    //
+    // 解释：
+    //
+    // 删除 '*' 号和它左边的其中一个 'a' 字符。如果我们选择删除 s[3] ，s 字典序最小。
+    //
+    // 示例 2：
+    //
+    // 输入：s = "abc"
+    //
+    // 输出："abc"
+    //
+    // 解释：
+    //
+    // 字符串中没有 '*' 字符。
+    //
+    //
+    //
+    // 提示：
+    //
+    // 1 <= s.length <= 105
+    // s 只含有小写英文字母和 '*' 字符。
+    // 输入保证操作可以删除所有的 '*' 字符。
+}
